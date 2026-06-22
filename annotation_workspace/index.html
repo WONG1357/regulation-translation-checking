@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF Teaching Workspace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">文</div>
+      <div>
+        <h1>PDF Teaching Workspace</h1>
+        <p>Mark a few decisive examples. Teach the extraction logic.</p>
+      </div>
+    </div>
+
+    <div class="file-controls">
+      <label class="button primary" for="pdfFile">Open PDF</label>
+      <input id="pdfFile" type="file" accept="application/pdf" hidden>
+      <select id="localPdfSelect" aria-label="PDFs in local pdfs folder">
+        <option value="">Local PDFs…</option>
+      </select>
+      <button id="openLocalPdf" class="button">Open</button>
+      <span id="fileName" class="file-name">No PDF open</span>
+    </div>
+
+    <div class="toolbar-group page-tools">
+      <button id="prevPage" class="icon-button" title="Previous page">←</button>
+      <label class="page-jump"><input id="pageNumber" type="number" min="1" value="1"> / <span id="pageCount">0</span></label>
+      <button id="nextPage" class="icon-button" title="Next page">→</button>
+      <button id="zoomOut" class="icon-button" title="Zoom out">−</button>
+      <span id="zoomLabel">100%</span>
+      <button id="zoomIn" class="icon-button" title="Zoom in">+</button>
+    </div>
+
+    <div class="toolbar-group action-tools">
+      <div class="segmented" role="group" aria-label="Selection mode">
+        <button id="textMode" class="active">Text selection</button>
+        <button id="rectangleMode">Rectangle selection</button>
+      </div>
+      <button id="exportJson" class="button">Export JSON</button>
+      <button id="exportAnnotationsCsv" class="button">Annotations CSV</button>
+      <label class="button" for="importJson">Import JSON</label>
+      <input id="importJson" type="file" accept="application/json" hidden>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="viewer-shell">
+      <div id="emptyState" class="empty-state">
+        <div class="empty-icon">PDF</div>
+        <h2>Open a regulation or quality manual</h2>
+        <p>Select a PDF above, or place one in <code>annotation_workspace/pdfs/</code>.</p>
+      </div>
+      <div id="viewerViewport" class="viewer-viewport hidden">
+        <div id="pageStage" class="page-stage">
+          <canvas id="pdfCanvas"></canvas>
+          <div id="textLayer" class="text-layer"></div>
+          <div id="highlightLayer" class="highlight-layer"></div>
+          <div id="selectionLayer" class="selection-layer"></div>
+        </div>
+      </div>
+      <div class="viewer-status">
+        <span id="modeStatus">Text selection mode</span>
+        <span id="selectionHint">Drag across PDF text to capture it.</span>
+      </div>
+    </section>
+
+    <aside class="inspector">
+      <nav class="tabs" aria-label="Annotation workspace sections">
+        <button class="tab active" data-tab="annotate">Annotate</button>
+        <button class="tab" data-tab="pairs">Pairs</button>
+        <button class="tab" data-tab="rules">Layout rules</button>
+        <button class="tab" data-tab="data">Data</button>
+      </nav>
+
+      <section id="annotateTab" class="tab-panel active">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Current selection</span>
+            <h2>Block annotation</h2>
+          </div>
+          <button id="clearSelection" class="text-button">Clear</button>
+        </div>
+
+        <textarea id="selectedText" rows="6" placeholder="Select text or draw a rectangle on the PDF page."></textarea>
+        <div id="selectionMeta" class="selection-meta">No active selection</div>
+
+        <label>Label
+          <select id="annotationLabel"></select>
+        </label>
+        <label>Note
+          <textarea id="annotationNote" rows="3" placeholder="Why is this example useful?"></textarea>
+        </label>
+
+        <div class="button-row">
+          <button id="saveAnnotation" class="button primary grow">Save annotation</button>
+          <button id="deleteAnnotation" class="button danger hidden">Delete</button>
+        </div>
+        <div class="button-row">
+          <button id="setChinese" class="button role-chinese grow">Set as Chinese source</button>
+          <button id="setEnglish" class="button role-english grow">Set as English translation</button>
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="panel-heading compact">
+          <div>
+            <span class="eyebrow">This page</span>
+            <h2>Annotations</h2>
+          </div>
+          <span id="pageAnnotationCount" class="count-badge">0</span>
+        </div>
+        <div id="filterChips" class="filter-chips"></div>
+        <div id="annotationList" class="item-list"></div>
+      </section>
+
+      <section id="pairsTab" class="tab-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Pending selection</span>
+            <h2>Create bilingual pair</h2>
+          </div>
+          <button id="clearPendingPair" class="text-button">Reset</button>
+        </div>
+
+        <div class="pair-well chinese">
+          <div class="pair-well-title"><span></span> Chinese source</div>
+          <div id="pendingChinese" class="pending-list empty">No Chinese annotations selected</div>
+        </div>
+        <div class="pair-well english">
+          <div class="pair-well-title"><span></span> English translation</div>
+          <div id="pendingEnglish" class="pending-list empty">No English annotations selected</div>
+        </div>
+
+        <label>Pair type
+          <select id="pairType"></select>
+        </label>
+        <label>Pair note
+          <textarea id="pairNote" rows="3" placeholder="Describe why these selections correspond."></textarea>
+        </label>
+        <button id="createPair" class="button primary full">Create pair</button>
+
+        <div class="section-divider"></div>
+        <div class="panel-heading compact">
+          <div>
+            <span class="eyebrow">Saved examples</span>
+            <h2>Manual pairs</h2>
+          </div>
+          <span id="pairCount" class="count-badge">0</span>
+        </div>
+        <div id="pairList" class="item-list"></div>
+      </section>
+
+      <section id="rulesTab" class="tab-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Document pattern</span>
+            <h2>Add layout rule</h2>
+          </div>
+        </div>
+        <label>Rule type
+          <select id="ruleType"></select>
+        </label>
+        <div class="field-row">
+          <label>Page / range
+            <input id="rulePageRange" type="text" placeholder="e.g. 3-12">
+          </label>
+          <label>Section
+            <input id="ruleSection" type="text" placeholder="e.g. 0.5 Definitions">
+          </label>
+        </div>
+        <label>Description
+          <textarea id="ruleDescription" rows="5" placeholder="Describe how this document structures Chinese, English, tables, or repeated metadata."></textarea>
+        </label>
+        <p class="helper">The rule will link the annotations and manual pairs currently selected in the pending pair editor.</p>
+        <button id="addRule" class="button primary full">Add layout rule</button>
+
+        <div class="section-divider"></div>
+        <div class="panel-heading compact">
+          <div>
+            <span class="eyebrow">Saved patterns</span>
+            <h2>Layout rules</h2>
+          </div>
+          <span id="ruleCount" class="count-badge">0</span>
+        </div>
+        <div id="ruleList" class="item-list"></div>
+      </section>
+
+      <section id="dataTab" class="tab-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Portable outputs</span>
+            <h2>Export & restore</h2>
+          </div>
+        </div>
+        <div id="summaryCards" class="summary-grid"></div>
+        <label>General notes
+          <textarea id="generalNotes" rows="5" placeholder="Overall observations to include in the ChatGPT package."></textarea>
+        </label>
+        <div class="export-stack">
+          <button id="exportPairsCsv" class="button full">Export manual pairs CSV</button>
+          <button id="exportRulesJson" class="button full">Export layout rules JSON</button>
+          <button id="exportCompact" class="button full">Export compact package for ChatGPT</button>
+          <button id="exportAllJson" class="button primary full">Export complete annotation JSON</button>
+        </div>
+        <p class="helper">The complete JSON restores highlights, pairs, rules, notes, and visibility settings. Open the matching PDF before or after importing it.</p>
+      </section>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

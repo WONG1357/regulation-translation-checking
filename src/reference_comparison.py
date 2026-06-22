@@ -5,7 +5,13 @@ import re
 
 from rapidfuzz import fuzz, process
 
-from .llm_client import call_llm_json, format_api_error, get_llm_config, is_authentication_error
+from .llm_client import (
+    call_llm_json,
+    format_api_error,
+    get_llm_config,
+    is_authentication_error,
+    is_configuration_error,
+)
 from .utils import BilingualPair, DocumentResult, TextBlock, contains_english, normalize_text
 
 
@@ -81,8 +87,10 @@ def _enrich_reference_rows_with_llm(rows: list[dict[str, object]], model: str) -
                 expected="object",
             )
         except Exception as exc:
-            warnings.append(f"API reference comparison failed: {format_api_error(config.provider, exc)}")
-            if is_authentication_error(exc):
+            warning = f"API reference comparison failed: {format_api_error(config.provider, exc)}"
+            if warning not in warnings:
+                warnings.append(warning)
+            if is_authentication_error(exc) or is_configuration_error(exc):
                 break
             continue
         row["possible issue"] = parsed.get("assessment", row["possible issue"])

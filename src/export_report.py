@@ -32,13 +32,30 @@ def build_word_report(
     terminology_issues: list[dict],
     regulatory_refs: list[dict],
     reference_comparison: list[dict],
+    unpaired_content: list[dict] | None = None,
+    skipped_content: list[dict] | None = None,
+    coverage_summary: list[dict] | None = None,
+    extraction_statistics: list[dict] | None = None,
+    corrected_pairs: list[dict] | None = None,
+    ignored_content: list[dict] | None = None,
+    unpaired_chinese: list[dict] | None = None,
+    unpaired_english: list[dict] | None = None,
 ) -> bytes:
     doc = Document()
     doc.add_heading("Bilingual Regulatory Document Review Report", 0)
+    _add_table_section(doc, "Document Coverage Summary", coverage_summary or [])
+    _add_table_section(doc, "Extraction Statistics", extraction_statistics or [])
+    _add_table_section(doc, "Corrected Main Bilingual Pairs", corrected_pairs or [])
+    _add_table_section(doc, "Ignored Content Summary", ignored_content or [])
+    _add_table_section(doc, "Unpaired Chinese Content", unpaired_chinese or [])
+    _add_table_section(doc, "Unpaired English Content", unpaired_english or [])
     _add_table_section(doc, "Translation Issues", translation_issues)
     _add_table_section(doc, "Terminology Consistency Issues", terminology_issues)
     _add_table_section(doc, "Regulatory References", regulatory_refs)
     _add_table_section(doc, "Reference Regulation Comparison", reference_comparison)
+    if not unpaired_chinese and not unpaired_english:
+        _add_table_section(doc, "Unpaired Chinese/English Content", unpaired_content or [])
+    _add_table_section(doc, "Skipped or Unreviewed Content", skipped_content or [])
     output = BytesIO()
     doc.save(output)
     return output.getvalue()

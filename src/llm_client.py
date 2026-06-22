@@ -19,6 +19,10 @@ class LLMAuthenticationError(RuntimeError):
     """Raised when the selected provider rejects the API key."""
 
 
+class LLMConfigurationError(RuntimeError):
+    """Raised when local API settings cannot form a valid HTTP request."""
+
+
 def get_llm_config(model: str | None = None) -> LLMConfig:
     session_provider = None
     session_key = None
@@ -66,6 +70,7 @@ def get_llm_config(model: str | None = None) -> LLMConfig:
 def call_llm_json(config: LLMConfig, messages: list[dict[str, str]], expected: str = "array") -> Any:
     if not config.api_key:
         raise ValueError(f"{config.provider} API key not found")
+    validate_llm_config(config)
 
     provider = config.provider.lower()
     if provider in {"openai", "openai-compatible", "deepseek"}:
@@ -84,6 +89,8 @@ def call_llm_json(config: LLMConfig, messages: list[dict[str, str]], expected: s
 
 
 def format_api_error(provider: str, exc: Exception) -> str:
+    if isinstance(exc, LLMConfigurationError):
+        return str(exc)
     if is_authentication_error(exc):
         return f"{provider} authentication failed. Check that the API key is correct, active, and belongs to the selected provider."
     return _sanitize_error(str(exc))
@@ -92,6 +99,10 @@ def format_api_error(provider: str, exc: Exception) -> str:
 def is_authentication_error(exc: Exception) -> bool:
     text = str(exc).lower()
     return isinstance(exc, LLMAuthenticationError) or "401" in text or "authentication" in text or "invalid api key" in text
+
+
+def is_configuration_error(exc: Exception) -> bool:
+    return isinstance(exc, LLMConfigurationError)
 
 
 def provider_key_label(provider: str) -> str:
@@ -175,6 +186,39 @@ def _extract_json(content: str) -> str:
 
 def _clean_api_key(api_key: str | None) -> str | None:
     return api_key.strip() if isinstance(api_key, str) and api_key.strip() else None
+
+
+def validate_llm_config(config: LLMConfig) -> None:
+    api_key = _clean_api_key(config.api_key)
+    error = api_key_validation_error(api_key, config.provider)
+    if error:
+        raise LLMConfigurationError(error)
+    assert api_key is not None
+    if config.base_url:
+        try:
+            str(config.base_url).encode("ascii")
+        except UnicodeEncodeError as exc:
+            raise LLMConfigurationError("API base URL contains unsupported non-ASCII characters.") from exc
+
+
+def api_key_validation_error(api_key: str | None, provider: str) -> str | None:
+    api_key = _clean_api_key(api_key)
+    if not api_key:
+        return f"{provider} API key not found."
+    try:
+        api_key.encode("ascii")
+    except UnicodeEncodeError:
+        return f"{provider} API key contains non-ASCII text. Clear the field and paste only the actual API key."
+    if any(char.isspace() for char in api_key):
+        return (
+            f"{provider} API key contains spaces or line breaks. Clear the field and paste only the actual API key."
+        )
+    if len(api_key) > 512:
+        return (
+            f"{provider} API key is unexpectedly long and appears to contain pasted prose. "
+            "Clear the field and paste only the actual API key."
+        )
+    return None
 
 
 def _sanitize_error(message: str) -> str:

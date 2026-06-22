@@ -4,7 +4,15 @@ import json
 import re
 from typing import Any
 
-from .llm_client import LLMAuthenticationError, LLMConfig, call_llm_json, format_api_error, get_llm_config, is_authentication_error
+from .llm_client import (
+    LLMAuthenticationError,
+    LLMConfig,
+    call_llm_json,
+    format_api_error,
+    get_llm_config,
+    is_authentication_error,
+    is_configuration_error,
+)
 from .utils import BilingualPair, normalize_text
 
 
@@ -13,6 +21,7 @@ def review_paragraph_pairs_with_api(
     model: str,
     batch_size: int = 8,
     config: LLMConfig | None = None,
+    progress_callback=None,
 ) -> tuple[list[dict[str, Any]], list[str]]:
     """Call the configured LLM API to review detected bilingual paragraph pairs.
 
@@ -27,6 +36,7 @@ def review_paragraph_pairs_with_api(
         return [], ["No bilingual paragraph pairs were available for API processing."]
 
     rows: list[dict[str, Any]] = []
+    total = len(pairs)
     for start in range(0, len(pairs), batch_size):
         batch = pairs[start : start + batch_size]
         payload = {
@@ -34,6 +44,7 @@ def review_paragraph_pairs_with_api(
             "rules": [
                 "Return one JSON object for every input pair, even if no issue is found.",
                 "Do not over-report trivial style differences.",
+                "Compare the Chinese controlling meaning against the English translation in plain language.",
                 "Flag wrong meaning, missing information, extra information, weakened regulatory obligation, wrong modal verbs, terminology inconsistency, and unclear English.",
                 "Severity must be Critical, Major, Minor, or None.",
                 "Confidence must be High, Medium, or Low.",
@@ -41,6 +52,7 @@ def review_paragraph_pairs_with_api(
             "output_schema": {
                 "pair_id": "string",
                 "status": "OK or Issue",
+                "comparison_summary": "plain-language comparison of Chinese source meaning and English translation meaning",
                 "issue_type": "string",
                 "severity": "Critical, Major, Minor, or None",
                 "explanation": "string",
@@ -70,8 +82,10 @@ def review_paragraph_pairs_with_api(
                 expected="array",
             )
         except Exception as exc:
-            warnings.append(f"API paragraph review failed: {format_api_error(config.provider, exc)}")
-            if is_authentication_error(exc):
+            warning = f"API paragraph review failed: {format_api_error(config.provider, exc)}"
+            if warning not in warnings:
+                warnings.append(warning)
+            if is_authentication_error(exc) or is_configuration_error(exc):
                 break
             continue
 
@@ -87,6 +101,7 @@ def review_paragraph_pairs_with_api(
                     "Chinese source text": pair.chinese_text,
                     "existing English translation": pair.english_text,
                     "API status": item.get("status", "Issue"),
+                    "comparison summary": item.get("comparison_summary", ""),
                     "issue type": item.get("issue_type", ""),
                     "severity": item.get("severity", "None"),
                     "explanation of the problem": item.get("explanation", ""),
@@ -96,6 +111,8 @@ def review_paragraph_pairs_with_api(
                     "model": config.model,
                 }
             )
+        if progress_callback:
+            progress_callback(min(start + len(batch), total), total)
     return rows, warnings
 
 
@@ -111,6 +128,7 @@ def api_rows_to_translation_issues(rows: list[dict[str, Any]]) -> list[dict[str,
                 "page number or section": row.get("location", ""),
                 "Chinese source text": row.get("Chinese source text", ""),
                 "existing English translation": row.get("existing English translation", ""),
+                "comparison summary": row.get("comparison summary", ""),
                 "issue type": row.get("issue type", "translation accuracy"),
                 "explanation of the problem": row.get("explanation of the problem", ""),
                 "severity": severity,

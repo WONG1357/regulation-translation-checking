@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import io
 import re
+from collections import defaultdict
 from pathlib import Path
 
 import fitz
@@ -20,6 +21,7 @@ from .utils import (
     contains_chinese,
     normalize_text,
 )
+from .section_detection import assign_sections, parse_section_heading
 
 
 HEADING_STYLE_RE = re.compile(r"heading|标题", re.I)
@@ -78,34 +80,61 @@ def extract_docx(file_name: str, data: bytes) -> DocumentResult:
                     order=order,
                     section_heading=current_heading,
                     paragraph_number=paragraph_number,
+                    extraction_source="paragraph",
                 )
             )
             order += 1
         elif isinstance(item, Table):
             for row_index, row in enumerate(item.rows):
                 row_texts = [normalize_text(cell.text) for cell in row.cells]
-                row_text = " | ".join(t for t in row_texts if t)
-                if not row_text:
+                for cell_index, cell_text in enumerate(row_texts):
+                    for part_index, part in enumerate(_split_logical_lines(cell_text)):
+                        blocks.append(
+                            TextBlock(
+                                block_id=f"{file_name}:t:{table_index}:r:{row_index}:c:{cell_index}:p:{part_index}",
+                                file_name=file_name,
+                                file_type="docx",
+                                text=part,
+                                block_type="table_cell",
+                                order=order,
+                                section_heading=current_heading,
+                                table_index=table_index,
+                                row_index=row_index,
+                                cell_index=cell_index,
+                                extraction_source="table",
+                            )
+                        )
+                        order += 1
+            table_index += 1
+
+    for source_name, sections in (("header", doc.sections), ("footer", doc.sections)):
+        seen: set[str] = set()
+        for section_index, section in enumerate(sections):
+            container = section.header if source_name == "header" else section.footer
+            for item_index, paragraph in enumerate(container.paragraphs):
+                text = normalize_text(paragraph.text)
+                key = f"{section_index}:{text}"
+                if not text or key in seen:
                     continue
+                seen.add(key)
                 blocks.append(
                     TextBlock(
-                        block_id=f"{file_name}:t:{table_index}:r:{row_index}",
+                        block_id=f"{file_name}:{source_name}:{section_index}:{item_index}",
                         file_name=file_name,
                         file_type="docx",
-                        text=row_text,
-                        block_type="table_row",
+                        text=text,
+                        block_type=source_name,
                         order=order,
-                        section_heading=current_heading,
-                        table_index=table_index,
-                        row_index=row_index,
+                        extraction_source=source_name,
+                        is_repeated_header_footer=True,
                     )
                 )
                 order += 1
-            table_index += 1
 
     if not blocks:
         warnings.append("No readable text found in DOCX.")
 
+    assign_sections(blocks)
     all_text = "\n".join(block.text for block in blocks)
     metadata = extract_key_metadata(all_text)
     metadata["page_count"] = None
@@ -126,33 +155,63 @@ def extract_pdf(file_name: str, data: bytes) -> DocumentResult:
     pdf = fitz.open(stream=data, filetype="pdf")
     order = 0
     current_heading: str | None = None
+    visual_elements = 0
 
     for page_idx in range(pdf.page_count):
         page = pdf.load_page(page_idx)
-        text = normalize_text(page.get_text("text"))
-        if not text:
+        raw_page_blocks = page.get_text("dict").get("blocks", [])
+        page_visuals = [item for item in raw_page_blocks if item.get("type") != 0]
+        visual_elements += len(page_visuals)
+        page_items = _extract_pdf_page_items(page)
+        if not page_items:
             warnings.append(f"Page {page_idx + 1}: no extractable text found; scanned/image-based content may require OCR.")
             continue
-        page_lines = [normalize_text(line) for line in text.splitlines() if normalize_text(line)]
-        if not page_lines:
-            continue
-        for line_idx, line in enumerate(_merge_pdf_lines(page_lines)):
-            if _looks_like_heading(line):
-                current_heading = line
+        for line_idx, item in enumerate(page_items):
+            text = item["text"]
+            is_heading = _looks_like_heading(text)
+            if is_heading:
+                current_heading = text
             blocks.append(
                 TextBlock(
                     block_id=f"{file_name}:pg:{page_idx + 1}:b:{line_idx}",
                     file_name=file_name,
                     file_type="pdf",
-                    text=line,
-                    block_type="heading" if _looks_like_heading(line) else "paragraph",
+                    text=text,
+                    block_type=item["block_type"] if item["block_type"].startswith("table") else ("heading" if is_heading else "paragraph"),
                     order=order,
                     page_number=page_idx + 1,
                     section_heading=current_heading,
                     paragraph_number=line_idx + 1,
+                    table_index=item.get("table_index"),
+                    row_index=item.get("row_index"),
+                    cell_index=item.get("cell_index"),
+                    bbox=item.get("bbox"),
+                    bbox_normalized=_normalize_bbox(item.get("bbox"), page.rect.width, page.rect.height),
+                    extraction_source="table" if item["block_type"].startswith("table") else "paragraph",
                 )
             )
             order += 1
+        for visual_idx, visual in enumerate(page_visuals):
+            bbox = tuple(float(value) for value in visual.get("bbox", (0, 0, 0, 0)))
+            blocks.append(
+                TextBlock(
+                    block_id=f"{file_name}:pg:{page_idx + 1}:visual:{visual_idx}",
+                    file_name=file_name,
+                    file_type="pdf",
+                    text=f"[Non-text visual element {visual_idx + 1}]",
+                    block_type="image_or_visual",
+                    order=order,
+                    page_number=page_idx + 1,
+                    section_heading=current_heading,
+                    bbox=bbox,
+                    bbox_normalized=_normalize_bbox(bbox, page.rect.width, page.rect.height),
+                    extraction_source="unknown",
+                )
+            )
+            order += 1
+
+    assign_sections(blocks)
+    _mark_repeated_headers_and_footers(blocks, pdf.page_count)
 
     if not blocks:
         warnings.append("No readable text found in PDF. The file may be scanned or image-based and require OCR.")
@@ -160,6 +219,7 @@ def extract_pdf(file_name: str, data: bytes) -> DocumentResult:
     all_text = "\n".join(block.text for block in blocks)
     metadata = extract_key_metadata(all_text)
     metadata["page_count"] = pdf.page_count
+    metadata["ignored_visual_elements"] = visual_elements
     return DocumentResult(file_name, "pdf", blocks, warnings, metadata)
 
 
@@ -189,11 +249,13 @@ def extract_txt(file_name: str, data: bytes) -> DocumentResult:
                 order=len(blocks),
                 section_heading=current_heading,
                 paragraph_number=idx + 1,
+                extraction_source="paragraph",
             )
         )
 
     if not blocks:
         warnings.append("No readable text found in TXT file.")
+    assign_sections(blocks)
     metadata = extract_key_metadata(text)
     metadata["page_count"] = None
     return DocumentResult(file_name, "txt", blocks, warnings, metadata)
@@ -212,9 +274,11 @@ def extract_key_metadata(text: str) -> dict[str, str | None]:
 
 
 def _looks_like_heading(text: str) -> bool:
+    if parse_section_heading(text):
+        return True
     if len(text) > 120:
         return False
-    if re.match(r"^\s*(\d+(\.\d+){0,4}|[A-Z]\.?)\s+.+", text):
+    if re.match(r"^\s*(?:\d{1,2}\.\d+(?:\.\d+){0,3}|[A-Z]\.?)\s+.+", text):
         return True
     if "/" in text and contains_chinese(text) and contains_english(text) and len(text) < 80:
         return True
@@ -236,3 +300,143 @@ def _merge_pdf_lines(lines: list[str]) -> list[str]:
     if buffer:
         merged.append(buffer)
     return merged
+
+
+def _extract_pdf_page_items(page) -> list[dict]:
+    """Return text in visual reading order while preserving detected table cells."""
+    table_items: list[dict] = []
+    table_boxes: list[tuple[float, float, float, float]] = []
+    try:
+        found = page.find_tables()
+        for table_index, table in enumerate(found.tables):
+            table_boxes.append(tuple(float(value) for value in table.bbox))
+            rows = table.extract()
+            row_count = max(len(rows), 1)
+            for row_index, row in enumerate(rows):
+                col_count = max(len(row), 1)
+                for cell_index, value in enumerate(row):
+                    parts = _split_logical_lines(value or "")
+                    if not parts:
+                        continue
+                    x0, y0, x1, y1 = table_boxes[-1]
+                    # PyMuPDF does not expose every reconstructed cell rectangle
+                    # consistently, so retain a stable approximate coordinate.
+                    cell_bbox = (
+                        x0 + (x1 - x0) * cell_index / col_count,
+                        y0 + (y1 - y0) * row_index / row_count,
+                        x0 + (x1 - x0) * (cell_index + 1) / col_count,
+                        y0 + (y1 - y0) * (row_index + 1) / row_count,
+                    )
+                    for part_index, text in enumerate(parts):
+                        part_height = (cell_bbox[3] - cell_bbox[1]) / len(parts)
+                        part_bbox = (
+                            cell_bbox[0],
+                            cell_bbox[1] + part_height * part_index,
+                            cell_bbox[2],
+                            cell_bbox[1] + part_height * (part_index + 1),
+                        )
+                        table_items.append(
+                            {
+                                "text": text,
+                                "block_type": "table_cell",
+                                "table_index": table_index,
+                                "row_index": row_index,
+                                "cell_index": cell_index,
+                                "bbox": part_bbox,
+                            }
+                        )
+    except Exception:
+        # Some PDFs have malformed vector geometry. Text extraction should
+        # remain available even when table reconstruction fails.
+        table_items = []
+        table_boxes = []
+
+    text_items: list[dict] = []
+    page_dict = page.get_text("dict", sort=True)
+    for raw_block in page_dict.get("blocks", []):
+        if raw_block.get("type") != 0:
+            continue
+        for line in raw_block.get("lines", []):
+            spans = line.get("spans", [])
+            text = normalize_text("".join(span.get("text", "") for span in spans))
+            if not text:
+                continue
+            bbox = tuple(float(value) for value in line.get("bbox", raw_block.get("bbox", (0, 0, 0, 0))))
+            if any(_bbox_center_inside(bbox, table_bbox) for table_bbox in table_boxes):
+                continue
+            text_items.append({"text": text, "block_type": "paragraph", "bbox": bbox})
+
+    items = text_items + table_items
+    items.sort(
+        key=lambda item: (
+            round(item["bbox"][1], 1),
+            item.get("table_index", -1),
+            item.get("row_index", -1),
+            item.get("cell_index", -1),
+            round(item["bbox"][0], 1),
+        )
+    )
+    return items
+
+
+def _split_logical_lines(text: str) -> list[str]:
+    return [
+        clean
+        for line in re.split(r"[\r\n]+", text or "")
+        if (clean := normalize_text(line))
+    ]
+
+
+def _bbox_center_inside(
+    bbox: tuple[float, float, float, float],
+    container: tuple[float, float, float, float],
+) -> bool:
+    cx = (bbox[0] + bbox[2]) / 2
+    cy = (bbox[1] + bbox[3]) / 2
+    return container[0] <= cx <= container[2] and container[1] <= cy <= container[3]
+
+
+def _normalize_bbox(
+    bbox: tuple[float, float, float, float] | None,
+    page_width: float,
+    page_height: float,
+) -> tuple[float, float, float, float] | None:
+    if not bbox or not page_width or not page_height:
+        return None
+    return (
+        bbox[0] / page_width,
+        bbox[1] / page_height,
+        bbox[2] / page_width,
+        bbox[3] / page_height,
+    )
+
+
+def _mark_repeated_headers_and_footers(blocks: list[TextBlock], page_count: int) -> None:
+    if page_count < 2:
+        return
+    occurrences: dict[str, list[TextBlock]] = defaultdict(list)
+    for block in blocks:
+        if not block.bbox or not block.page_number:
+            continue
+        key = re.sub(r"\b\d+\b", "#", normalize_text(block.text).lower())
+        if len(key) >= 3:
+            occurrences[key].append(block)
+    threshold = max(2, int(page_count * 0.5 + 0.5))
+    for repeated in occurrences.values():
+        pages = {block.page_number for block in repeated}
+        if len(pages) < threshold:
+            continue
+        y_positions = [
+            block.bbox_normalized[1]
+            for block in repeated
+            if block.bbox_normalized
+        ]
+        if not y_positions:
+            continue
+        # Repetition plus a consistently extreme vertical position is a much
+        # safer signal than repetition alone (e.g. recurring table labels).
+        near_top = max(y_positions) < 0.12
+        near_bottom = min(y_positions) > 0.88
+        if near_top or near_bottom:
+            for block in repeated:
+                block.is_repeated_header_footer = True

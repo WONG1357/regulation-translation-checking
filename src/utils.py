@@ -19,10 +19,19 @@ class TextBlock:
     order: int
     page_number: int | None = None
     section_heading: str | None = None
+    section_id: str | None = None
+    section_title: str = ""
     paragraph_number: int | None = None
     table_index: int | None = None
     row_index: int | None = None
     cell_index: int | None = None
+    bbox: tuple[float, float, float, float] | None = None
+    bbox_normalized: tuple[float, float, float, float] | None = None
+    is_repeated_header_footer: bool = False
+    detected_language: str = ""
+    extraction_source: str = "unknown"
+    classification: str = "unknown"
+    ignore_reason: str = ""
 
     def location_label(self) -> str:
         parts: list[str] = []
@@ -65,6 +74,9 @@ class BilingualPair:
     section_heading: str | None = None
     chinese_block_id: str | None = None
     english_block_id: str | None = None
+    chinese_block_ids: list[str] | None = None
+    english_block_ids: list[str] | None = None
+    merged_group_id: str | None = None
 
 
 def normalize_text(text: str) -> str:
@@ -72,6 +84,21 @@ def normalize_text(text: str) -> str:
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
+
+
+def strip_leading_clause_number(text: str) -> str:
+    """Remove a leading clause/list marker without removing meaningful in-sentence numbers."""
+    clean = normalize_text(text)
+    clean = re.sub(
+        r"^\s*(?:"
+        r"\d+(?:\.\d+)+(?:[.)、：:]|\s+)?"
+        r"|[(（]?\d+[)）.、]\s*"
+        r")",
+        "",
+        clean,
+        count=1,
+    )
+    return clean.strip()
 
 
 def contains_chinese(text: str) -> bool:
@@ -91,15 +118,26 @@ def english_word_count(text: str) -> int:
 
 
 def classify_language(text: str) -> str:
-    has_zh = contains_chinese(text)
-    has_en = contains_english(text)
-    if has_zh and has_en:
-        return "Chinese + English"
-    if has_zh:
+    """Classify by meaningful character ratios, with codes/numbers kept neutral."""
+    text = text or ""
+    zh_count = chinese_char_count(text)
+    latin_count = len(re.findall(r"[A-Za-z]", text))
+    word_count = english_word_count(text)
+    meaningful = zh_count + latin_count
+    if meaningful == 0:
+        return "Neutral"
+
+    zh_ratio = zh_count / meaningful
+    en_ratio = latin_count / meaningful
+    if zh_count >= 2 and word_count >= 1 and zh_ratio >= 0.18 and en_ratio >= 0.18:
+        return "Mixed Chinese-English"
+    if zh_count >= 2 and (zh_ratio >= 0.65 or word_count <= 1):
         return "Chinese"
-    if has_en:
+    if word_count >= 1 and (en_ratio >= 0.65 or zh_count <= 1):
         return "English"
-    return "Other/Unknown"
+    if zh_count and latin_count:
+        return "Mixed Chinese-English"
+    return "Neutral"
 
 
 def confidence_from_score(score: float) -> str:
