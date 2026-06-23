@@ -1,0 +1,4377 @@
+[
+  {
+    "pair_id": "chunk_001_pair_001",
+    "chinese_block_ids": [
+      "p023_b0008"
+    ],
+    "english_block_ids": [
+      "p023_b0009"
+    ],
+    "chinese_text": "医科创建集团致力于成为国际顶级供应商，提供高品质，价格合理的器械，辅助外科医生改善病人的 生活素质和针对用户的需求，提供崭新的工程技术方案。",
+    "english_text": "MediConcepts Group’s vision is to be the world’s leading supplier of high quality, cost effective instrumentation, empowering surgeons to provide the patients with an improved quality of life, and to create engineering solutions which truly focus on the user’s needs.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_002",
+    "chinese_block_ids": [
+      "p023_b0010"
+    ],
+    "english_block_ids": [
+      "p023_b0011"
+    ],
+    "chinese_text": "我们承诺致力持续改进我们的医疗器械质量管理体系及提供足够资源，以确保提供完善之服务及满足 客户及法规的要求。我们并以客户之信任及满足作为我们最根本的表现基础。",
+    "english_text": "We strive to continuously improve our processes and resources. We proudly pronounce our commitment to understanding, and meeting customer expectations and regulatory requirements at all times. We take customer satisfaction as the primary measure of our performance.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_003",
+    "chinese_block_ids": [
+      "p023_b0014"
+    ],
+    "english_block_ids": [
+      "p023_b0015"
+    ],
+    "chinese_text": "我们的质量目标是经与我们员工沟通，并依管理层所定之质量方针，以及质量手册所规定的质量体系 要求而制定。具体的质量目标是通过管理评审会议制定",
+    "english_text": "The specified quality objectives are set by the management review meeting and it is our goal that a captioned policy is communicated to all our employees, who will adhere to the spirit of this Quality Policy as well as the quality system requirements set forth in the Quality Manual.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_004",
+    "chinese_block_ids": [
+      "p023_b0016"
+    ],
+    "english_block_ids": [
+      "p023_b0017"
+    ],
+    "chinese_text": "质量目标参照《质量目标一览表》",
+    "english_text": "Quality Objective refers to <Quality Objectives List>",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_005",
+    "chinese_block_ids": [
+      "p023_b0018"
+    ],
+    "english_block_ids": [
+      "p023_b0019"
+    ],
+    "chinese_text": "质量方针和质量目标将通过以下途径达成：",
+    "english_text": "The quality policy and objective will be achieved through the following channels: 领导所有员工去建立并维持一个符合0.4.1 所列的标准要求的质量管理体系，满足0.4.2 所列的适用 的法规要求。",
+    "confidence": 0.7,
+    "pairing_reason": "Chinese sentence followed by mixed English/Chinese block; partial translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_006",
+    "chinese_block_ids": [
+      "p023_b0021"
+    ],
+    "english_block_ids": [
+      "p023_b0022"
+    ],
+    "chinese_text": "1) 实施医疗器械国际标准;",
+    "english_text": "Implement the international standards for medical devices; 2) 通过对过程和设备的确认和验证以确保产品在每一个制作过程中之质量﹔",
+    "confidence": 0.7,
+    "pairing_reason": "Chinese list item followed by mixed English/Chinese block; partial translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_007",
+    "chinese_block_ids": [
+      "p023_b0023"
+    ],
+    "english_block_ids": [
+      "p023_b0024"
+    ],
+    "chinese_text": "Ensure the product quality in every manufacturing process through validation and verification of the manufacturing processes and equipments; 3) 通过培训所有员工以确保产品质量和效能改进。",
+    "english_text": "Ensure the product quality and improve efficiency by providing training to all staff.",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed block followed by English block; partial translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_008",
+    "chinese_block_ids": [
+      "p024_b0014"
+    ],
+    "english_block_ids": [
+      "p024_b0013"
+    ],
+    "chinese_text": "医科创建有限公司",
+    "english_text": "Medifabrica Limited",
+    "confidence": 0.5,
+    "pairing_reason": "Company names in same segment; possible translation but not exact",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_009",
+    "chinese_block_ids": [
+      "p024_b0017",
+      "p024_b0018"
+    ],
+    "english_block_ids": [
+      "p024_b0020"
+    ],
+    "chinese_text": "医创建科技（深圳）有限\n公司",
+    "english_text": "(Shenzhen) Company",
+    "confidence": 0.6,
+    "pairing_reason": "Chinese company name split across blocks; English partial name in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_010",
+    "chinese_block_ids": [
+      "p025_b0009"
+    ],
+    "english_block_ids": [
+      "p025_b0010",
+      "p025_b0011"
+    ],
+    "chinese_text": "总经理(管理者代表)",
+    "english_text": "General Manager\n(Management Representative)",
+    "confidence": 0.9,
+    "pairing_reason": "Direct translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_011",
+    "chinese_block_ids": [
+      "p025_b0012"
+    ],
+    "english_block_ids": [
+      "p025_b0015"
+    ],
+    "chinese_text": "研发总监/工程主管",
+    "english_text": "R&D Director /",
+    "confidence": 0.8,
+    "pairing_reason": "Partial translation; English block continues",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_012",
+    "chinese_block_ids": [
+      "p025_b0013"
+    ],
+    "english_block_ids": [
+      "p025_b0016",
+      "p025_b0021"
+    ],
+    "chinese_text": "医创建科技(深圳)有限公司",
+    "english_text": "Mediconcepts Technology\n(Shenzhen)Company Ltd",
+    "confidence": 0.9,
+    "pairing_reason": "Company name translation in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_013",
+    "chinese_block_ids": [
+      "p025_b0014"
+    ],
+    "english_block_ids": [
+      "p025_b0017",
+      "p025_b0022"
+    ],
+    "chinese_text": "法规符合性负责人 Person Responsible",
+    "english_text": "for Regulatory\nCompliance",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed block followed by English blocks forming title",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_014",
+    "chinese_block_ids": [
+      "p025_b0024"
+    ],
+    "english_block_ids": [
+      "p025_b0027"
+    ],
+    "chinese_text": "采购部(香港)",
+    "english_text": "Purchasing Department(HK)",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_001_pair_015",
+    "chinese_block_ids": [
+      "p025_b0025"
+    ],
+    "english_block_ids": [
+      "p025_b0026"
+    ],
+    "chinese_text": "售后服务部 After-sales Service",
+    "english_text": "Department",
+    "confidence": 0.6,
+    "pairing_reason": "Mixed block followed by English continuation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_001",
+    "chinese_block_ids": [
+      "p028_b0008"
+    ],
+    "english_block_ids": [
+      "p028_b0009",
+      "p028_b0010"
+    ],
+    "chinese_text": "3.2.1.1 负责公司之整体业务策略和管理，并为公司制订长远的发展方向。",
+    "english_text": "Be responsible for the overall business strategies and management of the company; and define the long term direction of the company. 3.2.1.2 为公司提供所需的资源以便有效运作。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese heading followed by English translation across blocks",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_002",
+    "chinese_block_ids": [
+      "p028_b0010"
+    ],
+    "english_block_ids": [
+      "p028_b0011"
+    ],
+    "chinese_text": "3.2.1.2 为公司提供所需的资源以便有效运作。",
+    "english_text": "Provide the company with sufficient resources for effective operation. 3.2.1.3 最终对公司之整体运作与产品之质量负责。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_003",
+    "chinese_block_ids": [
+      "p028_b0011"
+    ],
+    "english_block_ids": [
+      "p028_b0012",
+      "p028_b0013"
+    ],
+    "chinese_text": "3.2.1.3 最终对公司之整体运作与产品之质量负责。",
+    "english_text": "Be ultimately responsible for the company’s overall operations and product quality. 3.2.1.4 制订公司质量方针。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation across blocks",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_004",
+    "chinese_block_ids": [
+      "p028_b0013"
+    ],
+    "english_block_ids": [
+      "p028_b0014"
+    ],
+    "chinese_text": "3.2.1.4 制订公司质量方针。",
+    "english_text": "Define the company’s Quality Policy. 3.2.2 总经理 General Manager",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_005",
+    "chinese_block_ids": [
+      "p028_b0015"
+    ],
+    "english_block_ids": [
+      "p028_b0016"
+    ],
+    "chinese_text": "3.2.2.1 负责各部门运作之整体管理，并有对整体运作之责任及权力。",
+    "english_text": "Be responsible for the overall management of the operations of each department Having responsibility and authority over the operations. 3.2.2.2 领导及管理公司各部门，使生产团队合作凝聚，以达致符合客户要求及公司 目标。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_006",
+    "chinese_block_ids": [
+      "p028_b0016"
+    ],
+    "english_block_ids": [
+      "p028_b0017"
+    ],
+    "chinese_text": "3.2.2.2 领导及管理公司各部门，使生产团队合作凝聚，以达致符合客户要求及公司 目标。",
+    "english_text": "Provide leadership and management to the division, motivate all divisions and team members to work cohesively in meeting customer’s requirements and achieving company’s goals. 3.2.2.3 负责策划质量管理及建立公司质量目标。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_007",
+    "chinese_block_ids": [
+      "p028_b0017"
+    ],
+    "english_block_ids": [
+      "p028_b0018"
+    ],
+    "chinese_text": "3.2.2.3 负责策划质量管理及建立公司质量目标。",
+    "english_text": "Be responsible for the development of quality management and establishing the company’s Quality Objectives. 3.2.2.4 负责忠告性通知处理及报告。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_008",
+    "chinese_block_ids": [
+      "p028_b0018"
+    ],
+    "english_block_ids": [
+      "p028_b0019"
+    ],
+    "chinese_text": "3.2.2.4 负责忠告性通知处理及报告。",
+    "english_text": "Be responsible for Advisory Notice handling and reporting. 3.2.3 管理者代表(总经理兼整个集团公司的管理者代表) Management Representative (General",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_009",
+    "chinese_block_ids": [
+      "p028_b0020"
+    ],
+    "english_block_ids": [
+      "p028_b0021"
+    ],
+    "chinese_text": "3.2.3.1 担当本公司质量管理体系之管理者代表。",
+    "english_text": "Act as the Management Representative of the company’s Quality Management System. 3.2.3.2 确保质量管理体系按照适用之标准建立，实施和维持。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_010",
+    "chinese_block_ids": [
+      "p028_b0021"
+    ],
+    "english_block_ids": [
+      "p028_b0022"
+    ],
+    "chinese_text": "3.2.3.2 确保质量管理体系按照适用之标准建立，实施和维持。",
+    "english_text": "Ensure that the Quality Management System is established, implemented and maintained in accordance with applicable standards. 3.2.3.3 协调及筹组管理评审活动。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_011",
+    "chinese_block_ids": [
+      "p028_b0022"
+    ],
+    "english_block_ids": [
+      "p028_b0023"
+    ],
+    "chinese_text": "3.2.3.3 协调及筹组管理评审活动。",
+    "english_text": "Coordinate and administrate management review activities. 3.2.3.4 负责就有关公司之质量管理体系事宜与外间机构联络。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_012",
+    "chinese_block_ids": [
+      "p028_b0023"
+    ],
+    "english_block_ids": [
+      "p029_b0006"
+    ],
+    "chinese_text": "3.2.3.4 负责就有关公司之质量管理体系事宜与外间机构联络。",
+    "english_text": "Be responsible for communicating with external parties on matters relating to company’s Quality Management System. 3.2.3.5 向董事总经理汇报质量管理体系的绩效，以便其进行评审并作为质量管理体 系改进的基础。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation across segments (continued section)",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_013",
+    "chinese_block_ids": [
+      "p029_b0006"
+    ],
+    "english_block_ids": [
+      "p029_b0007"
+    ],
+    "chinese_text": "3.2.3.5 向董事总经理汇报质量管理体系的绩效，以便其进行评审并作为质量管理体 系改进的基础。",
+    "english_text": "Report on the performance of the Quality Management System to the Managing Director for review and as a basis for improvement of the Quality Management System. 3.2.3.6 主持管理评审会议。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_014",
+    "chinese_block_ids": [
+      "p029_b0007"
+    ],
+    "english_block_ids": [
+      "p029_b0008"
+    ],
+    "chinese_text": "3.2.3.6 主持管理评审会议。",
+    "english_text": "Preside over the management review meeting. 3.2.3.7 负责审批质量管理体系程序文件。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_015",
+    "chinese_block_ids": [
+      "p029_b0008"
+    ],
+    "english_block_ids": [
+      "p029_b0009"
+    ],
+    "chinese_text": "3.2.3.7 负责审批质量管理体系程序文件。",
+    "english_text": "Be responsible for approving Quality Management System Procedures.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_016",
+    "chinese_block_ids": [
+      "p029_b0011"
+    ],
+    "english_block_ids": [
+      "p029_b0012"
+    ],
+    "chinese_text": "3.2.4.1 研发总监",
+    "english_text": "R & D Director",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese title followed by English title",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_017",
+    "chinese_block_ids": [
+      "p029_b0013"
+    ],
+    "english_block_ids": [
+      "p029_b0014"
+    ],
+    "chinese_text": "3.2.4.1.1 向总经理负责所有工程事宜及协调临床事宜",
+    "english_text": "Be responsible to the General Manager for all engineering matters and co-ordination of clinical matters.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese clause followed by English translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_018",
+    "chinese_block_ids": [
+      "p029_b0015"
+    ],
+    "english_block_ids": [
+      "p029_b0016"
+    ],
+    "chinese_text": "3.2.4.1.2 确保产品满足MDD 技术要求以及其它国际的标准",
+    "english_text": "Ensure that the product complies with the technical requirements of the MDD and other international standards/requirements.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese clause followed by English translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_019",
+    "chinese_block_ids": [
+      "p029_b0017"
+    ],
+    "english_block_ids": [
+      "p029_b0018"
+    ],
+    "chinese_text": "3.2.4.1.3 负责风险分析、绘制技术图纸",
+    "english_text": "Be responsible for the risk analysis and drafting technical drawing. 3.2.4.2 工程经理",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese clause followed by English translation in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_020",
+    "chinese_block_ids": [
+      "p029_b0018"
+    ],
+    "english_block_ids": [
+      "p029_b0019"
+    ],
+    "chinese_text": "3.2.4.2 工程经理",
+    "english_text": "Engineering Manager",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese title followed by English title",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_021",
+    "chinese_block_ids": [
+      "p029_b0020"
+    ],
+    "english_block_ids": [
+      "p029_b0021"
+    ],
+    "chinese_text": "3.2.4.2.1 向研发总监负责，处理部门技术和工程相关事宜",
+    "english_text": "Be responsible to the R & D Director for handling matters in the division relating to technical and engineering aspects.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese clause followed by English translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_022",
+    "chinese_block_ids": [
+      "p029_b0022"
+    ],
+    "english_block_ids": [
+      "p029_b0023"
+    ],
+    "chinese_text": "3.2.4.2.2 协助研发总监开发产品及必要时更新产品",
+    "english_text": "Assist the R & D Director in developing products and/or upgrading the products as necessary.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese clause followed by English translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_002_pair_023",
+    "chinese_block_ids": [
+      "p029_b0024"
+    ],
+    "english_block_ids": [
+      "p029_b0025"
+    ],
+    "chinese_text": "3.2.4.2.3 协助生产部持续改进制造技术，以及减少生产成本",
+    "english_text": "Assist Production to continuously improve manufacturing techniques and reduce production cost.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese clause followed by English translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_001",
+    "chinese_block_ids": [
+      "p029_b0027"
+    ],
+    "english_block_ids": [
+      "p029_b0028"
+    ],
+    "chinese_text": "Assist the sourcing of new material and/or components and vendor approvals. 3.2.4.3 首席技術執行官",
+    "english_text": "Chief Technology Officer",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block contains title and English block is the translation of the title",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_002",
+    "chinese_block_ids": [
+      "p030_b0006"
+    ],
+    "english_block_ids": [
+      "p030_b0007"
+    ],
+    "chinese_text": "3.2.4.3.1 向董事总经理汇报所有技術發展事宜",
+    "english_text": "Be responsible to the Managing Director for all technological development matters",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_003",
+    "chinese_block_ids": [
+      "p030_b0008"
+    ],
+    "english_block_ids": [
+      "p030_b0009"
+    ],
+    "chinese_text": "3.2.4.3.2 确保产品满足最先進前沿技术要求以及客戶要求的国际的标准",
+    "english_text": "Ensure that products meet state-of-the-art technological requirements and international standards demanded by customers.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_004",
+    "chinese_block_ids": [
+      "p030_b0010"
+    ],
+    "english_block_ids": [
+      "p030_b0011"
+    ],
+    "chinese_text": "3.2.4.3.3 负责創新，草擬，绘制技术图纸和3D 模型設計",
+    "english_text": "Be responsible for innovation, drafting, creating technical drawing and 3D rending design,",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_005",
+    "chinese_block_ids": [
+      "p030_b0012"
+    ],
+    "english_block_ids": [
+      "p030_b0013"
+    ],
+    "chinese_text": "3.2.4.3.4 负责進行前期研發驗證和臨床測試",
+    "english_text": "Be responsible for conceptual design/pre-design verification and clinical Study",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_007",
+    "chinese_block_ids": [
+      "p030_b0015"
+    ],
+    "english_block_ids": [
+      "p030_b0016"
+    ],
+    "chinese_text": "3.2.5.1 负责向现有及潜在客户推销公司之产品。",
+    "english_text": "Be responsible for the marketing of the company’s products to existing and potential customers. 3.2.5.2 担当处理客户事宜之主要联络单位。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block paired with English block that also contains next Chinese sub-item; partial match",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_010",
+    "chinese_block_ids": [
+      "p030_b0019"
+    ],
+    "english_block_ids": [
+      "p030_b0020"
+    ],
+    "chinese_text": "Be responsible for delivering the products to the customers, and related shipping arrangement, including the documents. 3.2.5.5 负责主导合同评审，客户投诉处理，客户满意度调查。",
+    "english_text": "Be responsible for taking initiative in contract review, customer complaint handling and customer satisfaction investigation.",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block contains English translation of previous sub-item and Chinese text; English block is translation of the Chinese part. Partial match.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_012",
+    "chinese_block_ids": [
+      "p030_b0022"
+    ],
+    "english_block_ids": [
+      "p030_b0023"
+    ],
+    "chinese_text": "3.2.6.1 在其职责范围内界定目标与指标。",
+    "english_text": "Define the objectives and indicators within his responsibilities. 3.2.6.2 确保生产及质量要求借着资源调配得以满足。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block paired with English block that also contains next Chinese sub-item",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_014",
+    "chinese_block_ids": [
+      "p030_b0025"
+    ],
+    "english_block_ids": [
+      "p030_b0026"
+    ],
+    "chinese_text": "Maintain the effective operation of the Quality Management System within his responsibilities. 3.2.6.4 与相关部门协调确定生产方法及处理流程，并准备关联之文件。",
+    "english_text": "Confirm manufacturing methods and process flow by working with related departments. Prepare associated documents accordingly.",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block contains English translation of previous sub-item and Chinese text; English block is translation of the Chinese part.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_015",
+    "chinese_block_ids": [
+      "p031_b0006"
+    ],
+    "english_block_ids": [
+      "p031_b0007"
+    ],
+    "chinese_text": "3.2.6.5 解决生产线出现的工艺技术问题。",
+    "english_text": "Resolve any manufacturing problem arising from the production line. 3.2.6.6 管理和维护生产用设备、工装工具、仪器仪表，以确保工厂运作之持续。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block paired with English block that also contains next Chinese sub-item",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_020",
+    "chinese_block_ids": [
+      "p031_b0012"
+    ],
+    "english_block_ids": [
+      "p031_b0013"
+    ],
+    "chinese_text": "Assist in the preparation of “Process Validation” 3.2.6.11 领导及管理其监管之部门人员，使上述责任得以达成。",
+    "english_text": "Provide leadership and management to the department he/she supervises such that responsibilities mentioned above can be achieved.",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block contains English translation of previous sub-item and Chinese text; English block is translation of the Chinese part.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_022",
+    "chinese_block_ids": [
+      "p031_b0015"
+    ],
+    "english_block_ids": [
+      "p031_b0016"
+    ],
+    "chinese_text": "采购经理职责管理以下功能：",
+    "english_text": "Purchasing Manager is responsible for the management of the following functions:",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_024",
+    "chinese_block_ids": [
+      "p031_b0018"
+    ],
+    "english_block_ids": [
+      "p031_b0019"
+    ],
+    "chinese_text": "3.2.7.1.1 负责以准确时间及达致成本效益的态度采购物料、机器及设备",
+    "english_text": "Be responsible for procuring materials, machinery and equipment in a timely and cost-effective manner.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_025",
+    "chinese_block_ids": [
+      "p031_b0020"
+    ],
+    "english_block_ids": [
+      "p031_b0021"
+    ],
+    "chinese_text": "3.2.7.1.2 指导采购员解决与采购有关的事宜。",
+    "english_text": "Supervise the purchasing staff in resolving any matters in relation to purchasing.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_003_pair_026",
+    "chinese_block_ids": [
+      "p031_b0022"
+    ],
+    "english_block_ids": [
+      "p031_b0023"
+    ],
+    "chinese_text": "3.2.7.1.3 统筹供应商评估活动及确保已审定的采购程序正确无误地实施。",
+    "english_text": "Coordinate supplier evaluation activities and ensure the proper performance of the approved purchasing procedures.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_001",
+    "chinese_block_ids": [
+      "p031_b0026"
+    ],
+    "english_block_ids": [
+      "p031_b0027"
+    ],
+    "chinese_text": "3.2.7.2.1 负责与市场部联系，制订合理的生产计划。",
+    "english_text": "Be responsible for scheduling appropriate production plans by ongoing communication with Marketing.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_002",
+    "chinese_block_ids": [
+      "p031_b0028"
+    ],
+    "english_block_ids": [
+      "p031_b0029",
+      "p032_b0006"
+    ],
+    "chinese_text": "3.2.7.2.2 确保所有物料及成品恰当地储存、防护、运送。(货仓)",
+    "english_text": "Ensure all materials and finished goods are correctly and properly stored, preserved and delivered (Warehouse).",
+    "confidence": 1.0,
+    "pairing_reason": "English split across pages, combined to match Chinese.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_003",
+    "chinese_block_ids": [
+      "p032_b0007"
+    ],
+    "english_block_ids": [
+      "p032_b0008"
+    ],
+    "chinese_text": "3.2.7.2.3 指导下属处理与物料及与生产计划有关的事项。",
+    "english_text": "Supervise subordinates to handle matters related to materials and production plans.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_004",
+    "chinese_block_ids": [
+      "p032_b0009"
+    ],
+    "english_block_ids": [
+      "p032_b0010"
+    ],
+    "chinese_text": "3.2.7.2.4 确保质量管理体系在本部门内有效地运行。",
+    "english_text": "Ensure the effective operations of the Quality Management System within the department.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_005",
+    "chinese_block_ids": [
+      "p032_b0012"
+    ],
+    "english_block_ids": [
+      "p032_b0013"
+    ],
+    "chinese_text": "3.2.8.1 品质经理",
+    "english_text": "Quality Manager",
+    "confidence": 1.0,
+    "pairing_reason": "Title pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_006",
+    "chinese_block_ids": [
+      "p032_b0014"
+    ],
+    "english_block_ids": [
+      "p032_b0015"
+    ],
+    "chinese_text": "3.2.8.1.1 制订、实施及改进质量管理体系。",
+    "english_text": "Define, implement and improve the Quality Management System",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_007",
+    "chinese_block_ids": [
+      "p032_b0016"
+    ],
+    "english_block_ids": [
+      "p032_b0017"
+    ],
+    "chinese_text": "3.2.8.1.2 参与及协助解决生产及其它活动中发生的质量问题。",
+    "english_text": "Participate and assist in resolving quality related problems arising in the production or other activities.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_008",
+    "chinese_block_ids": [
+      "p032_b0018"
+    ],
+    "english_block_ids": [
+      "p032_b0019"
+    ],
+    "chinese_text": "3.2.8.1.3 确保客户投诉得到及时的跟进处理。",
+    "english_text": "Ensure that customer complaints are followed and resolved in a timely manner.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_009",
+    "chinese_block_ids": [
+      "p032_b0020"
+    ],
+    "english_block_ids": [
+      "p032_b0021"
+    ],
+    "chinese_text": "3.2.8.1.4 推广质量意识及质量改善。",
+    "english_text": "Promotion of quality concepts and quality improvement.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_010",
+    "chinese_block_ids": [
+      "p032_b0022"
+    ],
+    "english_block_ids": [
+      "p032_b0023"
+    ],
+    "chinese_text": "3.2.8.1.5 管理及处理有关法规有关之事宜。",
+    "english_text": "Manage and handle regulatory affairs.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_011",
+    "chinese_block_ids": [
+      "p032_b0024"
+    ],
+    "english_block_ids": [
+      "p032_b0025"
+    ],
+    "chinese_text": "3.2.8.1.6 管理内部质量审核活动。",
+    "english_text": "Manage and conduct internal quality audit program. 3.2.8.2 品质工程师",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese ends with period; English includes next heading but paired as continuation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_012",
+    "chinese_block_ids": [
+      "p032_b0027"
+    ],
+    "english_block_ids": [
+      "p032_b0028"
+    ],
+    "chinese_text": "3.2.8.2.1 负责测量仪器的校准",
+    "english_text": "Be responsible for the instruments’ calibration.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair within same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_013",
+    "chinese_block_ids": [
+      "p032_b0029"
+    ],
+    "english_block_ids": [
+      "p032_b0030"
+    ],
+    "chinese_text": "3.2.8.2.2 执行抽样计划、生产线及产品失效分析",
+    "english_text": "Conduct sampling plan, and Production Line and Product Defect Analysis. 3.2.8.3 品质主管",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese ends without period; English includes next heading but paired as continuation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_014",
+    "chinese_block_ids": [
+      "p032_b0032"
+    ],
+    "english_block_ids": [
+      "p032_b0033",
+      "p032_b0034"
+    ],
+    "chinese_text": "3.2.8.3.1 指导下属处理来料检查，制程检查、最终检查及出货检查。",
+    "english_text": "Supervise subordinates to conduct inspections, including Incoming inspection, In-Process inspection and Final inspection.",
+    "confidence": 1.0,
+    "pairing_reason": "English split across two blocks, combined to match Chinese.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_015",
+    "chinese_block_ids": [
+      "p032_b0035"
+    ],
+    "english_block_ids": [
+      "p033_b0006"
+    ],
+    "chinese_text": "3.2.8.3.2 协助品质经理建立质量管理体系",
+    "english_text": "Assist Quality Manager to establish a Quality Management System.",
+    "confidence": 1.0,
+    "pairing_reason": "Chinese at end of segment_0057, English at start of segment_0058, same section, no heading between.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_016",
+    "chinese_block_ids": [
+      "p033_b0007"
+    ],
+    "english_block_ids": [
+      "p033_b0008"
+    ],
+    "chinese_text": "3.2.8.3.3 协助纠正预防措施行动的跟进。",
+    "english_text": "Assist Corrective and Preventive Activities follow-up. 3.2.9 行政人事主管 Admin. & Personnel Supervisor",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese ends with period; English includes next heading but paired as continuation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_017",
+    "chinese_block_ids": [
+      "p033_b0009"
+    ],
+    "english_block_ids": [
+      "p033_b0010"
+    ],
+    "chinese_text": "3.2.9.1 负责人力资源的规划、招聘、培训、考核、实施与跟进。",
+    "english_text": "Be responsible for recruiting, planning, training, performance appraisal, implementation and follow-up of human resources. 3.2.9.2 负责编制公司年度培训计划幷组织实施。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese ends with period; English includes next heading but paired as continuation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_018",
+    "chinese_block_ids": [
+      "p033_b0011"
+    ],
+    "english_block_ids": [
+      "p033_b0012"
+    ],
+    "chinese_text": "3.2.9.3 负责各级人员薪资制定、职位的初核及工资的核算与计发。",
+    "english_text": "Be responsible for the initial audit for the emolument and position of each level of staff, and the calculation and verification of wages and salaries. 3.2.9.4 负责制定行政、人事部门的工作执行方案，幷跟进执行。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese ends with period; English includes next heading but paired as continuation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_004_pair_019",
+    "chinese_block_ids": [
+      "p033_b0013"
+    ],
+    "english_block_ids": [
+      "p033_b0014"
+    ],
+    "chinese_text": "3.2.9.5 负责督导居住证、保险的办理及劳动合同的签订。",
+    "english_text": "Be responsible for preparing employment contracts, residential permit and insurance matters. 3.2.9.6 负责督导、协调下属各部门工作效率的提升及工作目标的达成。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese ends with period; English includes next heading but paired as continuation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_001",
+    "chinese_block_ids": [
+      "p033_b0019"
+    ],
+    "english_block_ids": [
+      "p033_b0020"
+    ],
+    "chinese_text": "3.2.11.1 資格證明要求",
+    "english_text": "Qualification requirements",
+    "confidence": 0.95,
+    "pairing_reason": "Direct heading translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_002",
+    "chinese_block_ids": [
+      "p033_b0021",
+      "p033_b0022"
+    ],
+    "english_block_ids": [
+      "p033_b0023",
+      "p033_b0024",
+      "p034_b0006"
+    ],
+    "chinese_text": "3.2.11.1.1 製造商應在其組織內至少配備一名負責監管合規的人員，這些人員應具備醫療器械領域的必要專業知識。必要的專業知識應通過以下任一項資格證 明： (a) 獲得相關歐盟會員國承認的法律，醫學，藥學，工程學或其他相關科學 學科的大學學位或課程認可後授予文憑、證書或其他具有正式資格的證明， 並且至少具有一年醫療器材的法規事務或品質管理系統的專業經驗；或 (b) 有四年的專業經驗在與醫療器材相關的法規事務或品質管理系統方面。",
+    "english_text": "Manufacturers shall have available within their organisation at least one person responsible for regulatory compliance who possesses the requisite expertise in the field of medical devices. The requisite expertise shall be demonstrated by either of the following qualifications: (a) a diploma, certificate or other evidence of formal qualification, awarded on completion of a university degree or of a course of study recognised as equivalent by the Member State concerned, in law, medicine, pharmacy, engineering or another relevant scientific discipline, and at least one year of professional experience in regulatory affairs or in quality management systems relating to medical devices; (b) four years of professional experience in regulatory affairs or in quality management systems relating to medical devices. 3.2.11.2 職責",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic match across pages, English continues on next page",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_003",
+    "chinese_block_ids": [
+      "p034_b0007",
+      "p034_b0008"
+    ],
+    "english_block_ids": [
+      "p034_b0009"
+    ],
+    "chinese_text": "Responsibilities (a) 在器材被放行前，根據製造器材的品質管理系統對器材的符合性進行適 當的檢查; (b) 制定並保持最新之技術文件和歐盟符合性聲明; (c)遵守MDR Article 10 (10) 或IVDR Article 10(9)上市後監督義務; (d)依MDR Article 87 及88 或IVDR Article 82 及86 系統化紀錄和報告嚴重事 件及現場安全矯正措施;",
+    "english_text": "(a) the conformity of the devices is appropriately checked, in accordance with the quality management system under which the devices are manufactured, before a device is released; (b) the technical documentation and the EU declaration of conformity are drawn up and kept up-to-date; (c) the post-market surveillance obligations are complied with in accordance with Article 10(10); (d) the reporting obligations referred to in Articles 87 to 91 are fulfilled;",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic match of responsibilities list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_004",
+    "chinese_block_ids": [
+      "p034_b0010"
+    ],
+    "english_block_ids": [
+      "p034_b0011"
+    ],
+    "chinese_text": "管理者代表被委任为法規符合性負責人。",
+    "english_text": "The Management Representative is appointed as the Person responsible for regulatory compliance, PRRC. 副管理者代表被委任为副法規符合性負責人。",
+    "confidence": 0.85,
+    "pairing_reason": "Partial match, English contains extra Chinese text",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_005",
+    "chinese_block_ids": [
+      "p034_b0015"
+    ],
+    "english_block_ids": [
+      "p034_b0016"
+    ],
+    "chinese_text": "3.1.1.1.1.1 向董事总经理和总经理汇报所有項目發展事宜",
+    "english_text": "Be responsible to the Managing Director and General Manager for all project development matters. 3.1.1.1.1.2 與客戶保持聯繫並定時更新項目進度",
+    "confidence": 0.85,
+    "pairing_reason": "Partial match, English contains extra Chinese text",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_009",
+    "chinese_block_ids": [
+      "p035_b0009",
+      "p035_b0010"
+    ],
+    "english_block_ids": [
+      "p035_b0011"
+    ],
+    "chinese_text": "Maintain traceability of all released documentation 3.1.1.1.1.6 確保品質管理系統的實施和發行是符合ISO13485 和 歐盟醫療器械法規",
+    "english_text": "Ensure the deployment and establishment of quality management system is in full compliance with ISO 13485 and EU MDR. 3.1.1.1.1.7 監督和確保設計歷史文檔(DHF) 和器械主記錄(DMR) 的完整性是符合",
+    "confidence": 0.8,
+    "pairing_reason": "Partial match, Chinese block p035_b0010 is continuation of p035_b0009",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_010",
+    "chinese_block_ids": [
+      "p035_b0012"
+    ],
+    "english_block_ids": [
+      "p035_b0013"
+    ],
+    "chinese_text": "技術文檔提交要求",
+    "english_text": "Oversee and ensure the integrity of Design History File (DHF) and Device Master Record (DMR) fulfills the requirement of technical document submission",
+    "confidence": 0.7,
+    "pairing_reason": "Partial semantic match, Chinese is a fragment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_005_pair_011",
+    "chinese_block_ids": [
+      "p036_b0008"
+    ],
+    "english_block_ids": [
+      "p036_b0009",
+      "p036_b0010"
+    ],
+    "chinese_text": "4.1.1 集团公司按照0.4.1 所列标准的要求将质量管理体系形成文件并保持其有效性。",
+    "english_text": "Company produces quality management system documents according to the requirement stated in section 0.4.1 and ensure its effectiveness. 整个公司质量管理体系所需的过程及其在整个组织的应用，均于第5、6、7 和8 节确定。",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic match, English continues in next block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_010",
+    "chinese_block_ids": [
+      "p036_b0020"
+    ],
+    "english_block_ids": [
+      "p036_b0021"
+    ],
+    "chinese_text": "程，当需要更改这些过程时：",
+    "english_text": "Company shall manage the process of quality management system in accordance with the specifications stated in section 0.4.1 and regulations stated in section 0.4.2. When process change is needed,",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese continuation paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_011",
+    "chinese_block_ids": [
+      "p036_b0021"
+    ],
+    "english_block_ids": [
+      "p036_b0022"
+    ],
+    "chinese_text": "a) 评价过程更改对本公司质量管理体系的影响",
+    "english_text": "Evaluated for their impact on the quality management system;",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item a paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_012",
+    "chinese_block_ids": [
+      "p036_b0022"
+    ],
+    "english_block_ids": [
+      "p036_b0023"
+    ],
+    "chinese_text": "b) 评价过程更改对本公司质量管理体系中所产生的医疗器械的影响",
+    "english_text": "Evaluated for their impact on the medical devices produced under this quality management system;",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item b paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_015",
+    "chinese_block_ids": [
+      "p037_b0006"
+    ],
+    "english_block_ids": [
+      "p037_b0007"
+    ],
+    "chinese_text": "c) 按照0.4.1 所列的标准和0.4.2 所列的适用法规要求进行控制",
+    "english_text": "According to the specifications stated in 0.4.1 and regulation requirements stated in 0.4.2 to control",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item c paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_016",
+    "chinese_block_ids": [
+      "p037_b0008"
+    ],
+    "english_block_ids": [
+      "p037_b0009"
+    ],
+    "chinese_text": "保持对其进行控制，应保留外包过程符合0.4.1 所列标准要求、顾客要求和0.4.2 所列的 适用法规要求的责任。控制应与所涉及的风险和外部方满足7.4 中要求的能力相适应。控 制应包括书面质量协议。",
+    "english_text": "If company transfers any process which affects product quality during production to third party, surveillance shall be conducted and controlled during process. Process in third party shall meet the specification stated in section 0.4.1, customer requirement and regulation requirements stated in section 0.4.2. Control shall manage the risk involved and the ability of third party to fulfill to requirements stated in section 7.4. Control shall be recorded in a written quality agreement.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese paragraph paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_017",
+    "chinese_block_ids": [
+      "p037_b0010"
+    ],
+    "english_block_ids": [
+      "p037_b0011"
+    ],
+    "chinese_text": "用前应对软件应用进行确认，适当时，软件或其应用更改后也应对软件应用进行确认。",
+    "english_text": "The Group shall document procedures for the validation of the application of computer software used in the quality management system. Such software applications shall be validated prior to initial use and, as appropriate, after changes to such software or its application.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese continuation paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_018",
+    "chinese_block_ids": [
+      "p037_b0011"
+    ],
+    "english_block_ids": [
+      "p037_b0012"
+    ],
+    "chinese_text": "与软件确认和再确认有关的特定方法和活动应与软件使用有关的风险相适应。",
+    "english_text": "The specific approach and activities associated with software validation and revalidation shall be proportionate to the risk associated with the use of the software.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese sentence paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_019",
+    "chinese_block_ids": [
+      "p037_b0012"
+    ],
+    "english_block_ids": [
+      "p037_b0013"
+    ],
+    "chinese_text": "应保留这些活动的记录（见4.2.5）",
+    "english_text": "Records of such activities shall be maintained (see 4.2.5).",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese sentence paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_024",
+    "chinese_block_ids": [
+      "p038_b0008"
+    ],
+    "english_block_ids": [
+      "p038_b0009"
+    ],
+    "chinese_text": "质量管理体系文件包括：",
+    "english_text": "The Quality Management System documentation includes:",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_025",
+    "chinese_block_ids": [
+      "p038_b0010"
+    ],
+    "english_block_ids": [
+      "p038_b0011"
+    ],
+    "chinese_text": "a) 形成文件的质量方针和质量目标；",
+    "english_text": "A document containing the Quality policy and Quality Objectives",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item a paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_026",
+    "chinese_block_ids": [
+      "p038_b0011"
+    ],
+    "english_block_ids": [
+      "p038_b0012"
+    ],
+    "chinese_text": "b) 质量手册；",
+    "english_text": "The Quality Manual",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item b paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_027",
+    "chinese_block_ids": [
+      "p038_b0012"
+    ],
+    "english_block_ids": [
+      "p038_b0013"
+    ],
+    "chinese_text": "c) 0.4.1 所列标准要求的形成文件的程序和记录；",
+    "english_text": "Documented procedures and records required by Standard list 0.4.1;",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item c paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_028",
+    "chinese_block_ids": [
+      "p038_b0013"
+    ],
+    "english_block_ids": [
+      "p038_b0014"
+    ],
+    "chinese_text": "d) 确保有效地策划、运作和控制过程所需之文件，包括记录；",
+    "english_text": "Documents, including records, determined by the organization to be necessary to ensure the effective planning, operation, and control of its processes;",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item d paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_006_pair_029",
+    "chinese_block_ids": [
+      "p038_b0014"
+    ],
+    "english_block_ids": [
+      "p038_b0015"
+    ],
+    "chinese_text": "e) 0.4.2 所列适用法规要求规定的其他文件。",
+    "english_text": "Other documents specified in regulations stated in section 0.4.2.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese item e paired with English translation in next block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_001",
+    "chinese_block_ids": [
+      "p038_b0020"
+    ],
+    "english_block_ids": [
+      "p038_b0018",
+      "p038_b0019"
+    ],
+    "chinese_text": "aims of the Quality Manual are:- ▪ 记录质量管理体系质量方针、目标及范围",
+    "english_text": "The Quality manager of the Group is responsible for establishing and maintaining this Quality Manual; and this Quality Manual shall be approved by the Managing Director. The",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed block contains Chinese and English; English part continues from previous blocks.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_002",
+    "chinese_block_ids": [
+      "p038_b0022"
+    ],
+    "english_block_ids": [
+      "p038_b0021"
+    ],
+    "chinese_text": "相互关系",
+    "english_text": "Document Quality Policy, Quality Objectives and define the scope of the Quality Management System. ▪ 定义本集团公司及其子公司的组织架构，及其职责、权限以及影响质量的各职能间的",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed block contains Chinese and English; Chinese part is continuation of English.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_011",
+    "chinese_block_ids": [
+      "p039_b0007"
+    ],
+    "english_block_ids": [
+      "p039_b0008"
+    ],
+    "chinese_text": "4.2.3 医疗器械文档 Medical Device Document 就每一款式、型号及系列的医疗器械，建立和维护一个包含或识别产品的规格及质量管 理体系的要求之技术文件/产品档案。这些文件包括以下信息：",
+    "english_text": "For each type, model, and family of medical devices, a technical file or product file either containing or identifying documents defining product specifications and Quality Management System requirements is established and maintained (see 4.2.4). These documents include, or refer to the locations of the following information:",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese heading and English paragraph are direct translations.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_012",
+    "chinese_block_ids": [
+      "p039_b0009"
+    ],
+    "english_block_ids": [
+      "p039_b0010"
+    ],
+    "chinese_text": "◼ 医疗器械的概述、预期用途/预期目的和标记，包括所有适用说明；",
+    "english_text": "General description of the medical device, intended use/purpose, and labelling, including any instructions for use;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_013",
+    "chinese_block_ids": [
+      "p039_b0011"
+    ],
+    "english_block_ids": [
+      "p039_b0012"
+    ],
+    "chinese_text": "◼ 产品规范；",
+    "english_text": "Specifications for product;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_014",
+    "chinese_block_ids": [
+      "p039_b0013"
+    ],
+    "english_block_ids": [
+      "p039_b0014"
+    ],
+    "chinese_text": "◼ 制造、包装、贮存、处置和流通的规范或程序；",
+    "english_text": "Specifications or procedures for manufacturing, packaging, storage, handling and distribution;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_015",
+    "chinese_block_ids": [
+      "p039_b0015"
+    ],
+    "english_block_ids": [
+      "p039_b0016"
+    ],
+    "chinese_text": "◼ 测量和监视程序；",
+    "english_text": "Procedures for measuring and monitoring;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_016",
+    "chinese_block_ids": [
+      "p039_b0017"
+    ],
+    "english_block_ids": [
+      "p039_b0018"
+    ],
+    "chinese_text": "◼ 臨床評價文件；",
+    "english_text": "Clinical evaluation documentation;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_017",
+    "chinese_block_ids": [
+      "p039_b0019"
+    ],
+    "english_block_ids": [
+      "p039_b0020"
+    ],
+    "chinese_text": "◼ 上市後監督文件；",
+    "english_text": "PMS documentations ;",
+    "confidence": 0.9,
+    "pairing_reason": "Direct translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_018",
+    "chinese_block_ids": [
+      "p039_b0021"
+    ],
+    "english_block_ids": [
+      "p039_b0022"
+    ],
+    "chinese_text": "文件的最新電子檔或紙檔需要在已上市的市場上保留，以便根據要求提供給任何監管 機構。對於歐盟，位於歐洲經濟區以外的製造商將在其歐洲授權代表提供。詳情請參 閱 QSP0723 – 監管策略。",
+    "english_text": "An up-to-date electronic or hard copy of the file needs to be kept available in launched market, allowing it to be presented to any Regulatory Authorities upon request. For EU, manufacturers based outside the EEA are to make it available at the address of their European Authorized Representative. For the details, please refer to QSP0723 – Regulatory Strategy.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_007_pair_019",
+    "chinese_block_ids": [
+      "p039_b0023"
+    ],
+    "english_block_ids": [
+      "p039_b0024",
+      "p040_b0006"
+    ],
+    "chinese_text": "现时，本集团公司所生产的医疗器械产品、配件并没有特定安装和服务要求，也没有生 产有源植入性医疗器械和植入性医疗器械，故此，质量管理体系不适用于条款7.5.3、 7.5.4、和 7.5.9.2。",
+    "english_text": "The existing products and/or components of the Group do not have particular requirements for installation, and do not include any active implantable devices and implantable devices, and thus Quality Management System Clause 7.5.3、7.5.4 and 7.5.9.2 do not apply in this Quality Management System.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese paragraph and English paragraph split across pages; English continues on next page.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_001",
+    "chinese_block_ids": [
+      "p040_b0016",
+      "p040_b0017"
+    ],
+    "english_block_ids": [
+      "p040_b0018"
+    ],
+    "chinese_text": "Prevent deterioration or loss of documents; h) 防止作废文件的非预期使用，及若因任何原因而保留作废文件时，对这些文件进行适当的标识。",
+    "english_text": "Prevent the unintended use of obsolete and expired documents, and such obsolete or expired documents shall be clearly marked identified if they are retained for any purpose. 品质经理负责对质量手册、质量管理体系程序、工程图纸和工作指引等文件的控制。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese and English are mixed in blocks; semantic match within same section.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_002",
+    "chinese_block_ids": [
+      "p040_b0019"
+    ],
+    "english_block_ids": [
+      "p040_b0020"
+    ],
+    "chinese_text": "Quality Manager is responsible for the control of documents such as the Quality Manual, Quality Management System procedures, engineering drawings and working instructions. 确保文件的更改应得到原批准部门或指定的其它部门之评审和签署，该被指定的审批 部门应能获取用于作出评审决定的相关背景资料。如有需要，再由管理者代表批准。",
+    "english_text": "Changes in documents are reviewed and signed either by the original approving department or another designated department. The designated department shall have access to the relevant background information in order to make the decision to approve the changes which decision shall be approved by the Management Representative, if necessary. 至少保留一份作废的文件，其保存期限应于程序文件中列明及纪录。这个期限确保至少",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese and English are mixed in blocks; semantic match within same section.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_003",
+    "chinese_block_ids": [
+      "p040_b0021",
+      "p041_b0006"
+    ],
+    "english_block_ids": [
+      "p041_b0007"
+    ],
+    "chinese_text": "在医疗器械寿命期内，本集团可以得到该医疗器械的制造和实验文件。该期限应不少于 记录（见4.2.5）或相关法规要求所规定的保存期限。作废文件原件按QSP0401 规定保存。",
+    "english_text": "At least one copy of obsolete controlled documents shall be retained. The period which this obsolete controlled document to be retained shall be documented and recorded in a procedure. This period ensures that the documents to which medical devices have been manufactured and tested are available for at least the lifetime of the medical device, but shall not be less than the retention period of any resulting record (see 4.2.5), or as specified by relevant regulatory requirements. The master copies of all superseded documents are retained in accordance with QSP0401.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese blocks from segment_0073 and segment_0074 combine to match English block in segment_0074; same section.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_004",
+    "chinese_block_ids": [
+      "p041_b0010",
+      "p041_b0011",
+      "p041_b0012"
+    ],
+    "english_block_ids": [
+      "p041_b0013",
+      "p041_b0014",
+      "p041_b0015",
+      "p041_b0016",
+      "p041_b0017"
+    ],
+    "chinese_text": "集团公司应建立并维护记录，以提供符合质量管理体系要求和其有效运作的证据，记录应保持清晰，易于识别和检索。应编制形成文件的程序，以规定记录的识别，储存，保护，检索，保存期限和处置所需的控制措施。",
+    "english_text": "Records are established and maintained to provide evidence of conformity to requirements and of the effective operation of the Quality Management System. The records that are maintained in their respective departments must be legible, readily identifiable and retrievable. A documented procedure shall be established to define the controls needed for the identification, storage, protection, retrieval, retention time and disposition of records.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English blocks in same section 4.2.5, same segment, semantic match.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_005",
+    "chinese_block_ids": [
+      "p041_b0019"
+    ],
+    "english_block_ids": [
+      "p041_b0020"
+    ],
+    "chinese_text": "MC 不会收集保密健康信息。",
+    "english_text": "No confidential health information shall be collected.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_006",
+    "chinese_block_ids": [
+      "p041_b0021"
+    ],
+    "english_block_ids": [
+      "p041_b0022"
+    ],
+    "chinese_text": "记录被保存的期限应至少相当于该医疗器械的寿命期，但不少于从组织发放产品的日 期起计2 年，或按相关法规之要求规定。记录按QSP0401（文件及记录控制）规定保存。",
+    "english_text": "Records are retained for a period of time at least equivalent to the lifetime of the medical device, but not less than two years from the date of product released by the organization or as specified by relevant regulatory requirements. The records are retained in accordance with QSP0401 (Document and Record Control).",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_007",
+    "chinese_block_ids": [
+      "p042_b0009",
+      "p042_b0010",
+      "p042_b0011"
+    ],
+    "english_block_ids": [
+      "p042_b0012",
+      "p042_b0013",
+      "p042_b0014",
+      "p042_b0015"
+    ],
+    "chinese_text": "最高管理者（指MediConcepts Group 的管理层，包括董事总经理、总经理、研发总监、业务开发总监、市场总监、品质经理、各部门经理）承诺建立、实施质量管理体系并持续改进其有效性，其承诺可通过以下方式证明：",
+    "english_text": "Senior management (defined as the management of MediConcepts Group, includes the Managing Director, General Manager, R&D Director, Business Development President, Marketing Director, Quality Manager and Managers) is committed to the development and implementation of the Quality Management System and continually improving its effectiveness, demonstrated by:",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English blocks in same section 5.1, same segment, semantic match.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_008",
+    "chinese_block_ids": [
+      "p042_b0016"
+    ],
+    "english_block_ids": [
+      "p042_b0017"
+    ],
+    "chinese_text": "a) 向公司传达满足客户以及法规要求的重要性；",
+    "english_text": "Communicating to the company the importance of meeting customer as well as applicable regulatory requirements; b) 制订质量方针；",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese and English mixed in blocks; partial match, but same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_008_pair_009",
+    "chinese_block_ids": [
+      "p042_b0018"
+    ],
+    "english_block_ids": [
+      "p042_b0019"
+    ],
+    "chinese_text": "Establishing the quality policy; c) 确保质量目标的制订；",
+    "english_text": "Ensuring that quality objectives are established; d) 进行管理评审；及",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese and English mixed in blocks; partial match, but same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_001",
+    "chinese_block_ids": [
+      "p042_b0023"
+    ],
+    "english_block_ids": [
+      "p042_b0024"
+    ],
+    "chinese_text": "最高管理者负责确保顾客要求和适用的法律法规要求的重要性。",
+    "english_text": "Top management shall ensure that customer requirements and applicable regulatory requirements are determined and met.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 5.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_002",
+    "chinese_block_ids": [
+      "p042_b0026"
+    ],
+    "english_block_ids": [
+      "p042_b0027"
+    ],
+    "chinese_text": "最高管理者负责确保质量方针：",
+    "english_text": "Top management is responsible to ensure that the quality policy: a) 与集团公司的宗旨相适应；",
+    "confidence": 0.9,
+    "pairing_reason": "Partial translation pair in section 5.3, Chinese leads into English list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_003",
+    "chinese_block_ids": [
+      "p042_b0028"
+    ],
+    "english_block_ids": [
+      "p043_b0006"
+    ],
+    "chinese_text": "Matches the mission of the Group: b) 包含对满足要求和维持质量管理体系有效性的承诺；",
+    "english_text": "Includes a commitment to comply with requirements and to maintain the effectiveness of the Quality Management System: c) 提供制订和评审质量目标的框架；",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed blocks continuing list items across pages, same section 5.3",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_004",
+    "chinese_block_ids": [
+      "p043_b0007"
+    ],
+    "english_block_ids": [
+      "p043_b0008"
+    ],
+    "chinese_text": "Provides a framework for establishing and reviewing quality objectives: d) 在集团公司内达至沟通和理解；和",
+    "english_text": "Is communicated and understood within the group: and e) 在持续合适性方面得到评审。",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed blocks continuing list items, same section 5.3",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_006",
+    "chinese_block_ids": [
+      "p043_b0013",
+      "p043_b0014"
+    ],
+    "english_block_ids": [
+      "p043_b0015",
+      "p043_b0016",
+      "p043_b0017",
+      "p043_b0018"
+    ],
+    "chinese_text": "最高管理层负责确保在集团公司的相关职能和层次上建立质量目标，包括满足产品要求和适用的法规要求。质量目标应为可测量的并与质量方针保持一致。",
+    "english_text": "Top management is responsible to ensure that quality objectives, including those needed to meet applicable regulatory requirements and requirements for product, are established at relevant functions and levels. The quality objectives are measurable and consistent with the quality policy.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 5.4.1",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_007",
+    "chinese_block_ids": [
+      "p043_b0020"
+    ],
+    "english_block_ids": [
+      "p043_b0021"
+    ],
+    "chinese_text": "最高管理者负责确保Top management is responsible to ensure that a) 以满足4.1 及质量目标的要求为目的进行质量管理体系策划。",
+    "english_text": "The planning of the quality management system is carried out in order to meet the requirements given in 4.1, as well as the quality objectives; b) 在对质量管理体系的变更进行策划和实施时，质量管理体系的完整性得以维持。",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed blocks continuing list items, same section 5.4.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_009",
+    "chinese_block_ids": [
+      "p044_b0009",
+      "p044_b0010"
+    ],
+    "english_block_ids": [
+      "p044_b0011",
+      "p044_b0012"
+    ],
+    "chinese_text": "管理架构如公司的组织架构所示（见3.0），显示各相关职能间的相互关系及完成任务所需的独立性和权限。",
+    "english_text": "The company organization charts (see 3.0) show the interrelationship between the functions concerned and the independence and authority necessary to perform the tasks.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 5.5.1",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_010",
+    "chinese_block_ids": [
+      "p044_b0013",
+      "p044_b0014",
+      "p044_b0016"
+    ],
+    "english_block_ids": [
+      "p044_b0015",
+      "p044_b0017"
+    ],
+    "chinese_text": "最高管理者负责Top management is responsible to a) 确保在组织内对职责和权限进行定义，文件化和沟通任务所必要的独立性和权限。",
+    "english_text": "ensure that responsibilities and authorities are defined, documented and communicated within the organization, b) 建立全体管理、执行和验证工作的人员之间的相互关系，以及确保为使其完成这些establish the interrelation of all personnel who manage, perform and verify work affecting quality, and ensure the independence and authority necessary to perform these tasks.",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed blocks continuing list items, same section 5.5.1",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_011",
+    "chinese_block_ids": [
+      "p044_b0019"
+    ],
+    "english_block_ids": [
+      "p044_b0020"
+    ],
+    "chinese_text": "总经理被委任为管理者代表，其无论在其它方面的工作职责如何，应具有以下方面的职 责和权限：",
+    "english_text": "The General Manager is appointed as the Management Representative who, irrespective of other responsibilities, have responsibility and authority that includes: a) 确保质量管理体系所需的过程得以建立、实施和维持。",
+    "confidence": 0.9,
+    "pairing_reason": "Partial translation pair in section 5.5.2, Chinese leads into English list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_012",
+    "chinese_block_ids": [
+      "p044_b0021"
+    ],
+    "english_block_ids": [
+      "p044_b0022"
+    ],
+    "chinese_text": "Ensuring that processes needed for the Quality Management System are established, implemented and maintained; b) 向最高管理者报告质量管理体系的绩效以及任何需要改进的地方，及",
+    "english_text": "Reporting to top management on the performance of the Quality Management System and any need for improvement; and c) 确保在整个集团公司内推广满足适用的法规及质量管理体系要求的意识。",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed blocks continuing list items, same section 5.5.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_009_pair_013",
+    "chinese_block_ids": [
+      "p044_b0023"
+    ],
+    "english_block_ids": [
+      "p044_b0024"
+    ],
+    "chinese_text": "Ensuring the promotion of awareness of applicable regulatory requirements and quality management system requirements throughout the group.",
+    "english_text": "Ensuring the promotion of awareness of applicable regulatory requirements and quality management system requirements throughout the group.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 5.5.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_010_pair_003",
+    "chinese_block_ids": [
+      "p044_b0028",
+      "p044_b0029",
+      "p044_b0030",
+      "p044_b0031",
+      "p044_b0032"
+    ],
+    "english_block_ids": [
+      "p045_b0006"
+    ],
+    "chinese_text": "许多定期会议以促进整个集团公司内部沟通。最高管理者有责任确保建立适当的沟通机制就质量管理体系的有效性进行沟通。定期质量会议，各公司及部门代表就供应商、客户及内部问题进行讨论，商讨纠正及预防措施。定期如开商业会议，质量、服务、制造及设计部门代表参加，评审公司业绩及客户反馈。年度管理评审会议，由管理者代表主持，最高管理团队参加，评审质量管理体系表现。",
+    "english_text": "There are a number of regular meetings to facilitate internal communications throughout the group. Top management is responsible to ensure that appropriate communication processes are established within the group and company departments; and that communication takes place regarding the effectiveness of the Quality Management System. Regular Quality Meeting, with representatives from all departments, discusses quality problems resulting from suppliers, customers and internal problems. Corrective and Preventive actions are discussed. Commercial meetings are held regularly, attended by representatives of quality, service, production, and design, to review the performance of the companies and discuss customer feedback. Annually, the Quality Management review Meeting, chaired by Management Representative and attended by the top management team, review the performance of the Quality Management System.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese blocks from segment_0090 and English block from segment_0091 are semantically equivalent and belong to same section 5.5.3; Chinese blocks are last in segment_0090, English block is first in next segment, no new heading intervenes.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_010_pair_009",
+    "chinese_block_ids": [
+      "p046_b0009",
+      "p046_b0010",
+      "p046_b0011"
+    ],
+    "english_block_ids": [
+      "p046_b0012",
+      "p046_b0013",
+      "p046_b0014",
+      "p046_b0015"
+    ],
+    "chinese_text": "管理评审会议至少每年举行一次以评审质量管理体系以确保其持续的适宜性、充分性和有效性。管理评审包括评价质量管理体系改进的机会和变更的需要，包括质量方针和质量目标。",
+    "english_text": "The management review meeting is held at least once a year to review the Quality Management System to ensure its continuing suitability, adequacy and effectiveness. This review includes assessing opportunities for improvement and the need for changes to the Quality Management System, including the quality policy and quality objectives.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English blocks in same segment_0094, semantically equivalent",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_010_pair_010",
+    "chinese_block_ids": [
+      "p046_b0017"
+    ],
+    "english_block_ids": [
+      "p046_b0018"
+    ],
+    "chinese_text": "管理评审记录由管理者代表维护，存于DCC。",
+    "english_text": "Management review records are maintained by the MR and stored in DCC.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English blocks in same segment_0094, semantically equivalent",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_010_pair_012",
+    "chinese_block_ids": [
+      "p046_b0020"
+    ],
+    "english_block_ids": [
+      "p046_b0021"
+    ],
+    "chinese_text": "管理评审输入包括但不限于以下方面的讯息：",
+    "english_text": "The input to management review shall include, but is not limited to, information arising from:",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English blocks in same segment_0095, semantically equivalent",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_010_pair_016",
+    "chinese_block_ids": [
+      "p047_b0006"
+    ],
+    "english_block_ids": [
+      "p047_b0007"
+    ],
+    "chinese_text": "Recommendations for improvement; l) 适用的新的或修订的法规要求。",
+    "english_text": "Applicable new or revised regulatory requirements.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block from segment_0096 and English block from same segment; they are semantically related as continuation of list.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_010_pair_018",
+    "chinese_block_ids": [
+      "p047_b0009",
+      "p047_b0010"
+    ],
+    "english_block_ids": [
+      "p047_b0011",
+      "p047_b0012"
+    ],
+    "chinese_text": "管理评审输出应予以记录（见4.2.5）并包括经评审的输入和于以下方面有关的任何决定和措施：",
+    "english_text": "The output from management review shall be recorded (see 4.2.5) and include the input reviewed and any decisions and actions related to:",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English blocks in same segment_0097, semantically equivalent",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_001",
+    "chinese_block_ids": [
+      "p047_b0016"
+    ],
+    "english_block_ids": [
+      "p047_b0017"
+    ],
+    "chinese_text": "Changes needed to respond to applicable new or revised regulatory requirements; d) 资源需求",
+    "english_text": "Resource needs",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block ends with '资源需求' and English block is 'Resource needs', same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_002",
+    "chinese_block_ids": [
+      "p048_b0009"
+    ],
+    "english_block_ids": [
+      "p048_b0010"
+    ],
+    "chinese_text": "管理层有责任提供为了实施和维持质量管理体系，以及持续改善其有效性及效率的所需资源， 以达至",
+    "english_text": "Management is responsible to determine and provide the resources needed to implement and maintain the Quality Management System and continue its effectiveness and efficiencies, and",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_003",
+    "chinese_block_ids": [
+      "p048_b0011"
+    ],
+    "english_block_ids": [
+      "p048_b0012"
+    ],
+    "chinese_text": "a) 满足客户及其产品的合理要求",
+    "english_text": "Meet requirements of the customer and its product b) 满足适用的法规要求。",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block a) matches English block a) and b) combined; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_004",
+    "chinese_block_ids": [
+      "p048_b0012"
+    ],
+    "english_block_ids": [
+      "p048_b0013"
+    ],
+    "chinese_text": "Meet requirements of the customer and its product b) 满足适用的法规要求。",
+    "english_text": "Meet applicable regulatory requirements.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block ends with b) and English block is the translation of b).",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_005",
+    "chinese_block_ids": [
+      "p048_b0017",
+      "p048_b0018"
+    ],
+    "english_block_ids": [
+      "p048_b0019",
+      "p048_b0020",
+      "p048_b0021"
+    ],
+    "chinese_text": "基于合适的教育、培训、和工作人员的技能和经验，管理层有责任确保从事影响产品质量工作的人员是能够胜任的。",
+    "english_text": "The management is responsible to ensure that personnel performing work affecting product quality are competent on the basis of appropriate education, training, skills and experience.",
+    "confidence": 0.95,
+    "pairing_reason": "Complete translation pair in same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_007",
+    "chinese_block_ids": [
+      "p048_b0024"
+    ],
+    "english_block_ids": [
+      "p048_b0025"
+    ],
+    "chinese_text": "a) 确定其从事影响产品质量工作之下属所必需的资格﹔",
+    "english_text": "Determine the qualification of those subordinates who are involved in work affecting product quality, b) 提供合适的培训或采取其它措施以满足这些需求﹔",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese a) matches English a) and b) combined; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_008",
+    "chinese_block_ids": [
+      "p048_b0025"
+    ],
+    "english_block_ids": [
+      "p048_b0026"
+    ],
+    "chinese_text": "Determine the qualification of those subordinates who are involved in work affecting product quality, b) 提供合适的培训或采取其它措施以满足这些需求﹔",
+    "english_text": "Provide appropriate training or take other actions to satisfy these needs, c) 评估所采取措施的有效性﹔",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block contains b) and English block contains c); partial match but same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_009",
+    "chinese_block_ids": [
+      "p048_b0026"
+    ],
+    "english_block_ids": [
+      "p048_b0027"
+    ],
+    "chinese_text": "Provide appropriate training or take other actions to satisfy these needs, c) 评估所采取措施的有效性﹔",
+    "english_text": "Evaluate the effectiveness of the actions taken, d) 确保其下属均意识到所从事工作的实质意义和重要性，以及其如何为实现质量目",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block contains c) and English block contains d); partial match.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_010",
+    "chinese_block_ids": [
+      "p048_b0027",
+      "p048_b0028"
+    ],
+    "english_block_ids": [
+      "p048_b0029"
+    ],
+    "chinese_text": "Evaluate the effectiveness of the actions taken, d) 确保其下属均意识到所从事工作的实质意义和重要性，以及其如何为实现质量目标作出贡献。",
+    "english_text": "Ensure that their subordinates are aware of the relevance and importance of their activities and how they can contribute to fulfill the quality objectives. 行政人事部负责维护教育、培训、技能和经验的记录（见4.2.5）。",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese d) matches English d) plus additional Chinese text; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_011",
+    "chinese_block_ids": [
+      "p048_b0029"
+    ],
+    "english_block_ids": [
+      "p048_b0030"
+    ],
+    "chinese_text": "Ensure that their subordinates are aware of the relevance and importance of their activities and how they can contribute to fulfill the quality objectives. 行政人事部负责维护教育、培训、技能和经验的记录（见4.2.5）。",
+    "english_text": "The Administration & Personnel is responsible for maintaining records of education, training,",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block ends with Chinese sentence, English block starts translation; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_012",
+    "chinese_block_ids": [
+      "p049_b0006"
+    ],
+    "english_block_ids": [
+      "p049_b0007"
+    ],
+    "chinese_text": "skills and experience (see 4.2.5). 行政人事部主管负责制订一份年度培训计划并确保所计划的培训得到执行。",
+    "english_text": "The Administration & Personnel Supervisor is responsible to prepare an annual training plan and ensure that the planned training is carried out. 对于提供培训或采取其他措施的有效性的检查方法应与工作相关的风险相适应。",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block continues from previous page, English block continues translation; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_013",
+    "chinese_block_ids": [
+      "p049_b0007"
+    ],
+    "english_block_ids": [
+      "p049_b0008"
+    ],
+    "chinese_text": "The Administration & Personnel Supervisor is responsible to prepare an annual training plan and ensure that the planned training is carried out. 对于提供培训或采取其他措施的有效性的检查方法应与工作相关的风险相适应。",
+    "english_text": "The methodology used to check effectiveness is proportionate to the risk associated with the work for which the training or other action is being provided.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block ends with Chinese sentence, English block is its translation; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_014",
+    "chinese_block_ids": [
+      "p050_b0008",
+      "p050_b0009",
+      "p050_b0010"
+    ],
+    "english_block_ids": [
+      "p050_b0011",
+      "p050_b0012",
+      "p050_b0013"
+    ],
+    "chinese_text": "6.3.1 为达到产品符合要求、防止产品混淆和确保产品有序处置，管理层应负责确定、提供并维护所需的基础设施，将所需的基础设施的要求形成文件。基础设施包括(如适用时) ：",
+    "english_text": "The management is responsible for the documentation of determining, providing and maintaining the infrastructure required to achieve conformity to product requirements, prevent product mix-up and ensure orderly handling of product. Infrastructure includes, as applicable",
+    "confidence": 0.95,
+    "pairing_reason": "Complete translation pair in same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_015",
+    "chinese_block_ids": [
+      "p050_b0014"
+    ],
+    "english_block_ids": [
+      "p050_b0015"
+    ],
+    "chinese_text": "applicable a) 建筑物、工作场所和相关的设施﹔",
+    "english_text": "Buildings, workspace and associated utilities; b) 过程设备（硬件和软件）﹔及",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese a) matches English a) and b) combined; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_016",
+    "chinese_block_ids": [
+      "p050_b0015"
+    ],
+    "english_block_ids": [
+      "p050_b0016"
+    ],
+    "chinese_text": "Buildings, workspace and associated utilities; b) 过程设备（硬件和软件）﹔及",
+    "english_text": "Process equipment (both hardware and software), and c) 支持性服务（如运输、通讯或信息系统）。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block contains b) and English block contains c); partial match.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_017",
+    "chinese_block_ids": [
+      "p050_b0016"
+    ],
+    "english_block_ids": [
+      "p050_b0017"
+    ],
+    "chinese_text": "Process equipment (both hardware and software), and c) 支持性服务（如运输、通讯或信息系统）。",
+    "english_text": "Supporting services (such as transport, communication, or information systems). 当基础设施的维修保养活动或缺少这种维修保养活动而有可能影响产品质量时，应建立",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block contains c) and English block contains c) plus additional Chinese; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_011_pair_018",
+    "chinese_block_ids": [
+      "p050_b0017",
+      "p050_b0018"
+    ],
+    "english_block_ids": [
+      "p050_b0019"
+    ],
+    "chinese_text": "Supporting services (such as transport, communication, or information systems). 当基础设施的维修保养活动或缺少这种维修保养活动而有可能影响产品质量时，应建立维修保养活动的形成文件的程序，包括它们的维修保养频次。适当时，要求应适用于生产设备、工作环境控制设备和监视测量设备。",
+    "english_text": "Documented procedures are established for maintenance and repair activities, including their",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block ends with Chinese sentence, English block starts translation; same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_001",
+    "chinese_block_ids": [
+      "p050_b0023"
+    ],
+    "english_block_ids": [
+      "p050_b0024"
+    ],
+    "chinese_text": "6.3.2 维修保养记录由生产部保存（见4.2.5）。",
+    "english_text": "Maintenance and Repair records are maintained in Production (see 4.2.5).",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair in same section 6.3.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_003",
+    "chinese_block_ids": [
+      "p050_b0026"
+    ],
+    "english_block_ids": [
+      "p050_b0027"
+    ],
+    "chinese_text": "QSP0715 设备的管理、维修及保养",
+    "english_text": "Management, Repair and Maintenance of Equipment",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair in same section 6.3.3",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_008",
+    "chinese_block_ids": [
+      "p051_b0009",
+      "p051_b0010"
+    ],
+    "english_block_ids": [
+      "p051_b0011",
+      "p051_b0012",
+      "p051_b0013",
+      "p051_b0014"
+    ],
+    "chinese_text": "应将符合产品要求所需的工作环境的要求形成文件。将监视和控制工作环境的程序形成文件，应：",
+    "english_text": "The Group shall document the requirements for the work environment needed to achieve conformity to product requirements. If the conditions for the work environment can have an adverse effect on product quality, the Group shall document the requirements for the work environment and the procedures to monitor and control the work environment. The",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic translation pair in same section 6.4.1",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_009",
+    "chinese_block_ids": [
+      "p051_b0015",
+      "p051_b0016"
+    ],
+    "english_block_ids": [
+      "p051_b0017"
+    ],
+    "chinese_text": "Group shall: a) 建立对特定人员的健康、清洁和着装要求形成文件。此类人员与产品或工作环境的接触可能影响医疗器械的安全或性能",
+    "english_text": "Document requirements for health, cleanliness and clothing of personnel if contact between such personnel and the product or work environment could affect medical device safety or performance; b) 生产经理和品质经理负责确保其被要求在特殊环境下临时工作的下属均接受了适",
+    "confidence": 0.8,
+    "pairing_reason": "Partial translation pair; Chinese a) matches English a) but Chinese b) is separate",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_010",
+    "chinese_block_ids": [
+      "p051_b0018"
+    ],
+    "english_block_ids": [
+      "p051_b0019"
+    ],
+    "chinese_text": "当的培训或在受过训练的人员监督下工作。（见6.2.2b）",
+    "english_text": "The Production Manager and the Quality Manager are responsible to ensure that all their subordinates who are required to work temporarily under special environmental conditions within the work environment are appropriately trained or supervised by a trained person (see 6.2.2b).",
+    "confidence": 0.9,
+    "pairing_reason": "Translation pair for b) in same section 6.4.1",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_012",
+    "chinese_block_ids": [
+      "p051_b0021",
+      "p051_b0022"
+    ],
+    "english_block_ids": [
+      "p051_b0023",
+      "p051_b0024",
+      "p051_b0025"
+    ],
+    "chinese_text": "已受污染、有可能已受污染或易受污染的产品被视为不合格产品，并且应根据形成文件的程序予以控制以防止对其它产品、工作环境或人员的污染。",
+    "english_text": "As appropriate, the Group shall plan and document arrangements for the control of contaminated or potentially contaminated product in order to prevent contamination of the work environment, personnel, or product.",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic translation pair in same section 6.4.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_013",
+    "chinese_block_ids": [
+      "p051_b0027",
+      "p051_b0028"
+    ],
+    "english_block_ids": [
+      "p051_b0029",
+      "p051_b0030",
+      "p051_b0031"
+    ],
+    "chinese_text": "对于无菌医疗器械，微生物控制要求、微粒污染的要求以及该产品在组装或包装过程中需保持的洁净度要求均以与该产品相关的生产文件体现。",
+    "english_text": "For sterile medical devices, the organization shall document requirements for control of contamination with microorganisms or particulate matter and maintain the required cleanliness during assembly or packaging processes.",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic translation pair in same section 6.4.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_018",
+    "chinese_block_ids": [
+      "p052_b0007"
+    ],
+    "english_block_ids": [
+      "p052_b0008"
+    ],
+    "chinese_text": "QSP0712 洁净车间环境监控",
+    "english_text": "Clean Room Environmental Control",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair in same section 6.4.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_019",
+    "chinese_block_ids": [
+      "p052_b0009"
+    ],
+    "english_block_ids": [
+      "p052_b0010"
+    ],
+    "chinese_text": "QSP0713 灭菌控制",
+    "english_text": "Sterilization Control",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair in same section 6.4.2",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_012_pair_024",
+    "chinese_block_ids": [
+      "p053_b0009",
+      "p053_b0010",
+      "p053_b0011"
+    ],
+    "english_block_ids": [
+      "p053_b0012",
+      "p053_b0013",
+      "p053_b0014"
+    ],
+    "chinese_text": "7.1.1 研发、生产及品质部负责策划和开发各自责任范围的产品实现所需之过程。设计、制造、销售和客户反馈过程，在附件I 过程图中描述。产品实现的策划应与质量管理体系的要求一致。",
+    "english_text": "R&D, Production, Marketing, and Quality are responsible to plan and develop the processes needed for product realization in their responsible areas respectively. The processes for design, manufacture, sales and customer feedback, is outlined in the process",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic translation pair in same section 7.1.1",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_001",
+    "chinese_block_ids": [
+      "p053_b0017",
+      "p053_b0018"
+    ],
+    "english_block_ids": [
+      "p053_b0019",
+      "p053_b0020"
+    ],
+    "chinese_text": "7.1.2 在产品的实验过程中，将风险管理的一个或多个过程形成文件。保留风险管理活动的\n记录（见4.2.5）",
+    "english_text": "The Group shall document one or more processes for risk management in product\nrealization. Records of risk management activities shall be maintained (see 4.2.5).",
+    "confidence": 0.95,
+    "pairing_reason": "Same section 7.1.2, Chinese heading and paragraph paired with English translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_002",
+    "chinese_block_ids": [
+      "p053_b0021"
+    ],
+    "english_block_ids": [
+      "p053_b0022"
+    ],
+    "chinese_text": "7.1.3 在对产品实现进行策划时，确定以下方面的适当内容：",
+    "english_text": "In planning product realization, the following are determined as appropriate:",
+    "confidence": 0.95,
+    "pairing_reason": "Same section 7.1.3, Chinese heading paired with English translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_003",
+    "chinese_block_ids": [
+      "p053_b0023"
+    ],
+    "english_block_ids": [
+      "p053_b0024"
+    ],
+    "chinese_text": "a) 产品的质量目标和要求；",
+    "english_text": "Quality Objectives and requirements for the product; b) 针对产品建立过程、文件（见4.2.4）和提供基础设施和工作环境相关资源的需求；",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed-language block, Chinese part a) paired with English part a) and b) combined.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_004",
+    "chinese_block_ids": [
+      "p053_b0025",
+      "p053_b0026"
+    ],
+    "english_block_ids": [
+      "p053_b0027"
+    ],
+    "chinese_text": "The need to establish processes and documents (see 4.2.4) and to provide resources specific to the product, including infrastructure and work environment; c) 针对产品所要求的验证、确认、监视、测量、检验和试验、处置、贮存、流通和可追\n溯性活动，以及产品接收准则；",
+    "english_text": "Required verification, validation, monitoring, measurement, inspection and test, handling, storage, distribution and traceability activities specific to the product together with the criteria for product acceptance; d) 记录用以证明产品实现的过程和生产的产品符合要求（见4.2.5）。",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed-language blocks, Chinese parts c) and d) paired with English part c) and d).",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_006",
+    "chinese_block_ids": [
+      "p053_b0030"
+    ],
+    "english_block_ids": [
+      "p053_b0031",
+      "p053_b0032"
+    ],
+    "chinese_text": "7.1.4 该策划的输出可以是程序/流程图、作业指引、检验指引，及/或规格等。",
+    "english_text": "The output of this planning can be the procedure/ flowchart, work instruction, inspection\ninstructions, and/or specifications etc.",
+    "confidence": 0.95,
+    "pairing_reason": "Same section 7.1.4, Chinese heading paired with English translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_009",
+    "chinese_block_ids": [
+      "p054_b0007"
+    ],
+    "english_block_ids": [
+      "p054_b0008"
+    ],
+    "chinese_text": "7.2.1 与产品有关的要求之确定",
+    "english_text": "Determination of requirements related to the product 市场部负责主导确定与产品有关的要求。当有需要时，研发/工程部和其它部门须提供 其专门知识协助市场部。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese heading paired with mixed-language block containing English translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_011",
+    "chinese_block_ids": [
+      "p054_b0010"
+    ],
+    "english_block_ids": [
+      "p054_b0011"
+    ],
+    "chinese_text": "The following requirements are required to be determined a) 客户指定的要求，包括对交付及交付后活动的要求；",
+    "english_text": "Requirements specified by the customer, including the requirements for delivery and post- delivery activities； b) 客户没有明示要求，但指定的用途或已知的预期用途所必需的要求；",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed-language blocks, Chinese part a) paired with English part a) and b).",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_012",
+    "chinese_block_ids": [
+      "p054_b0012"
+    ],
+    "english_block_ids": [
+      "p054_b0013"
+    ],
+    "chinese_text": "Requirements not stated by the customer, but necessary for specified use or known intended use, where known; c) 与产品有关的适用的法规要求；",
+    "english_text": "Applicable regulatory requirements related to the product; d) 确保医疗器械的特定性能和安全使用所需的任何用户培训；",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed-language blocks, Chinese part c) paired with English part c) and d).",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_013",
+    "chinese_block_ids": [
+      "p054_b0014"
+    ],
+    "english_block_ids": [
+      "p054_b0015"
+    ],
+    "chinese_text": "Any user training needed to ensure specified performance and safe use of the medical device; e) 集团公司确定的任何附加要求。",
+    "english_text": "Any additional requirements to ensure the customer’s satisfaction as determined by the group.",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed-language block Chinese part e) paired with English part e).",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_015",
+    "chinese_block_ids": [
+      "p054_b0017"
+    ],
+    "english_block_ids": [
+      "p054_b0018"
+    ],
+    "chinese_text": "集团公司应在向客户作出提供产品的承诺之前对产品有关的要求进行评审以确保:",
+    "english_text": "Review the requirements related to the product prior to the Company’s commitment to supply a product to the customer and to ensure that: a) 产品要求得到规定并形成文件；",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese sentence paired with mixed-language block containing English translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_016",
+    "chinese_block_ids": [
+      "p054_b0019"
+    ],
+    "english_block_ids": [
+      "p054_b0020"
+    ],
+    "chinese_text": "Product requirements are defined and documented, b) 与以前表述不一致的合同或订单的要求已得到解决；",
+    "english_text": "Contract or order requirements differing from those previously expressed are resolved; c) 满足适用法规的要求；",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed-language blocks, Chinese part b) paired with English part b) and c).",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_017",
+    "chinese_block_ids": [
+      "p054_b0021"
+    ],
+    "english_block_ids": [
+      "p054_b0022"
+    ],
+    "chinese_text": "Applicable regulatory requirements are met; d) 依照7.2.1 识别的任何用户培训是可获得的或按计划是可获得的",
+    "english_text": "Any user training identified in accordance with 7.2.1 is available or planned to be available; e) 集团公司有能力满足规定的要求。",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed-language blocks, Chinese part d) paired with English part d) and e).",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_013_pair_020",
+    "chinese_block_ids": [
+      "p055_b0006"
+    ],
+    "english_block_ids": [
+      "p055_b0007"
+    ],
+    "chinese_text": "评审结果及评审所形成的措施的记录由市场部维持（见4.2.5）。",
+    "english_text": "Records of the results of the contract review and actions arising from the review are maintained in the Marketing Department (see 4.2.5). 若客户的要求没有形成文件，客户的要求在接受前应由双方确认。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese sentence paired with mixed-language block containing English translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_001",
+    "chinese_block_ids": [
+      "p055_b0012"
+    ],
+    "english_block_ids": [
+      "p055_b0013"
+    ],
+    "chinese_text": "通过拜访、电邮、电话、传真、网络、会议、信函或其它有效的方法与客户沟通应有关 以下方面：",
+    "english_text": "Implement effective arrangements for communicating such as visiting, email, phone, fax, internet, meeting or letter, with customers in relation to ： a) 产品信息；",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese sentence followed by mixed English-Chinese list start",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_002",
+    "chinese_block_ids": [
+      "p055_b0014"
+    ],
+    "english_block_ids": [
+      "p055_b0015"
+    ],
+    "chinese_text": "Product information; b) 问询、合同或订单和处理，包括对其修改；",
+    "english_text": "Enquiries, contracts or order handling, including amendments; c) 客户反馈，包括投诉；",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks continuing list items",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_003",
+    "chinese_block_ids": [
+      "p055_b0016"
+    ],
+    "english_block_ids": [
+      "p055_b0017"
+    ],
+    "chinese_text": "Customer feedback, including complaints; d) 忠告性通知。",
+    "english_text": "Advisory notices. 集团公司按照适用的法规要求通过有效的方式与相关监管机构沟通",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks continuing list items",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_005",
+    "chinese_block_ids": [
+      "p056_b0008"
+    ],
+    "english_block_ids": [
+      "p056_b0009"
+    ],
+    "chinese_text": "入进行了评审，并且设计输入要求确认后，开始输入要求转化为输出反复的过程。设计 和开发程序应形成文件。",
+    "english_text": "The design process follows a logical sequence; define user needs, determining design input requirements and producing the design out. At each stage, the design is reviewed against the input requirements and verified to ensure that functional and operational requirements are",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese paragraph followed by English paragraph in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_006",
+    "chinese_block_ids": [
+      "p056_b0010"
+    ],
+    "english_block_ids": [
+      "p056_b0011"
+    ],
+    "chinese_text": "achieved. When the design input has been reviewed and design input requirements accepted, an iterative process of translating requirements into design output commences. The Group shall document procedures for design and development. 7.3.2 设计和开发策划Design and development planning 研发总监及其团队负责确保产品设计和开发均有策划、控制和监督，均达至法规要求和 质量目标。设计计划是一份实时文件，随项目进展而变更、扩展及完善。",
+    "english_text": "R&D Director and his/ her team are responsible to ensure that the product design and development is planned, controlled and monitored, and that regulatory requirements and quality objectives are achieved. A design plan is a living document, which changes, expands, and refined as the project proceeds.",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed block followed by English block in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_007",
+    "chinese_block_ids": [
+      "p056_b0012"
+    ],
+    "english_block_ids": [
+      "p056_b0013"
+    ],
+    "chinese_text": "设计和开发策划时，应将以下方面形成文件：",
+    "english_text": "During the design and development planning, the Group shall document: a) 设计和开发的各个阶段；",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese sentence followed by mixed English-Chinese list start",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_008",
+    "chinese_block_ids": [
+      "p056_b0014"
+    ],
+    "english_block_ids": [
+      "p056_b0015"
+    ],
+    "chinese_text": "The design and development stages; b) 每个设计和开发阶段所需的一个或多个评审；",
+    "english_text": "The review(s) needed at each design and development stage; c) 适合于每个设计和开发阶段的验证、确认和设计转换活动；",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks continuing list items",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_009",
+    "chinese_block_ids": [
+      "p056_b0016"
+    ],
+    "english_block_ids": [
+      "p056_b0017"
+    ],
+    "chinese_text": "The verification, validation, and design transfer activities that are appropriate at each design and development stage; d) 设计和开发的职责和权限；",
+    "english_text": "The responsibilities and authorities for design and development; e) 确保设计和开发输出到设计和开发输入的可追溯的方法；",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks continuing list items",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_010",
+    "chinese_block_ids": [
+      "p056_b0018"
+    ],
+    "english_block_ids": [
+      "p056_b0019"
+    ],
+    "chinese_text": "The methods to ensure traceability of design and development outputs to design and development inputs; f) 所需的资源，包括必要的人员能力。",
+    "english_text": "The resources needed, including necessary competence of personnel. 7.3.3 设计和开发输入Design and development inputs",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks continuing list items",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_011",
+    "chinese_block_ids": [
+      "p057_b0006"
+    ],
+    "english_block_ids": [
+      "p057_b0007"
+    ],
+    "chinese_text": "设计输入要求形成最终设计确认的基础。在设计过程的初始阶段，阐述产品概念、扩展、 并转化成一整套设计输入要求，这些要求将转化为一个高层次的设计规范。",
+    "english_text": "During the planning phase of product development, inputs related to product requirement will be determined. These design input requirements form the basis for the eventual validation of the design. In the initial phase of the design process the product concept description is elaborated, expanded and transformed into a complete set of design input requirements which are converted into a high level design specification.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese paragraph followed by English paragraph in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_012",
+    "chinese_block_ids": [
+      "p057_b0008"
+    ],
+    "english_block_ids": [
+      "p057_b0009"
+    ],
+    "chinese_text": "确定并记录与产品要求有关的输入（见4.2.5）",
+    "english_text": "Inputs relating to product requirements are determined and recorded (see 4.2.5) 这些输入包括：",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese sentence followed by mixed English-Chinese block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_014",
+    "chinese_block_ids": [
+      "p057_b0011"
+    ],
+    "english_block_ids": [
+      "p057_b0012"
+    ],
+    "chinese_text": "a) 根据预期用途，规定的功能、性能、可用性和安全要求；",
+    "english_text": "Functional, performance, usability and safety requirements, according to the intended use; b) 适用的法规要求和标准；",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks continuing list items",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_014_pair_015",
+    "chinese_block_ids": [
+      "p057_b0013"
+    ],
+    "english_block_ids": [
+      "p057_b0014"
+    ],
+    "chinese_text": "Applicable regulatory requirements and standards; c) 适用的风险管理的一个或多个输出；",
+    "english_text": "Applicable output(s) of risk management; d) 适当时，来源于以前类似设计的信息；",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks continuing list items",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_015_pair_005",
+    "chinese_block_ids": [
+      "p057_b0019"
+    ],
+    "english_block_ids": [
+      "p057_b0020"
+    ],
+    "chinese_text": "The R&D Director is responsible to ensure that the outputs of design and development a) 以表格的形式提出，以验证设计和开发输入，并在放行前得到批准",
+    "english_text": "Are provided in a form that enables verification against the design and development",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block ends with 'a) 以表格的形式提出...' and English block continues with 'Are provided in a form...' forming a complete sentence.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_015_pair_017",
+    "chinese_block_ids": [
+      "p059_b0006"
+    ],
+    "english_block_ids": [
+      "p059_b0007"
+    ],
+    "chinese_text": "验证活动与设计评审相辅相成，作为结构性评估以建立设计输出符合设计输入要求。",
+    "english_text": "The verification activity is part of design review and is a structured assessment to establish that the design output meets the design input requirements. 验证计划需形成文件，包含方法、接收准则、适当时包括包含样本量原理的统计技术。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block is a standalone sentence; English block starts with its translation then continues with mixed content. Paired as translation pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_015_pair_018",
+    "chinese_block_ids": [
+      "p059_b0008"
+    ],
+    "english_block_ids": [
+      "p059_b0009"
+    ],
+    "chinese_text": "The Group shall document verification plans that include methods, acceptance criteria and, as appropriate, statistical techniques with rationale for sample size. 部分医疗器械预期用途要求连接至或通过接口连接至其他的医疗器械，验证时应包括 证实连接或通过接口连接时设计输出满足设计输入的要求",
+    "english_text": "If the intended use requires that the medical device be connected to, or have an interface with, other medical device(s), verification shall include confirmation that the design outputs meet design inputs when so connected or interfaced.",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed block p059_b0008 contains Chinese and English; English block p059_b0009 is the translation of the Chinese part. Paired as translation pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_015_pair_019",
+    "chinese_block_ids": [
+      "p059_b0010"
+    ],
+    "english_block_ids": [
+      "p059_b0011"
+    ],
+    "chinese_text": "记录并保存设计验证的所有记录（见4.2.5）。",
+    "english_text": "All results of the design verifications are recorded and maintained (see 4.2.5) 7.3.7 设计和开发确认Design and development validation 设计确认是所有努力的总和，确保设计满足最终用户及患者的需求和预期用途。设计确 认对生产首件进行，而不是模型。",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block is a standalone sentence; English block starts with its translation then continues with mixed content. Paired as translation pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_015_pair_020",
+    "chinese_block_ids": [
+      "p059_b0011"
+    ],
+    "english_block_ids": [
+      "p059_b0012"
+    ],
+    "chinese_text": "All results of the design verifications are recorded and maintained (see 4.2.5) 7.3.7 设计和开发确认Design and development validation 设计确认是所有努力的总和，确保设计满足最终用户及患者的需求和预期用途。设计确 认对生产首件进行，而不是模型。",
+    "english_text": "Design validation is the cumulative summation of all efforts to ensure that the design will confirm to the end user and patient needs and the intended use. It is performed on the initial production units, not prototypes.",
+    "confidence": 0.8,
+    "pairing_reason": "Mixed block p059_b0011 contains Chinese and English; English block p059_b0012 is the translation of the Chinese part. Paired as translation pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_001",
+    "chinese_block_ids": [
+      "p059_b0016"
+    ],
+    "english_block_ids": [
+      "p059_b0017"
+    ],
+    "chinese_text": "产品临床评估在过程确认阶段进行，如要求临床研究，应符合适当的法规要求。确认也 记录将影响客户、最终用户和患者的设计问题。保存设计确认活动记录，作为技术档案 的一部分（见4.2.5）。",
+    "english_text": "Clinical evaluation of the device is undertaken during the validation process and if clinical investigations are required, these shall conform to the appropriate regulatory requirements. Validation also addresses aspects of the design, which may have implications for the customer, end user and patient. The design validation activity is recorded and maintained as the part of the technical file. (see 4.2.5).",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_002",
+    "chinese_block_ids": [
+      "p060_b0006"
+    ],
+    "english_block_ids": [
+      "p060_b0007"
+    ],
+    "chinese_text": "7.3.8 设计和开发转换 Design and development transfer 集团公司应将设计和开发输出向制造转换的程序形成文件，这些程序应确保设计和开 发输出在成为最终生产规范前经验证适合于制造并确保生产能力能满足产品要求。应 记录转换的结果和结论（见4.2.5）",
+    "english_text": "The Group shall document procedures for transfer of design and development outputs to manufacturing. These procedures shall ensure that design and development outputs are verified as suitable for manufacturing before becoming final production specifications and that production capability can meet product requirements. Results and conclusions of the transfer shall be recorded (see 4.2.5). 7.3.9 设计和开发更改的控制Control of design and development changes",
+    "confidence": 0.9,
+    "pairing_reason": "Translation pair with mixed language block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_003",
+    "chinese_block_ids": [
+      "p060_b0008"
+    ],
+    "english_block_ids": [
+      "p060_b0009"
+    ],
+    "chinese_text": "集团公司应将设计和开发更改的程序形成文件。应确定更改对于医疗器械功能、性能、 可用性、安全、0.4.2 所列适用的法规要求及其预期用途等的重要程度。",
+    "english_text": "The Group shall document procedures to control design and development changes. The Group shall determine the significance of the change to function, performance, usability, safety and applicable regulatory requirements listed in 0.4.2 for the medical device and its intended use. 应识别设计和开发的更改。更改在实施前应经：",
+    "confidence": 0.9,
+    "pairing_reason": "Translation pair with mixed language block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_004",
+    "chinese_block_ids": [
+      "p060_b0010"
+    ],
+    "english_block_ids": [
+      "p060_b0011"
+    ],
+    "chinese_text": "Design and development changes shall be identified. Before implementation, the changes shall be: a) 评审；",
+    "english_text": "reviewed; b) 验证；",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed language blocks forming a list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_005",
+    "chinese_block_ids": [
+      "p060_b0012"
+    ],
+    "english_block_ids": [
+      "p060_b0013"
+    ],
+    "chinese_text": "verified; c) 适当时，确认；",
+    "english_text": "validated, as appropriate; d) 批准。",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed language blocks forming a list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_006",
+    "chinese_block_ids": [
+      "p060_b0014"
+    ],
+    "english_block_ids": [
+      "p060_b0015"
+    ],
+    "chinese_text": "approved; 设计和开发更改的评审应包括评价更改对 在制的或已交付的组成部件和产品的影响， 以及对风险管理的输入或输出和产品实现过程的影响。",
+    "english_text": "The review of design and development changes shall include evaluation of the effect of the changes on constituent parts and product in process or already delivered, inputs or outputs of risk management and product realization processes. 应保留更改及评审和任何必要的措施的记录（见4.2.5）",
+    "confidence": 0.9,
+    "pairing_reason": "Translation pair with mixed language block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_007",
+    "chinese_block_ids": [
+      "p060_b0016"
+    ],
+    "english_block_ids": [
+      "p060_b0017"
+    ],
+    "chinese_text": "Records of changes, their review and any necessary actions shall be maintained (see 4.2.5). 7.3.10 设计和开发文档 Documents of design and development",
+    "english_text": "集团公司就每个医疗器械类型或医疗器械族保留设计和开发文档，文档应包含或引用 形成的记录以证明符合设计和开发要求，该文档还应包含设计和开发更改的记录。",
+    "confidence": 0.9,
+    "pairing_reason": "Translation pair with mixed language block",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_008",
+    "chinese_block_ids": [
+      "p061_b0006"
+    ],
+    "english_block_ids": [
+      "p061_b0007"
+    ],
+    "chinese_text": "The Group shall maintain a design and development file for each medical device type or medical device family. This file shall include or reference records generated to demonstrate conformity to the requirements for design and development and records for design and development changes. 7.3.11 辅助程序Supporting procedures",
+    "english_text": "QSP0704 设计与开发控制及新产品引进控制",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed language block with procedure list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_009",
+    "chinese_block_ids": [
+      "p061_b0008"
+    ],
+    "english_block_ids": [
+      "p061_b0009"
+    ],
+    "chinese_text": "Design and Development Control and New Product Introduction Control QSP0705 技术文件编制和控制",
+    "english_text": "Preparation and Control of Technical Document QSP0720 风险管理",
+    "confidence": 0.7,
+    "pairing_reason": "Mixed language block with procedure list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_011",
+    "chinese_block_ids": [
+      "p062_b0008"
+    ],
+    "english_block_ids": [
+      "p062_b0009"
+    ],
+    "chinese_text": "应将确保采购的产品符合规定的采购信息的程序形成文件（见4.2.4）。",
+    "english_text": "The Group shall document procedures (see 4.2.4) to ensure that purchased product conforms to specified purchasing information. 建立评价和选择供方的准则，准则应：",
+    "confidence": 0.9,
+    "pairing_reason": "Translation pair in same segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_012",
+    "chinese_block_ids": [
+      "p062_b0010"
+    ],
+    "english_block_ids": [
+      "p062_b0011"
+    ],
+    "chinese_text": "The Group shall establish criteria for the evaluation and selection of suppliers. The criteria shall be: a) 基于供方提供满足组织要求的产品的能力；",
+    "english_text": "Based on the supplier’s ability to provide product that meets the organization’s requirements; b) 基于供方的绩效；",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed language blocks forming a list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_013",
+    "chinese_block_ids": [
+      "p062_b0012"
+    ],
+    "english_block_ids": [
+      "p062_b0013"
+    ],
+    "chinese_text": "Based on the performance of the supplier; c) 基于采购产品对医疗器械质量的影响；",
+    "english_text": "Based on the effect of the purchased product on the quality of the medical device; d) 与医疗器械相关风险相适应。",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed language blocks forming a list",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_016_pair_014",
+    "chinese_block_ids": [
+      "p062_b0014"
+    ],
+    "english_block_ids": [
+      "p062_b0015"
+    ],
+    "chinese_text": "Proportionate to the risk associated with the medical device. 总经理对采购部提出的新供应商的核准有最终决定权。采购经理负责协调供方的监视",
+    "english_text": "和再评价活动，并报告供方满足采购产品的要求的绩效，其结果应为供方再评价过程提 供输入。",
+    "confidence": 0.85,
+    "pairing_reason": "Mixed language blocks forming a paragraph",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_008",
+    "chinese_block_ids": [
+      "p063_b0006"
+    ],
+    "english_block_ids": [
+      "p063_b0007"
+    ],
+    "chinese_text": "施的记录由采购部保存。（见4.2.5）",
+    "english_text": "Records of the results of evaluation, selection, monitoring and re-evaluation of supplier capability or performance and any necessary actions arising from these activities shall be maintained (see 4.2.5).",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese block continues from previous page, English block is its translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_010",
+    "chinese_block_ids": [
+      "p063_b0009"
+    ],
+    "english_block_ids": [
+      "p063_b0010"
+    ],
+    "chinese_text": "采购部负责确保：",
+    "english_text": "Purchasing is responsible to ensure: 拟采购产品的采购信息应表述或引用，适当时包括：",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block followed by mixed block containing its translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_012",
+    "chinese_block_ids": [
+      "p063_b0012"
+    ],
+    "english_block_ids": [
+      "p063_b0013"
+    ],
+    "chinese_text": "a) 产品规范；",
+    "english_text": "Product specifications;",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_013",
+    "chinese_block_ids": [
+      "p063_b0014"
+    ],
+    "english_block_ids": [
+      "p063_b0015"
+    ],
+    "chinese_text": "b) 产品接收、程序、过程和设备的要求；",
+    "english_text": "Requirements for product acceptance, procedures, processes and equipment;",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_014",
+    "chinese_block_ids": [
+      "p063_b0016"
+    ],
+    "english_block_ids": [
+      "p063_b0017"
+    ],
+    "chinese_text": "c) 供方人员资格要求；",
+    "english_text": "Requirements for qualification of supplier personnel;",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_015",
+    "chinese_block_ids": [
+      "p063_b0018"
+    ],
+    "english_block_ids": [
+      "p063_b0019"
+    ],
+    "chinese_text": "d) 质量管理体系要求。",
+    "english_text": "Quality management system requirements. 在与供应商沟通前，确保所规定的采购要求是充分和适宜的",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block followed by mixed block containing its translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_017",
+    "chinese_block_ids": [
+      "p063_b0021"
+    ],
+    "english_block_ids": [
+      "p063_b0022"
+    ],
+    "chinese_text": "适用时，采购信息应包括书面协议，该协议明确了在影响采购产品满足规定的采购要求 的能力的任何更改实施前，供方应将采购产品方面的更改通知集团公司。",
+    "english_text": "Purchasing information shall include, as applicable, a written agreement that the supplier notify the Group of changes in the purchased product prior to implementation of any changes that affect the ability of the purchased product to meet specified purchase requirements. 采购信息由采购部按照7.5.9 规定的可追溯性要求的范围和程度，以文件（见4.2.4）和 记录（见4.2.5）的形式保持。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block followed by mixed block containing its translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_020",
+    "chinese_block_ids": [
+      "p063_b0025"
+    ],
+    "english_block_ids": [
+      "p063_b0026"
+    ],
+    "chinese_text": "执行来料检验或验证以确保所采购的产品满足规定的采购要求。品质部负责根据来料 检验程序执行必要的来料检验。",
+    "english_text": "Incoming inspection or verification is carried out to ensure that purchased product meets",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block and English block are partial translation; English continues on next page",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_026",
+    "chinese_block_ids": [
+      "p064_b0009"
+    ],
+    "english_block_ids": [
+      "p064_b0010"
+    ],
+    "chinese_text": "当公司或其客户拟在供方的现场实施验证时，对拟验证的安排和产品放行的方法应在 采购信息中作出规定。",
+    "english_text": "When the company or its customer intends to perform verification at the supplier’s premises, the intended verification arrangements and method of product release are stated in the purchasing information. 验证的记录应予以保持。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block followed by mixed block containing its translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_029",
+    "chinese_block_ids": [
+      "p064_b0014"
+    ],
+    "english_block_ids": [
+      "p064_b0015"
+    ],
+    "chinese_text": "QSP0706 采购及外发加工",
+    "english_text": "Purchasing and Outsourcing Process",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_017_pair_030",
+    "chinese_block_ids": [
+      "p064_b0016"
+    ],
+    "english_block_ids": [
+      "p064_b0017"
+    ],
+    "chinese_text": "QSP0707 供应商/外发加工/生产商评估与认可",
+    "english_text": "Evaluation and Approval of Vendor/Supplier",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_001",
+    "chinese_block_ids": [
+      "p065_b0009",
+      "p065_b0010"
+    ],
+    "english_block_ids": [
+      "p065_b0011",
+      "p065_b0012",
+      "p065_b0013"
+    ],
+    "chinese_text": "生产经理应对生产提供予以策划、实施、监视和控制以确保产品符合规范，适当时包括但不限于：",
+    "english_text": "Production and service provision shall be planned, carried out, monitored and controlled to ensure that product conforms to specification. As appropriate, production controls shall include but are not limited to:",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match: Chinese intro paragraph matches English intro paragraph.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_002",
+    "chinese_block_ids": [
+      "p065_b0014"
+    ],
+    "english_block_ids": [
+      "p065_b0015"
+    ],
+    "chinese_text": "a) 编制生产控制程序和控制方法的文件（见4.2.4）；",
+    "english_text": "Documentation of procedures and methods for the control of production (see 4.2.4);",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item a.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_003",
+    "chinese_block_ids": [
+      "p065_b0016"
+    ],
+    "english_block_ids": [
+      "p065_b0017"
+    ],
+    "chinese_text": "b) 基础设施鉴定；",
+    "english_text": "Qualification of infrastructure;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item b.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_004",
+    "chinese_block_ids": [
+      "p065_b0018"
+    ],
+    "english_block_ids": [
+      "p065_b0019",
+      "p065_b0020"
+    ],
+    "chinese_text": "c) 实施过程参数和产品特性的监视和测量；",
+    "english_text": "Implementation of monitoring and measurement of process parameters and product characteristics;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item c.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_005",
+    "chinese_block_ids": [
+      "p065_b0021"
+    ],
+    "english_block_ids": [
+      "p065_b0022"
+    ],
+    "chinese_text": "d) 获得和使用监视和测量设备；",
+    "english_text": "Availability and use of monitoring and measuring equipment;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item d.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_006",
+    "chinese_block_ids": [
+      "p065_b0023"
+    ],
+    "english_block_ids": [
+      "p065_b0024"
+    ],
+    "chinese_text": "e) 对标记和包装实施规定的操作；",
+    "english_text": "Implementation of defined operations for labelling and packaging;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item e.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_007",
+    "chinese_block_ids": [
+      "p065_b0025"
+    ],
+    "english_block_ids": [
+      "p065_b0026"
+    ],
+    "chinese_text": "f) 实施产品放行、交付和交付后活动。",
+    "english_text": "Implementation of product release, delivery and post-delivery activities.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item f.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_008",
+    "chinese_block_ids": [
+      "p065_b0028",
+      "p065_b0029"
+    ],
+    "english_block_ids": [
+      "p065_b0030",
+      "p065_b0031",
+      "p065_b0032",
+      "p065_b0033"
+    ],
+    "chinese_text": "公司应保持每一批医疗器械的记录（见4.2.5），提供可追溯到各部件的批号，并标明生产数量和批准销售的数量。每批的记录应由指定人员加以验证和批准。",
+    "english_text": "Company should establish the necessary processes to maintain records (see 4.2.5) for each lot of medical devices that provides traceability to the lot numbers of the component parts and identifies the amount manufactured and amount approved for distribution. The lot records are verified and approved by designated personnel.",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match: Chinese paragraph about lot records matches English paragraph.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_009",
+    "chinese_block_ids": [
+      "p065_b0036"
+    ],
+    "english_block_ids": [
+      "p065_b0037",
+      "p065_b0038"
+    ],
+    "chinese_text": "在下列情况下，应将产品的清洁或污染控制要求形成文件：",
+    "english_text": "The Group shall document requirements for cleanliness of product or contamination control of product if:",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match: Chinese intro matches English intro for cleanliness.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_010",
+    "chinese_block_ids": [
+      "p065_b0039"
+    ],
+    "english_block_ids": [
+      "p065_b0040"
+    ],
+    "chinese_text": "a) 产品在灭菌或使用前由组织进行清洁；",
+    "english_text": "Product is cleaned by the organization prior to sterilization or its use;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item a.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_011",
+    "chinese_block_ids": [
+      "p065_b0041"
+    ],
+    "english_block_ids": [
+      "p066_b0006",
+      "p066_b0007"
+    ],
+    "chinese_text": "b) 产品是以非无菌形式提供且需在灭菌或使用前进行清洁处理；",
+    "english_text": "Product is supplied non-sterile and is to be subjected to a cleaning process prior to sterilization or its use;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item b, English continues on next page.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_012",
+    "chinese_block_ids": [
+      "p066_b0008"
+    ],
+    "english_block_ids": [
+      "p066_b0009",
+      "p066_b0010"
+    ],
+    "chinese_text": "c) 产品在灭菌或使用前不能进行清洁处理，使用时其清洁是至关重要的；",
+    "english_text": "Product cannot be cleaned prior to sterilization or its use, and its cleanliness is of significance in use;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item c.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_013",
+    "chinese_block_ids": [
+      "p066_b0011"
+    ],
+    "english_block_ids": [
+      "p066_b0012"
+    ],
+    "chinese_text": "d) 提供的产品为非无菌使用，使用时其清洁是至关重要的；",
+    "english_text": "Product is supplied to be used non-sterile, and its cleanliness is of significance in use;",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item d.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_014",
+    "chinese_block_ids": [
+      "p066_b0013"
+    ],
+    "english_block_ids": [
+      "p066_b0014"
+    ],
+    "chinese_text": "e) 在制造过程中从产品中除去过程添加物。",
+    "english_text": "Process agents are to be removed from product during manufacture.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair for item e.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_018_pair_015",
+    "chinese_block_ids": [
+      "p066_b0016",
+      "p066_b0017"
+    ],
+    "english_block_ids": [
+      "p066_b0018",
+      "p066_b0019"
+    ],
+    "chinese_text": "若产品是按照上述a）或b）的要求进行清洁，则6.4.1 中包含的要求不适用于清洁处理前的过程。",
+    "english_text": "If product is cleaned in accordance with a) or b) above, the requirements contained in 6.4.1 do not apply prior to the cleaning process.",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match: Chinese paragraph about exception matches English.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_003",
+    "chinese_block_ids": [
+      "p066_b0033"
+    ],
+    "english_block_ids": [
+      "p066_b0034",
+      "p066_b0035"
+    ],
+    "chinese_text": "对特殊的过程实施确认，包括灭菌过程，以证明这些过程实现所策划的结果的能力",
+    "english_text": "Validation is performed for special processes, including the sterilization processes, to demonstrate the ability of these processes to achieve planned results.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_004",
+    "chinese_block_ids": [
+      "p066_b0037"
+    ],
+    "english_block_ids": [
+      "p066_b0038"
+    ],
+    "chinese_text": "将过程确认程序形成文件，过程确认包括：",
+    "english_text": "The Group shall document procedures for validation of processes, including:",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_005",
+    "chinese_block_ids": [
+      "p066_b0039"
+    ],
+    "english_block_ids": [
+      "p066_b0040",
+      "p066_b0041"
+    ],
+    "chinese_text": "a) 为过程的评审和批准所规定的准则﹔",
+    "english_text": "Defined criteria for review and approval of the processes, b) 设备鉴定和人员资格的鉴定﹔ Approval of equipment and qualification of personnel,",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed block with Chinese and English; Chinese part corresponds to English in next blocks",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_008",
+    "chinese_block_ids": [
+      "p067_b0006"
+    ],
+    "english_block_ids": [
+      "p067_b0007",
+      "p067_b0008",
+      "p067_b0009",
+      "p067_b0010"
+    ],
+    "chinese_text": "c) 使用特定方法、程序和接收准则﹔",
+    "english_text": "Use of specific methods, procedures and acceptance criteria; d) 适当时包括包含样本量原理的统计技术； As appropriate, statistical techniques with rationale for sample sizes; e) 记录的要求（见4.2.5）； requirement for records (see 4.2.5)； f) 再确认，包括再确认的准则。 Revalidation, including criteria for revalidation; g) 对过程更改的批准。 Approval of changes to the processes.",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed blocks; Chinese item c) corresponds to English in subsequent mixed blocks",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_009",
+    "chinese_block_ids": [
+      "p067_b0012",
+      "p067_b0013",
+      "p067_b0014",
+      "p067_b0015",
+      "p067_b0016"
+    ],
+    "english_block_ids": [
+      "p067_b0017",
+      "p067_b0018",
+      "p067_b0019",
+      "p067_b0020",
+      "p067_b0021",
+      "p067_b0022",
+      "p067_b0023",
+      "p067_b0024"
+    ],
+    "chinese_text": "集团公司将用于生产提供的计算机软件应用的确认程序形成文件，此类软件的应用 在首次使用前应予以确认，适当时，此类软件或其应用更改后也应予以确认。有关 软件确认和再确认的特定方法和活动应与软件使用有关的风险（包括对产品符合规 范的能力的影响）相适应。 保留确认的结果和结论以及确认所采取的必要措施的记录（见4.2.4 和4.2.5）。",
+    "english_text": "The Group shall document procedures for the validation of the application of computer software used in production and service provision. Such software applications shall be validated prior to initial use and, as appropriate, after changes to such software or its application. The specific approach and activities associated with software validation and revalidation shall be proportionate to the risk associated with the use of the software, including the effect on the ability of the product to conform to specifications. Records of the results and conclusion of validation and necessary actions from the validation shall be maintained (see 4.2.4 and 4.2.5).",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair across multiple blocks",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_010",
+    "chinese_block_ids": [
+      "p067_b0026"
+    ],
+    "english_block_ids": [
+      "p067_b0027",
+      "p067_b0028"
+    ],
+    "chinese_text": "7.5.7 灭菌过程和无菌屏障系统确认的专用要求",
+    "english_text": "Particular requirements for validation of processes for sterilization and sterile barrier systems",
+    "confidence": 1.0,
+    "pairing_reason": "Heading and its English translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_011",
+    "chinese_block_ids": [
+      "p067_b0030"
+    ],
+    "english_block_ids": [
+      "p067_b0031",
+      "p067_b0032"
+    ],
+    "chinese_text": "集团公司将灭菌过程和无菌屏障系统的确认程序形成文件（见4.2.4）",
+    "english_text": "The organization shall document procedures (see 4.2.4) for the validation of processes for sterilization and sterile barrier systems.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_012",
+    "chinese_block_ids": [
+      "p067_b0034",
+      "p067_b0035"
+    ],
+    "english_block_ids": [
+      "p067_b0036",
+      "p067_b0037"
+    ],
+    "chinese_text": "灭菌过程和无菌屏障系统应在实施前得到确认，适当时，还应在后续的产品或过程更改实施前得到确认。",
+    "english_text": "Processes for sterilization and sterile barrier systems shall be validated prior to implementation and following product or process changes, as appropriate.",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_015",
+    "chinese_block_ids": [
+      "p068_b0006"
+    ],
+    "english_block_ids": [
+      "p068_b0007",
+      "p068_b0008"
+    ],
+    "chinese_text": "保留确认的结果和结论以及确认所采取的必要措施的记录（见4.2.4 和4.2.5）",
+    "english_text": "Records of the results and, conclusion of validation and necessary actions from the validation shall be maintained (see 4.2.4 and 4.2.5).",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_019_pair_017",
+    "chinese_block_ids": [
+      "p068_b0011"
+    ],
+    "english_block_ids": [
+      "p068_b0012",
+      "p068_b0013"
+    ],
+    "chinese_text": "产品实现的全过程中的产品均依照形成文件的程序使用适宜的方法予以识别",
+    "english_text": "Products are identified by suitable means throughout product realization in accordance with the documented procedures",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_001",
+    "chinese_block_ids": [
+      "p068_b0015",
+      "p068_b0016",
+      "p068_b0017"
+    ],
+    "english_block_ids": [
+      "p068_b0018",
+      "p068_b0019",
+      "p068_b0020",
+      "p068_b0021",
+      "p068_b0022"
+    ],
+    "chinese_text": "在产品实现的整个过程中按照监视和测量要求识别产品的状态。在产品的生产、贮存的全过程中应保持产品状态的标识，确保只有通过所要求的检验和试验或经授权让步放行的产品才能被发送或使用。",
+    "english_text": "The Group shall identify product status with respect to monitoring and measurement requirements throughout product realization. Identification of product status shall be maintained throughout production, storage, installation and servicing of product to ensure that only product that has passed the required inspections and tests or released under an authorized concession is dispatched or used.",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.8",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_002",
+    "chinese_block_ids": [
+      "p068_b0024",
+      "p068_b0025",
+      "p068_b0026"
+    ],
+    "english_block_ids": [
+      "p068_b0027",
+      "p068_b0028",
+      "p068_b0029",
+      "p068_b0030"
+    ],
+    "chinese_text": "如0.4.2 所列的适用的法规有要求，应将为医疗器械指定唯一器械标识的系统形成文件。仅NM 的产品适用此条款，其他的代加工产品，由对应的客户为医疗器械指定唯一器械标识的系统形成文件。",
+    "english_text": "If required by applicable regulatory requirements (see 0.4.2), the Group shall document a system to assign unique device identification to the medical device. This regulation is only valid to NM product. Client is responsible for document a system to assign unique device identification to the respective OEM medical device.",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.8",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_003",
+    "chinese_block_ids": [
+      "p068_b0032",
+      "p068_b0033"
+    ],
+    "english_block_ids": [
+      "p068_b0034",
+      "p068_b0035"
+    ],
+    "chinese_text": "集团公司应建立程序并形成文件以确保返回的医疗器械能被识别且能与合格品区分开来。",
+    "english_text": "The organization shall document procedures to ensure that medical devices returned to the Group are identified and distinguished from conforming product.",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.8",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_006",
+    "chinese_block_ids": [
+      "p068_b0039",
+      "p068_b0040"
+    ],
+    "english_block_ids": [
+      "p068_b0041",
+      "p068_b0042",
+      "p069_b0006"
+    ],
+    "chinese_text": "按照0.4.2 所列的适用法规的要求规定可追溯性的范围、程度以及拟保留的记录（见4.2.5），制定相应的程序并形成文件。",
+    "english_text": "The organization shall document procedures for traceability. These procedures shall define the extent of traceability in accordance with applicable regulatory requirements(see 0.4.2) and the records to be maintained(see 4.2.5).",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic match across segments 0159 and 0160, same section 7.5.9, no new heading",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_009",
+    "chinese_block_ids": [
+      "p069_b0008"
+    ],
+    "english_block_ids": [
+      "p069_b0009"
+    ],
+    "chinese_text": "b) 植入性医疗器械的专用要求（不适用）",
+    "english_text": "Particular requirements for implantable medical devices(Not Applicable)",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.9",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_011",
+    "chinese_block_ids": [
+      "p069_b0012"
+    ],
+    "english_block_ids": [
+      "p069_b0013"
+    ],
+    "chinese_text": "集团公司维护在公司控制下或使用的客户财产。公司识别、验证、保护和维护供其使用 或构成产品一部分的客户财产。当客户财产发生丢失、损坏或发现不适用的情况时，应 报告客户并保持记录（见4.2.5）。",
+    "english_text": "The Group exercises care with customer property while it is under the Group’s control or being used by the Group. The Group identifies, verifies, protects and safeguards customer property provided for use or incorporation into the product. If any customer property is lost, damaged or otherwise found to be unsuitable for use, this shall be reported to the customer and records maintained (see 4.2.5).",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.10",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_013",
+    "chinese_block_ids": [
+      "p069_b0015"
+    ],
+    "english_block_ids": [
+      "p069_b0016",
+      "p069_b0017"
+    ],
+    "chinese_text": "集团公司应建立为使产品在加工、贮存、处置和流通期间符合要求而提供防护的程序并 形成文件，防护适用于医疗器械的组成部分。",
+    "english_text": "The Group shall document procedures for preserving the conformity of product to requirements during processing, storage, handling, and distribution. Preservation shall apply to the constituent parts of a medical device.",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.11",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_014",
+    "chinese_block_ids": [
+      "p069_b0018"
+    ],
+    "english_block_ids": [
+      "p069_b0019",
+      "p069_b0020",
+      "p069_b0021",
+      "p069_b0022"
+    ],
+    "chinese_text": "在产品的加工、贮存、处置和流通期间，当其暴露于预期条件和危险（源）时，集团公 司应通过以下方式防止产品发现变化、污染或损坏：",
+    "english_text": "The Group shall protect product from alteration, contamination or damage when exposed to expected conditions and hazards during processing, storage, handling, and distribution by: a) 设计和制作适当的包装和货运包装箱； Designing and constructing suitable packaging and shipping containers; b) 如果包装本身不能提供防护，将所需的特殊条件要求形成文件。 Documenting requirements for special conditions needed if packaging alone cannot provide preservation. 如果要求特殊条件，其应受控并予以记录（见4.2.5） If special conditions are required, they shall be controlled and recorded (see 4.2.5).",
+    "confidence": 0.9,
+    "pairing_reason": "Semantic match within same section 7.5.11, mixed language blocks combined",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_016",
+    "chinese_block_ids": [
+      "p069_b0024"
+    ],
+    "english_block_ids": [
+      "p069_b0025"
+    ],
+    "chinese_text": "QSP0703 客供财物处理",
+    "english_text": "Customer Consigned Property Control",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.12",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_020_pair_017",
+    "chinese_block_ids": [
+      "p069_b0026"
+    ],
+    "english_block_ids": [
+      "p069_b0027"
+    ],
+    "chinese_text": "QSP0704 设计与开发控制及新产品引进控制",
+    "english_text": "Design and Development Control and New Product Introduction Control",
+    "confidence": 0.95,
+    "pairing_reason": "Semantic match within same section 7.5.12",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_001",
+    "chinese_block_ids": [
+      "p070_b0006"
+    ],
+    "english_block_ids": [
+      "p070_b0007"
+    ],
+    "chinese_text": "QSP0705 技术文件的准备和控制",
+    "english_text": "Preparation and Control of Technical Document",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same section segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_007",
+    "chinese_block_ids": [
+      "p070_b0013"
+    ],
+    "english_block_ids": [
+      "p070_b0014"
+    ],
+    "chinese_text": "QSP0711 货仓及生产车间清洁环境管理",
+    "english_text": "Warehouse and Production Area Cleaning Environment Management",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same section segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_011",
+    "chinese_block_ids": [
+      "p070_b0018"
+    ],
+    "english_block_ids": [
+      "p070_b0019"
+    ],
+    "chinese_text": "QSP0715 设备的管理、维修及保养",
+    "english_text": "Management, Repair and Maintenance of Equipment",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same section segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_017",
+    "chinese_block_ids": [
+      "p071_b0007"
+    ],
+    "english_block_ids": [
+      "p071_b0008"
+    ],
+    "chinese_text": "生产部和质量部负责确定各自责任范围的需实施的监控和测量以及所需的监控和测量装置，为 产品符合确定的要求提供证据(见7.2.1)。",
+    "english_text": "Production and Quality are responsible to determine and establish monitoring and measurement processes to be undertaken in their responsible areas and provide evidence of conformity that products and components conform to specific requirements (see 7.2.1).",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in same section segment",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_018",
+    "chinese_block_ids": [
+      "p071_b0009"
+    ],
+    "english_block_ids": [
+      "p071_b0010",
+      "p071_b0011"
+    ],
+    "chinese_text": "集团公司建立了形成文件的程序以确保监控和测量活动可行并以与监控和测量要求相一致的方 式实施。",
+    "english_text": "Documented procedures are established to ensure that monitoring and measurement can be carried out and are carried out in a manner that is consistent with the monitoring and measurement requirements. These procedures included instructions for the use of test equipment to verify product conformity and where necessary, verification of the environmental condition necessary to perform testing. 为确保结果有效，必要时，测量设备应：",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block corresponds to English blocks that continue across two blocks; the mixed block p071_b0011 also contains Chinese continuation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_021",
+    "chinese_block_ids": [
+      "p071_b0013"
+    ],
+    "english_block_ids": [
+      "p071_b0014"
+    ],
+    "chinese_text": "当不存在上述标准时，应记录校准或检定的依据（见4.2.5）；",
+    "english_text": "Calibrated or verified at specified intervals, or prior to use, against measurement standards traceable to international or national measurement standards; where no such standards exist, the basis used for calibration or verification shall be recorded（see 4.2.5）; b) 进行调整或必要时再调整；应记录这种调整或再调整（见4.2.5）；",
+    "confidence": 0.8,
+    "pairing_reason": "Chinese block corresponds to part of English block; English block also contains additional Chinese text",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_026",
+    "chinese_block_ids": [
+      "p071_b0018"
+    ],
+    "english_block_ids": [
+      "p071_b0019"
+    ],
+    "chinese_text": "Protected from damage and deterioration during handling, maintenance and storage. 集团公司应按照形成文件的程序执行校准或鉴定",
+    "english_text": "The Group shall perform calibration or verification in accordance with documented procedures.",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block contains English continuation and Chinese sentence; English block is translation of Chinese part",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_021_pair_027",
+    "chinese_block_ids": [
+      "p071_b0020"
+    ],
+    "english_block_ids": [
+      "p072_b0006"
+    ],
+    "chinese_text": "此外，当发现设备不符合要求时，对以往测量结果的有效性予以评价和记录，并对该设备和任 何受影响的产品采取适当的措施。品质工程师负责测量设备的校准和验证并保持校准和验证结 果的记录（见4.2.5）。",
+    "english_text": "In addition, the validity of the previous measuring results is assessed and recorded, and appropriate actions are taken on the equipment; and any non-conforming products affected by that equipment. Quality Engineer is responsible for the calibration and verification of measuring equipments and maintaining the records of the results of calibration and verification (see 4.2.5). 集团公司应将用于监视和测量要求的计算机软件应用的确认程序形成文件。此类软件的应用在 首次使用前应予以确认，适当时，此类软件或其应用更改后也应予确认。有关软件确认和再确 认的特定方法和活动应与软件使用有关的风险（包括对产品符合规范的能力的影响）相适应。",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block on page 71 is translated in English block on page 72; same section segment 7.6, continued across pages",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_001",
+    "chinese_block_ids": [
+      "p072_b0008"
+    ],
+    "english_block_ids": [
+      "p072_b0009"
+    ],
+    "chinese_text": "应保留确认的结果和结论以及确认所采取的必要措施的记录（见4.2.4 和4.2.5）。",
+    "english_text": "Records of the results and conclusion of validation and necessary actions from the validation shall be maintained (see 4.2.4 and 4.2.5). 辅助程序Supporting procedures, QSP0716 测量仪器之校准和控制 Calibration & Control of Measuring Instrument",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese and English are translations of each other within same section segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_002",
+    "chinese_block_ids": [
+      "p073_b0009"
+    ],
+    "english_block_ids": [
+      "p073_b0010",
+      "p073_b0011",
+      "p073_b0012",
+      "p073_b0013"
+    ],
+    "chinese_text": "监控、测量、分析和改进过程（包括对适用方法、统计技术及其应用程度）均予以策划和实施以",
+    "english_text": "The monitoring, measurement, analysis and improvement processes (including determination of applicable methods, statistical techniques and the extent of their use) are planned and implemented to a) 证实产品的符合性﹔ demonstrate conformity of the product, b) 确保质量管理体系的符合性，及 ensure conformity of the Quality Management System, and c) 持续改进质量管理体系的有效性。 continually improve the effectiveness of the Quality Management System.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block is the start of the paragraph, English blocks complete the translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_003",
+    "chinese_block_ids": [
+      "p074_b0009"
+    ],
+    "english_block_ids": [
+      "p074_b0010",
+      "p074_b0011",
+      "p074_b0012"
+    ],
+    "chinese_text": "作为对质量管理体系业绩的一种测量，与以下方面相关的信息均予以监控",
+    "english_text": "As one of the measurements of the performance of the Quality Management System, the information relating to the following is monitored a) 是否已满足客户的要求，及/或 whether the Group has met customer requirements, and/or b) 客户对集团公司印象中，集团公司是否已满足其要求 customer perception as to whether the Group has met customer requirements",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block introduces the list, English blocks complete the translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_004",
+    "chinese_block_ids": [
+      "p074_b0013"
+    ],
+    "english_block_ids": [
+      "p074_b0014",
+      "p074_b0015"
+    ],
+    "chinese_text": "获取和利用这种信息的方法，如拜访客户、电话或电邮调查，由市场总监确定。",
+    "english_text": "The methods, such as visiting customers or by phone or e-mail surveys, for obtaining information are determined by the Marketing Director. 集团公司应建立反馈系统的形成文件的程序，该反馈过程应包括从生产和生产后活动中 收集数据的规定。 The Group shall document procedures for the feedback process. This feedback process shall include provisions to gather data from production as well as post-production activities.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block and English blocks are translations of each other within same section.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_005",
+    "chinese_block_ids": [
+      "p074_b0016"
+    ],
+    "english_block_ids": [
+      "p074_b0017"
+    ],
+    "chinese_text": "从反馈过程中收集的信息应用作为监视和保持产品要求的风险管理的潜在输入以及产品 实现或改进过程的潜在输入。",
+    "english_text": "The information gathered in the feedback process shall serve as potential input into risk management for monitoring and maintaining the product requirements as well as the product realization or improvement processes.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_006",
+    "chinese_block_ids": [
+      "p074_b0018"
+    ],
+    "english_block_ids": [
+      "p074_b0019"
+    ],
+    "chinese_text": "对从生产后阶段获取的经验的评审构成反馈系统的一部分。",
+    "english_text": "The review of the experience gained from the post-production phase forms part of the feedback system.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_007",
+    "chinese_block_ids": [
+      "p074_b0021"
+    ],
+    "english_block_ids": [
+      "p074_b0022",
+      "p074_b0023",
+      "p074_b0024"
+    ],
+    "chinese_text": "集团公司应按照0.4.1 所列标准及0.4.2 所列适用的法规要求将及时处置投诉的程序形成 文件。",
+    "english_text": "The Group shall document procedures for timely complaint handling in accordance with applicable regulatory requirements (see 0.4.1 and 0.4.2). 这些程序应包括对以下方面的最低要求和职责： These procedures shall include at a minimum requirements and responsibilities for: a) 接收和记录信息； Receiving and recording information;",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block and English blocks are translations of each other within same section.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_008",
+    "chinese_block_ids": [
+      "p075_b0006"
+    ],
+    "english_block_ids": [
+      "p075_b0007"
+    ],
+    "chinese_text": "b) 评价信息以确定反馈是否构成投诉；",
+    "english_text": "Evaluating information to determine if the feedback constitutes a complaint; c) 调查投诉；",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block b) corresponds to English block starting with 'Evaluating information'.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_009",
+    "chinese_block_ids": [
+      "p075_b0008"
+    ],
+    "english_block_ids": [
+      "p075_b0009"
+    ],
+    "chinese_text": "d) 确定是否需要向适当的监管机构报告信息；",
+    "english_text": "Determining the need to report the information to the appropriate regulatory authorities; e) 处置与投诉有关的产品；",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block d) corresponds to English block starting with 'Determining the need to report'.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_022_pair_010",
+    "chinese_block_ids": [
+      "p075_b0010"
+    ],
+    "english_block_ids": [
+      "p075_b0011"
+    ],
+    "chinese_text": "f) 确定是否需要启动纠正或纠正措施。",
+    "english_text": "Determining the need to initiate corrections or corrective actions. 如果有任何投诉未经调查，应记录理由。应记录由投诉处置过程形成的任何纠正或纠正措 施。",
+    "confidence": 0.85,
+    "pairing_reason": "Chinese block f) corresponds to English block starting with 'Determining the need to initiate'.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_005",
+    "chinese_block_ids": [
+      "p075_b0017"
+    ],
+    "english_block_ids": [
+      "p075_b0018"
+    ],
+    "chinese_text": "如果0.4.2 所列的适用的法规有要求，将符合不良事件报告准则的投诉或发布的忠告性通 知报告，则组织应将向有关的监管机构报告的程序形成文件。",
+    "english_text": "If applicable regulatory requirements (see 0.4.2) require notification of complaints that meet specified reporting criteria of adverse events or issuance of advisory notices, the organization shall document procedures for providing notification to the appropriate regulatory authorities.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese block followed by mixed block with English translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_006",
+    "chinese_block_ids": [
+      "p075_b0018"
+    ],
+    "english_block_ids": [
+      "p075_b0019"
+    ],
+    "chinese_text": "应保留向监管机构报告的记录（见4.2.5）",
+    "english_text": "Records of reporting to regulatory authorities shall be maintained (see 4.2.5).",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese part of mixed block paired with English-only block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_008",
+    "chinese_block_ids": [
+      "p075_b0021"
+    ],
+    "english_block_ids": [
+      "p075_b0022"
+    ],
+    "chinese_text": "按计划的时间间隔进行内部审核以确定质量管理体系是否：",
+    "english_text": "Internal audits are conducted at planned intervals to determine whether the Quality Management System:",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese block followed by English block in same segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_011",
+    "chinese_block_ids": [
+      "p076_b0006",
+      "p076_b0007"
+    ],
+    "english_block_ids": [
+      "p076_b0008"
+    ],
+    "chinese_text": "a) 符合策划并形成文件的安排、0.4.1 所列标准的要求、0.4.2 所列适用法规的要求及本质 量手册所描述的质量管理体系要求；",
+    "english_text": "Comply with plan and produce documents which fulfill the specifications stated in section 0.4.1, regulations stated in section 0.4.2 and the quality management system requirement mentioned in this quality manual",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese blocks a) and continuation paired with English block containing same content.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_012",
+    "chinese_block_ids": [
+      "p076_b0008"
+    ],
+    "english_block_ids": [
+      "p076_b0009"
+    ],
+    "chinese_text": "b) 得到有效地实施和保持。",
+    "english_text": "Is effectively implemented and maintained.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese part of mixed block paired with English part of next mixed block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_013",
+    "chinese_block_ids": [
+      "p076_b0009"
+    ],
+    "english_block_ids": [
+      "p076_b0010",
+      "p076_b0011"
+    ],
+    "chinese_text": "策划了一个审核方案，考虑拟审核的过程和区域的状况和重要性，以及以往审核的结果。 审核准则以0.4.1 所列的标准为基础。根据内部审核程序，本手册所描述的整个质量管理 体系应至少每年审核2 次。审核员的选择和审核的实施，审核过程的客观性和公证性均得 到确保。审核员不得审核自己的工作。",
+    "english_text": "An audit program is planned, taking into consideration of the status and importance of the processes and areas to be audited, as well as the results of previous audits. The audit criteria are based on the specifications listed in section 0.4.1. The whole Quality Management System described in this Quality Manual is audited at least twice a year according to the internal quality procedure. Selection of auditors and conduct of audits are such that objectivity and impartiality of the audit process are ensured. Auditors are not allowed to audit their own work.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block paired with English blocks that together form the translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_014",
+    "chinese_block_ids": [
+      "p076_b0011"
+    ],
+    "english_block_ids": [
+      "p076_b0012"
+    ],
+    "chinese_text": "审核包括评估：",
+    "english_text": "Audits include the evaluation of:",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese part of mixed block paired with English block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_015",
+    "chinese_block_ids": [
+      "p076_b0013"
+    ],
+    "english_block_ids": [
+      "p076_b0014"
+    ],
+    "chinese_text": "a) 活动、过程和工作区域",
+    "english_text": "Activities, processes, and work areas.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese block paired with English block containing same content.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_016",
+    "chinese_block_ids": [
+      "p076_b0014"
+    ],
+    "english_block_ids": [
+      "p076_b0015"
+    ],
+    "chinese_text": "b) 质量实践，体系程序和工作指引",
+    "english_text": "Quality practices, system procedures and work instructions",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese part of mixed block paired with English part of next mixed block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_017",
+    "chinese_block_ids": [
+      "p076_b0015"
+    ],
+    "english_block_ids": [
+      "p076_b0016"
+    ],
+    "chinese_text": "c) 证明文件及记录等",
+    "english_text": "Certification documents and records, etc.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese part of mixed block paired with English part of next mixed block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_018",
+    "chinese_block_ids": [
+      "p076_b0016"
+    ],
+    "english_block_ids": [
+      "p076_b0017"
+    ],
+    "chinese_text": "部门负责人确保及时采取措施以消除在各自负责区域所发现的不合格及其原因。",
+    "english_text": "Department heads are responsible to ensure that actions are taken without undue delay to eliminate the nonconformities identified in their responsible areas and their causes",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese part of mixed block paired with English part of next mixed block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_019",
+    "chinese_block_ids": [
+      "p076_b0017"
+    ],
+    "english_block_ids": [
+      "p076_b0018"
+    ],
+    "chinese_text": "管理者代表应对所采取措施的验证及验证结果的报告。(见8.5.2)",
+    "english_text": "The Management Representative is responsible for the verification of the actions taken and the reporting of verification results (see 8.5.2).",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese part of mixed block paired with English-only block.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_021",
+    "chinese_block_ids": [
+      "p076_b0021"
+    ],
+    "english_block_ids": [
+      "p077_b0006"
+    ],
+    "chinese_text": "采用适宜的方法对质量管理体系过程进行监控，并在适当时进行测量。这些方法应证实过 程实现所策划的结果的能力。当未能达到所策划的结果时，应采取适当的纠正和纠正措施， 以确保产品的符合性。",
+    "english_text": "Suitable methods are applied for monitoring and, where applicable, measurement of the Quality Management System processes. These methods demonstrate the ability of the processes to achieve planned results. When planned results are not achieved, appropriate correction and corrective action are taken, to ensure conformity of the product.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese block on page 76 paired with English block on page 77 across segment boundary, same section, no intervening heading.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_023_pair_025",
+    "chinese_block_ids": [
+      "p077_b0009"
+    ],
+    "english_block_ids": [
+      "p077_b0010",
+      "p077_b0011"
+    ],
+    "chinese_text": "在产品实现过程的适当阶段，根据所策划的安排和形成文件的程序对产品的特性予以监 控和测量以验证产品要求已得到满足。这种监视和测量应依据策划并形成文件的安排和 形成文件的程序，在产品实现过程的适当阶段进行。",
+    "english_text": "The Group shall monitor and measure the characteristics of the product to verify that product requirements have been met. This shall be carried out at applicable stages of the product realization process in accordance with the planned and documented arrangements and documented procedures.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese block paired with English blocks that together form the translation.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_001",
+    "chinese_block_ids": [
+      "p077_b0012"
+    ],
+    "english_block_ids": [
+      "p077_b0013"
+    ],
+    "chinese_text": "Evidence of conformity to the acceptance criteria shall be maintained. The identity of the person authorizing release of product shall be recorded (see 4.2.5). As appropriate, records shall identify the test equipment used to perform measurement activities. 只有在策划的安排已圆满完成时，才能放行产品。如果，万一货期紧急，必须得到客户的 批准才能在测试完成之前放行产品并且测试必须在产品使用之前完成。",
+    "english_text": "Product release and service delivery shall not proceed until the planned and documented arrangements have been satisfactorily completed. If, in case of urgent delivery, products are shipped before completion of testing, it must be approved by the customer and test must be completed before the products are used.",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed block contains Chinese translation of English block; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_002",
+    "chinese_block_ids": [
+      "p077_b0014"
+    ],
+    "english_block_ids": [
+      "p077_b0015",
+      "p077_b0016"
+    ],
+    "chinese_text": "有源植入性医疗器械和植入性医疗器械的专用要求（不适用）",
+    "english_text": "Particular requirement for active implantable devices and implantable device(Not Applicable)",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese heading and English continuation; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_013",
+    "chinese_block_ids": [
+      "p078_b0009",
+      "p078_b0010",
+      "p078_b0011",
+      "p078_b0012"
+    ],
+    "english_block_ids": [
+      "p078_b0013",
+      "p078_b0014",
+      "p078_b0015",
+      "p078_b0016",
+      "p078_b0017"
+    ],
+    "chinese_text": "对不符合产品要求的产品予以识别和控制以防止非预期的使用或交付。不合格产品应放置在隔离区直到不符合项得以解决。不合格产品的控制及与不合格品识别、记录、隔离、评价和处置相关职责和权限应于文件化程序中规定。不合格的评价应包括确定是否需要调查和通知对不合格负责的所有外部方。",
+    "english_text": "The Group shall ensure that product which does not conform to product requirements identified and controlled to prevent its unintended use or delivery. The organization shall document a procedure to define the controls and related responsibilities and authorities for the identification, documentation, segregation, evaluation and disposition of nonconforming product.",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese paragraphs and English paragraphs are translations; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_014",
+    "chinese_block_ids": [
+      "p078_b0019",
+      "p078_b0020"
+    ],
+    "english_block_ids": [
+      "p078_b0021",
+      "p078_b0022"
+    ],
+    "chinese_text": "应保留不合格的性质以及随后所采取的任何措施的记录，包括评价、任何调查和决策的理由说明（见4.2.5）",
+    "english_text": "Nonconforming product shall be reserved and record implemented follow-up action including evaluation, investigation and decision making reason.",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese and English paragraphs are translations; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_015",
+    "chinese_block_ids": [
+      "p078_b0024"
+    ],
+    "english_block_ids": [
+      "p078_b0025"
+    ],
+    "chinese_text": "8.3.2 交付前发现不合格品的响应措施",
+    "english_text": "Actions in response to nonconforming product detected before delivery",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese heading and English translation; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_016",
+    "chinese_block_ids": [
+      "p078_b0026"
+    ],
+    "english_block_ids": [
+      "p078_b0027"
+    ],
+    "chinese_text": "集团公司应通过下列一种或几种途径处置不合格品：",
+    "english_text": "The Group shall deal with nonconforming product by one or more of the following ways:",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English sentences are translations; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_018",
+    "chinese_block_ids": [
+      "p078_b0031"
+    ],
+    "english_block_ids": [
+      "p078_b0032"
+    ],
+    "chinese_text": "Authorizing its use, release or acceptance under concession. 应确保不合格品仅在提供理由、获得批准和满足适用法规要求的情况下才能让步接收。应 保留让步接收和授权让步人员身份的记录（见4.2.5）",
+    "english_text": "The Group shall ensure that nonconforming product is accepted by concession only if the justification is provided, approval is obtained and applicable regulatory requirements are met. Records of the acceptance by concession and the identity of the person authorizing the concession shall be maintained (see 4.2.5).",
+    "confidence": 0.9,
+    "pairing_reason": "Mixed block contains Chinese translation of English block; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_019",
+    "chinese_block_ids": [
+      "p078_b0034"
+    ],
+    "english_block_ids": [
+      "p079_b0006"
+    ],
+    "chinese_text": "8.3.3 交付后发现不合格品的响应措施",
+    "english_text": "Actions in response to nonconforming product detected after delivery",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese heading and English translation across segments; same section, no intervening heading.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_024_pair_022",
+    "chinese_block_ids": [
+      "p079_b0007",
+      "p079_b0008"
+    ],
+    "english_block_ids": [
+      "p079_b0009",
+      "p079_b0010",
+      "p079_b0011"
+    ],
+    "chinese_text": "当交付后或开始使用后发现不合格品时，组织应采取与不合格的影响或潜在影响的程度相适应的措施。应保留所采取措施的记录（见4.2.5）",
+    "english_text": "When nonconforming product is detected after delivery or use has started, the organization shall take action appropriate to the effects, or potential effects, of the nonconformity. Records of actions taken shall be maintained (see 4.2.5).",
+    "confidence": 0.95,
+    "pairing_reason": "Chinese and English paragraphs are translations; same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_003",
+    "chinese_block_ids": [
+      "p079_b0021",
+      "p079_b0022"
+    ],
+    "english_block_ids": [
+      "p079_b0023",
+      "p079_b0024",
+      "p079_b0025"
+    ],
+    "chinese_text": "集团公司应按照考虑了返工对产品的潜在不良影响所形成文件的程序进行返工。这些程序应经过与原程序相同的评审和批准。",
+    "english_text": "The Group shall perform rework in accordance with documented procedures that takes into account the potential adverse effect of the rework on the product. These procedures shall undergo the same review and approval as the original procedure.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 8.3.4",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_004",
+    "chinese_block_ids": [
+      "p079_b0027"
+    ],
+    "english_block_ids": [
+      "p079_b0028",
+      "p079_b0029"
+    ],
+    "chinese_text": "返工完成后，产品应经验证以确保其满足适用的接收准则和法规要求。",
+    "english_text": "After the completion of rework, product shall be verified to ensure that it meets applicable acceptance criteria and regulatory requirements.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 8.3.4",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_005",
+    "chinese_block_ids": [
+      "p079_b0031"
+    ],
+    "english_block_ids": [
+      "p079_b0032"
+    ],
+    "chinese_text": "应保留返工的记录（见4.2.5）",
+    "english_text": "Records of rework shall be maintained (see 4.2.5).",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 8.3.4",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_012",
+    "chinese_block_ids": [
+      "p080_b0008"
+    ],
+    "english_block_ids": [
+      "p080_b0009"
+    ],
+    "chinese_text": "集团公司应将确定、收集和分析适当数据的程序形成文件以证实质量管理体系的适应性、充分 性和有效性。这些程序应包括对统计技术在内的适当方法及其适用程度的确定。",
+    "english_text": "The Group shall document procedures to determine, collect and analyse appropriate data to demonstrate the suitability, adequacy and effectiveness of the quality management system. The procedures shall include determination of appropriate methods, including statistical techniques and the extent of their use. 数据分析应包括来自监视和测量的结果以及其他有关来源的数据，并至少包括以下方面输入：",
+    "confidence": 0.9,
+    "pairing_reason": "Partial translation pair; English block contains extra sentence",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_019",
+    "chinese_block_ids": [
+      "p080_b0016"
+    ],
+    "english_block_ids": [
+      "p080_b0017"
+    ],
+    "chinese_text": "Service reports, as appropriate. 如果数据分析表明质量管理体系不是适宜的、充分的或有效的，组织应按照8.5 的要求将此分 析结果用作改进的输入。",
+    "english_text": "If the analysis of data shows that the quality management system is not suitable, adequate or effective, the organization shall use this analysis as input for improvement as required in 8.5. 数据分析结果的记录应予保持（见4.2.5）。",
+    "confidence": 0.9,
+    "pairing_reason": "Partial translation pair; each block contains mixed content",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_022",
+    "chinese_block_ids": [
+      "p080_b0020"
+    ],
+    "english_block_ids": [
+      "p080_b0021"
+    ],
+    "chinese_text": "QSP0808 数据分析及统计技术控制",
+    "english_text": "Control of Data Analysis & Statistical Techniques",
+    "confidence": 0.9,
+    "pairing_reason": "Procedure name and its English translation",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_027",
+    "chinese_block_ids": [
+      "p081_b0008"
+    ],
+    "english_block_ids": [
+      "p081_b0009"
+    ],
+    "chinese_text": "确保质量管理体系的持续适宜性、充分性和有效性以及医疗器械的安全和性能，应利用 质量方针、质量目标、审核结果、上市后监督、数据分析、纠正措施、预防措施和管理 评审来识别和实施任何必要的更改。",
+    "english_text": "The Group shall identify and implement any changes necessary to ensure and maintain the continued suitability, adequacy and effectiveness of the quality management system as well as medical device safety and performance through the use of the quality policy, quality objectives, audit results, post market surveillance, analysis of data, corrective actions, preventive actions and management review.",
+    "confidence": 0.95,
+    "pairing_reason": "Direct translation pair in section 8.5.1",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_025_pair_029",
+    "chinese_block_ids": [
+      "p081_b0011"
+    ],
+    "english_block_ids": [
+      "p081_b0012"
+    ],
+    "chinese_text": "采取适宜的纠正措施以消除不合格的原因，防止不合格项发生。不合格由以下途径提 出：内审、外审、不合格报告、客户投诉，后期项目评审等，纠正措施应无不当拖延。 纠正措施应与不合格的影响程度相适应。",
+    "english_text": "Appropriate corrective actions are taken to eliminate the causes of nonconformities in order to prevent recurrence. Non-conformances are raised in the following areas: internal audits, external audits, non-conformance reports, customer complaints, post project reviews and etc. Corrective actions shall not have inappropriate delay and shall be conducted in accordance with the severity of nonconformities. 集团公司建立形成文件的程序以规定以下方面的要求",
+    "confidence": 0.9,
+    "pairing_reason": "Partial translation pair; English block contains extra sentence",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_026_pair_002",
+    "chinese_block_ids": [
+      "p082_b0006"
+    ],
+    "english_block_ids": [
+      "p082_b0007"
+    ],
+    "chinese_text": "应保留任何调查的结果和所采取措施的记录（见4.2.5）。",
+    "english_text": "Records of the results of any investigation and of action taken shall be maintained (see 4.2.5).",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair in same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_026_pair_004",
+    "chinese_block_ids": [
+      "p082_b0009"
+    ],
+    "english_block_ids": [
+      "p082_b0010"
+    ],
+    "chinese_text": "采取适宜的预防措施消除潜在不合格的原因，防止不合格发生。原因来源对内审、外审、 不合格报告、客户反馈等的评审。",
+    "english_text": "Appropriate preventive actions are taken to eliminate the causes of any potential nonconformity, in order to prevent their occurrence. Their causes are from the reviews of internal audits, external audits, non-conformance reports, customer feedback, etc. 集团公司建立形成文件的程序以规定以下方面的要求：",
+    "confidence": 0.9,
+    "pairing_reason": "Chinese paragraph followed by English paragraph with similar content; English block includes additional Chinese text but is the closest match.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_026_pair_006",
+    "chinese_block_ids": [
+      "p082_b0017"
+    ],
+    "english_block_ids": [
+      "p082_b0018"
+    ],
+    "chinese_text": "应保留任何调查的结果和所采取措施的记录（见4.2.5）",
+    "english_text": "Records of the results of any investigations and of action taken shall be maintained (see 4.2.5).",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair in same section and segment.",
+    "status": "paired"
+  },
+  {
+    "pair_id": "chunk_026_pair_012",
+    "chinese_block_ids": [
+      "p083_b0006"
+    ],
+    "english_block_ids": [
+      "p083_b0007"
+    ],
+    "chinese_text": "附录I",
+    "english_text": "Appendix I",
+    "confidence": 1.0,
+    "pairing_reason": "Direct translation pair in same section and segment.",
+    "status": "paired"
+  }
+]

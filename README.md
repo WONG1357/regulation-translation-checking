@@ -21,6 +21,17 @@ In **Upload & Settings**, enter:
 
 The API key is kept only in `st.session_state`. It is not printed or written to report files.
 
+The app defaults to the following DeepSeek configuration:
+
+```text
+Base URL: https://api.deepseek.com
+Model: deepseek-v4-flash
+```
+
+DeepSeek calls use non-streaming JSON mode with thinking disabled. The default
+pairing chunk size is 7,000 characters and can be reduced in the app if a
+network or provider interruption occurs.
+
 ## Workflow
 
 1. Upload a PDF, DOCX, or TXT bilingual document.
@@ -45,6 +56,8 @@ The app creates `outputs/` automatically:
 - `ai_pairs_raw.json`: validated raw AI pairing output.
 - `reviewed_pairs.json`: optional user-reviewed pair list, or the raw list if unchanged.
 - `coverage_report.csv`: one accounting row per extracted block.
+- `page_coverage_report.csv`: page-level coverage with every section detected on each page.
+- `section_coverage_report.csv`: section-level coverage across page boundaries.
 - `translation_issues.csv` / `.json`: paired-text translation findings.
 - `terminology_consistency.csv` / `.json`: document-wide terminology findings.
 - `regulation_references.csv` / `.json`: detected regulation and standard references.

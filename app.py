@@ -9,9 +9,10 @@ import pandas as pd
 import streamlit as st
 
 from src.block_cleaner import mark_repeated_headers_footers
+from src.ai_client import test_api_connection
 from src.bilingual_pairer import pair_chunks
 from src.chunker import build_chunks
-from src.coverage_validator import validate_coverage
+from src.coverage_validator import build_page_coverage, build_section_coverage, validate_coverage
 from src.file_loader import load_uploaded_file
 from src.highlight_renderer import render_highlighted_document
 from src.regulation_checker import review_regulations
@@ -95,8 +96,10 @@ def build_coverage_rows(
 def initialise_state() -> None:
     defaults = {
         "api_key": "",
-        "base_url": "",
-        "model": "gpt-4o-mini",
+        "base_url": "https://api.deepseek.com",
+        "model": "deepseek-v4-flash",
+        "review_start_section": "",
+        "ai_chunk_characters": 7000,
         "document_name": "",
         "raw_blocks": [],
         "blocks": [],
@@ -197,6 +200,20 @@ def render_upload_tab() -> None:
             key="include_headers",
             help="They always remain in extracted_blocks.json. The default is to exclude them from pairing.",
         )
+        st.text_input(
+            "Review start section (optional)",
+            key="review_start_section",
+            placeholder="e.g. 2.0",
+            help="AI pairing includes this section and all numerically later sections/subsections. Leave blank for the full document.",
+        )
+        st.number_input(
+            "AI chunk size (characters)",
+            min_value=2500,
+            max_value=20000,
+            step=500,
+            key="ai_chunk_characters",
+            help="DeepSeek reliability is usually better with smaller chunks. The default is 7,000 characters.",
+        )
         if st.button("1. Extract document", type="primary", use_container_width=True):
             try:
                 name, data = load_uploaded_file(uploaded)
@@ -217,7 +234,12 @@ def render_upload_tab() -> None:
                 blocks = [dict(item) for item in st.session_state["raw_blocks"]]
                 blocks = mark_repeated_headers_footers(blocks)
                 blocks = parse_sections(blocks)
-                chunks = build_chunks(blocks, st.session_state["include_headers"])
+                chunks = build_chunks(
+                    blocks,
+                    st.session_state["include_headers"],
+                    max_characters=int(st.session_state["ai_chunk_characters"]),
+                    review_start_section=st.session_state["review_start_section"],
+                )
                 st.session_state["blocks"] = blocks
                 st.session_state["chunks"] = chunks
                 reset_downstream()
@@ -233,11 +255,20 @@ def render_upload_tab() -> None:
             help="Kept only in Streamlit session_state. It is never written to output files.",
         )
         st.text_input(
-            "OpenAI-compatible base URL (optional)",
+            "DeepSeek / OpenAI-compatible base URL",
             key="base_url",
-            placeholder="https://api.openai.com/v1",
+            placeholder="https://api.deepseek.com",
         )
-        st.text_input("AI model", key="model", placeholder="gpt-4o-mini")
+        st.text_input("AI model", key="model", placeholder="deepseek-v4-flash")
+        if st.button("Test API connection", use_container_width=True):
+            if require_api():
+                try:
+                    key, model, base_url = api_settings()
+                    with st.spinner("Testing DeepSeek with a small JSON request…"):
+                        test_api_connection(key, model, base_url)
+                    st.success("DeepSeek connection and JSON response are working.")
+                except Exception as exc:
+                    st.error(f"API connection test failed: {exc}")
         st.info(
             "Python extracts and tracks every block. AI performs semantic pairing. "
             "The reviewer remains advisory: uncertain and unpaired content is preserved, not forced."
@@ -259,14 +290,38 @@ def render_extraction_tab() -> None:
         return
     blocks = st.session_state["blocks"]
     pages = sorted({int(item.get("page") or 1) for item in blocks})
-    selected_pages = st.multiselect("Pages", pages, default=pages[: min(5, len(pages))])
+    selected_pages = st.multiselect(
+        "Pages",
+        pages,
+        default=pages,
+        help="All extracted pages are selected by default. Clear or change the selection only to filter the preview.",
+    )
     block_types = sorted({item["block_type"] for item in blocks})
     selected_types = st.multiselect("Block types", block_types, default=block_types)
+    status_map = {item["block_id"]: item for item in st.session_state["block_statuses"]}
     rows = [
         item for item in blocks
         if int(item.get("page") or 1) in selected_pages and item["block_type"] in selected_types
     ]
-    st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True, height=560)
+    debug_rows = [{
+        "block_id": item["block_id"],
+        "page_number": item.get("page"),
+        "section_id": item.get("section"),
+        "section_title": item.get("section_title"),
+        "section_segment_id": item.get("section_segment_id"),
+        "text": item.get("text"),
+        "classification": item.get("block_type"),
+        "pair_id": status_map.get(item["block_id"], {}).get("pair_id"),
+        "ignored": "yes" if item.get("block_type") == "header_footer" else "no",
+        "reason": (
+            "Repeated header/footer excluded from pairing."
+            if item.get("block_type") == "header_footer"
+            else item.get("section_rejection_reason")
+            or status_map.get(item["block_id"], {}).get("status", "Not paired yet")
+        ),
+        "rejected_section_candidate": item.get("section_candidate_rejected"),
+    } for item in rows]
+    st.dataframe(pd.DataFrame(debug_rows), use_container_width=True, hide_index=True, height=560)
     if st.session_state["chunks"]:
         with st.expander(f"Chunk preview ({len(st.session_state['chunks'])} chunks)"):
             st.json(st.session_state["chunks"][:3], expanded=False)
@@ -277,9 +332,17 @@ def render_pairing_tab() -> None:
     if st.button("3. Run AI pairing", type="primary"):
         if require_blocks() and require_api():
             try:
-                chunks = st.session_state["chunks"] or build_chunks(
-                    st.session_state["blocks"], st.session_state.get("include_headers", False)
+                chunks = build_chunks(
+                    st.session_state["blocks"],
+                    st.session_state.get("include_headers", False),
+                    max_characters=int(st.session_state["ai_chunk_characters"]),
+                    review_start_section=st.session_state["review_start_section"],
                 )
+                if not chunks:
+                    raise ValueError(
+                        "No blocks fall at or after the selected review start section. "
+                        "Check the section number or leave it blank."
+                    )
                 st.session_state["chunks"] = chunks
                 save_json("chunks.json", chunks, OUTPUT_DIR)
                 progress = st.progress(0, text="Pairing document chunks…")
@@ -374,6 +437,16 @@ def render_pairing_tab() -> None:
     if not st.session_state["coverage_df"].empty:
         with st.expander("Full block coverage report"):
             st.dataframe(st.session_state["coverage_df"], use_container_width=True, hide_index=True)
+        page_coverage = build_page_coverage(
+            st.session_state["blocks"], st.session_state["block_statuses"]
+        )
+        section_coverage = build_section_coverage(
+            st.session_state["blocks"], st.session_state["block_statuses"]
+        )
+        with st.expander("Page coverage report"):
+            st.dataframe(page_coverage, use_container_width=True, hide_index=True)
+        with st.expander("Section coverage report", expanded=True):
+            st.dataframe(section_coverage, use_container_width=True, hide_index=True)
 
 
 def render_highlight_tab() -> None:
@@ -531,6 +604,16 @@ def render_export_tab() -> None:
             }, OUTPUT_DIR)
             save_json("reviewed_pairs.json", pairs, OUTPUT_DIR)
             save_csv("coverage_report.csv", coverage_df, OUTPUT_DIR)
+            save_csv(
+                "page_coverage_report.csv",
+                build_page_coverage(st.session_state["blocks"], statuses),
+                OUTPUT_DIR,
+            )
+            save_csv(
+                "section_coverage_report.csv",
+                build_section_coverage(st.session_state["blocks"], statuses),
+                OUTPUT_DIR,
+            )
             save_json("translation_issues.json", st.session_state["translation_findings"], OUTPUT_DIR)
             save_csv("translation_issues.csv", st.session_state["translation_findings"], OUTPUT_DIR)
             save_json("terminology_consistency.json", st.session_state["terminology_findings"], OUTPUT_DIR)
@@ -573,6 +656,7 @@ def render_export_tab() -> None:
     expected = [
         "extracted_blocks.json", "sectioned_blocks.json", "chunks.json",
         "ai_pairs_raw.json", "reviewed_pairs.json", "coverage_report.csv",
+        "page_coverage_report.csv", "section_coverage_report.csv",
         "translation_issues.csv", "terminology_consistency.csv",
         "regulation_references.csv", "regulation_review.csv", "final_report.html",
     ]

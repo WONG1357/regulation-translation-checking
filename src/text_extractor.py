@@ -13,7 +13,6 @@ from docx.table import Table
 from docx.text.paragraph import Paragraph
 
 
-SECTION_RE = re.compile(r"^\s*(\d+(?:\.\d+)+(?:\.[A-Za-z])?[.)]?)\s*(.*)")
 HEADING_RE = re.compile(r"^(heading|title|标题)", re.I)
 
 
@@ -58,8 +57,11 @@ def _base_block(
     heading_hint: bool = False,
 ) -> dict[str, Any]:
     text = re.sub(r"[ \t]+", " ", text.replace("\u3000", " ")).strip()
-    match = SECTION_RE.match(text)
-    is_heading = heading_hint or bool(match and len(text) <= 220)
+    from .section_parser import parse_section_heading
+
+    provisional_type = "heading" if heading_hint else block_type
+    match = parse_section_heading(text, provisional_type)
+    is_heading = heading_hint or bool(match)
     return {
         "block_id": block_id,
         "page": page,
@@ -67,7 +69,7 @@ def _base_block(
         "text": text,
         "language": detect_language(text),
         "block_type": "heading" if is_heading and block_type == "paragraph" else block_type,
-        "section": match.group(1).rstrip(".)") if match else None,
+        "section": match.section_id if match else None,
         "heading": text if is_heading else None,
         "bbox": bbox,
     }

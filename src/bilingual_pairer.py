@@ -24,8 +24,10 @@ def pair_chunks(
     warnings: list[str] = []
     for index, chunk in enumerate(chunks, start=1):
         result = _pair_chunk(chunk, api_key, model, base_url)
-        valid_ids = set(chunk["block_ids"])
-        pairs, statuses, chunk_warnings = validate_pairing_result(result, chunk["chunk_id"], valid_ids)
+        block_map = {item["block_id"]: item for item in chunk["blocks"]}
+        pairs, statuses, chunk_warnings = validate_pairing_result(
+            result, chunk["chunk_id"], set(block_map), block_map
+        )
         all_pairs.extend(pairs)
         all_statuses.extend(statuses)
         warnings.extend(chunk_warnings)
@@ -52,6 +54,10 @@ def _pair_chunk(chunk: dict[str, Any], api_key: str, model: str, base_url: str) 
     }
     prompt = f"""Pair Chinese source blocks with their corresponding English translations.
 Use semantic meaning and document order. A pair may contain multiple blocks on either side.
+Pair within the same section_segment_id first. Never pair Chinese from one section with
+English from a later unrelated section. Pair across adjacent segments only when the Chinese
+block is the last meaningful block of its segment, the English block is immediately next,
+both belong to the same continuing section, and no new heading intervenes.
 Use ONLY supplied block IDs and copy text verbatim; never invent, rewrite, or omit document text.
 Account for every block exactly once in block_statuses.
 Allowed statuses: paired, missing_english, missing_chinese, standalone, header_footer, uncertain, unpaired.
@@ -70,7 +76,10 @@ Chunk:
 
 
 def validate_pairing_result(
-    result: dict[str, Any], chunk_id: str, valid_ids: set[str]
+    result: dict[str, Any],
+    chunk_id: str,
+    valid_ids: set[str],
+    block_map: dict[str, dict[str, Any]] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[str]]:
     if not isinstance(result, dict):
         raise ValueError(f"{chunk_id}: AI pairing result is not a JSON object.")
@@ -87,6 +96,18 @@ def validate_pairing_result(
         if set(zh_ids) & set(en_ids):
             warnings.append(f"{chunk_id}: discarded a pair that reused the same block on both sides.")
             continue
+        if block_map:
+            sections = {
+                block_map[block_id].get("section")
+                for block_id in zh_ids + en_ids
+                if block_id in block_map
+            }
+            if len(sections) > 1:
+                warnings.append(
+                    f"{chunk_id}: discarded a cross-section pair spanning "
+                    f"{', '.join(str(value) for value in sorted(sections, key=str))}."
+                )
+                continue
         pair_id = str(pair.get("pair_id") or f"{chunk_id}_pair_{number:03d}")
         if pair_id in used_pair_ids:
             pair_id = f"{chunk_id}_pair_{number:03d}"
