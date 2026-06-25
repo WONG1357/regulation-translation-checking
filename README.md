@@ -1,73 +1,57 @@
-# Bilingual Chinese-English Document Review Assistant
+# Bilingual Translation and Regulatory Consistency Checker
 
-A Streamlit application for extracting, pairing, highlighting, and reviewing bilingual Chinese-English quality and regulatory documents.
+A Streamlit application for preliminary Chinese-English translation, terminology, and regulatory consistency review of medical-device QMS documents.
 
-## Install and run
+## Features
+
+- DOCX-only ingestion for the bilingual Quality Manual workflow.
+- Word-native extraction that preserves body order, paragraphs, tables, rendered page
+  markers, and TOC-derived section/page hints.
+- Small-block segmentation rather than page-level pairing.
+- Chinese-to-English machine translation before semantic pair matching.
+- Strict configurable confirmed/uncertain thresholds, with no forced low-score pairing.
+- Special handling for bilingual headings, change-history revisions, and reference matrices.
+- AI validation of uncertain pairs only.
+- A second AI stage for translation equivalence and regulatory observations.
+- Regulation detection from the uploaded document.
+- Document-wide bilingual glossary and terminology consistency checks.
+- One downloadable DOCX review report.
+- Dry-run mode for extraction and pairing without an API key.
+
+## Run
 
 ```bash
-pip install -r requirements.txt
-streamlit run app.py
+uv sync --extra dev
+uv run streamlit run app/streamlit_app.py
 ```
 
-Open the local Streamlit URL shown in the terminal.
+PDF and OCR processing are intentionally disabled in the current workflow. Use the DOCX
+source file so the app can rely on Word paragraph/table structure instead of lossy PDF
+layout reconstruction.
 
-## API configuration
+## AI configuration
 
-In **Upload & Settings**, enter:
+The UI supports DeepSeek, OpenAI, and generic OpenAI-compatible endpoints. For DeepSeek,
+select `DeepSeek`, use model `deepseek-v4-flash`, and keep the API base URL as
+`https://api.deepseek.com`. API keys are entered into a password field and are not written
+to disk. AI responses are requested as JSON, validated with Pydantic, retried on invalid
+output, and cached in `.cache/ai/` by prompt/input hash.
 
-- an AI API key (password field);
-- an optional OpenAI-compatible base URL;
-- the model name supported by that API.
+Dry-run mode does not machine-translate prose, so it confirms only stable same-row and
+heading-glossary pairs. Other content is preserved for manual review rather than force-paired.
 
-The API key is kept only in `st.session_state`. It is not printed or written to report files.
-
-The app defaults to the following DeepSeek configuration:
+## Project structure
 
 ```text
-Base URL: https://api.deepseek.com
-Model: deepseek-v4-flash
+app/                    Streamlit UI
+src/                    Extraction, pairing, checking, and reporting modules
+prompts/                Versioned AI prompts
+outputs/                Generated DOCX review report
+tests/                  Unit tests
 ```
 
-DeepSeek calls use non-streaming JSON mode with thinking disabled. The default
-pairing chunk size is 7,000 characters and can be reduced in the app if a
-network or provider interruption occurs.
+## Important limitation
 
-## Workflow
-
-1. Upload a PDF, DOCX, or TXT bilingual document.
-2. Extract document blocks. PDF blocks retain page and bounding-box data; DOCX tables become table-row blocks.
-3. Clean and section the document. Repeated headers and footers are marked but retained.
-4. Build chunks using section, table, and size boundaries.
-5. Run AI semantic pairing using only supplied block IDs.
-6. Review coverage and optionally change/delete candidate pairs.
-7. View Chinese and English pair members with matching highlight colours. Unpaired text remains plain.
-8. Run translation, terminology, and regulation reviews.
-9. Export JSON, CSV, and HTML reports.
-
-Only confirmed paired text is sent to translation checking. Unpaired content remains visible and unattended; it does not block the workflow.
-
-## Output files
-
-The app creates `outputs/` automatically:
-
-- `extracted_blocks.json`: all initially extracted blocks.
-- `sectioned_blocks.json`: blocks after header/footer marking and section assignment.
-- `chunks.json`: AI chunks with block IDs and context.
-- `ai_pairs_raw.json`: validated raw AI pairing output.
-- `reviewed_pairs.json`: optional user-reviewed pair list, or the raw list if unchanged.
-- `coverage_report.csv`: one accounting row per extracted block.
-- `page_coverage_report.csv`: page-level coverage with every section detected on each page.
-- `section_coverage_report.csv`: section-level coverage across page boundaries.
-- `translation_issues.csv` / `.json`: paired-text translation findings.
-- `terminology_consistency.csv` / `.json`: document-wide terminology findings.
-- `regulation_references.csv` / `.json`: detected regulation and standard references.
-- `regulation_review.csv` / `.json`: cautious consistency review.
-- `final_report.html`: summary, findings, and the highlighted document view.
-
-## Limitations
-
-- Scanned/image-only PDFs require OCR, which is not included.
-- PDF reading order and irregular table reconstruction depend on the source PDF structure.
-- AI pairing and review are advisory and require qualified human judgment.
-- Regulatory verification is limited without official source text. The app instructs AI not to invent requirements and to report when full verification is unavailable.
-- Long documents may require many API requests and can encounter provider token or rate limits.
+Only `outputs/review_report.docx` is generated for the user. This tool produces AI-assisted
+observations. It does not determine compliance, certification, or legal acceptability. Every
+final decision must be made by qualified regulatory and quality professionals.
