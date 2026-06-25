@@ -1,1 +1,2 @@
-"""Bilingual regulatory document review helpers."""
+"""Bilingual regulatory checker package."""
+

@@ -1,162 +1,142 @@
 from __future__ import annotations
 
+import hashlib
+import json
+import logging
 import re
-from dataclasses import asdict, dataclass
-from typing import Any, Iterable
+from pathlib import Path
+from typing import Any, Iterable, TypeVar
+
+from pydantic import BaseModel
+
+from src.schemas import Language
+
+LOGGER = logging.getLogger("bilingual_regulatory_checker")
+
+SECTION_RE = re.compile(
+    r"^\s*(?:section\s*)?(\d+(?:\.\d+)*(?:\.[a-zA-Z]\)?)?|"
+    r"附录\s*[IVX一二三四五六七八九十]+)(?=$|[\s:：、,，;\-]|[\u3400-\u9fff])",
+    re.IGNORECASE,
+)
+CHINESE_RE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
+LATIN_RE = re.compile(r"[A-Za-z]")
+REFERENCE_RE = re.compile(
+    r"\b(?:ISO[-\s]?\d{4,5}(?::\d{4})?|BS\s+EN\s+ISO\s+\d{4,5}(?::\d{4})?|"
+    r"QSP\d{4}|WI\d{3,5}|21\s+CFR(?:\s+Part)?\s*\d+|"
+    r"(?:EU\s+)?(?:MDR|MDD)|YY/?T?\s*\d{4}|(?:\d{2}/\d{2}/EEC)|"
+    r"Regulation\s*\(EU\)\s*\d{4}/\d+|Directive\s*\d{2}/\d{2}/EEC)\b",
+    re.IGNORECASE,
+)
+
+T = TypeVar("T", bound=BaseModel)
 
 
-SUPPORTED_EXTENSIONS = {"docx", "pdf", "txt"}
-MAX_FILE_SIZE_MB = 50
-
-
-@dataclass
-class TextBlock:
-    block_id: str
-    file_name: str
-    file_type: str
-    text: str
-    block_type: str
-    order: int
-    page_number: int | None = None
-    section_heading: str | None = None
-    section_id: str | None = None
-    section_title: str = ""
-    paragraph_number: int | None = None
-    table_index: int | None = None
-    row_index: int | None = None
-    cell_index: int | None = None
-    bbox: tuple[float, float, float, float] | None = None
-    bbox_normalized: tuple[float, float, float, float] | None = None
-    is_repeated_header_footer: bool = False
-    detected_language: str = ""
-    extraction_source: str = "unknown"
-    classification: str = "unknown"
-    ignore_reason: str = ""
-
-    def location_label(self) -> str:
-        parts: list[str] = []
-        if self.page_number:
-            parts.append(f"Page {self.page_number}")
-        if self.section_heading:
-            parts.append(f"Section: {self.section_heading}")
-        if self.paragraph_number:
-            parts.append(f"Para {self.paragraph_number}")
-        if self.table_index is not None:
-            table = f"Table {self.table_index + 1}"
-            if self.row_index is not None:
-                table += f", row {self.row_index + 1}"
-            if self.cell_index is not None:
-                table += f", cell {self.cell_index + 1}"
-            parts.append(table)
-        return " | ".join(parts) if parts else f"Block {self.order + 1}"
-
-
-@dataclass
-class DocumentResult:
-    file_name: str
-    file_type: str
-    blocks: list[TextBlock]
-    warnings: list[str]
-    metadata: dict[str, Any]
-
-
-@dataclass
-class BilingualPair:
-    pair_id: str
-    file_name: str
-    chinese_text: str
-    english_text: str
-    confidence: str
-    confidence_score: float
-    pairing_reason: str
-    location: str
-    page_number: int | None = None
-    section_heading: str | None = None
-    chinese_block_id: str | None = None
-    english_block_id: str | None = None
-    chinese_block_ids: list[str] | None = None
-    english_block_ids: list[str] | None = None
-    merged_group_id: str | None = None
+def configure_logging(level: int = logging.INFO) -> None:
+    if not LOGGER.handlers:
+        handler = logging.StreamHandler()
+        handler.setFormatter(
+            logging.Formatter("%(asctime)s %(levelname)s %(name)s: %(message)s")
+        )
+        LOGGER.addHandler(handler)
+    LOGGER.setLevel(level)
 
 
 def normalize_text(text: str) -> str:
-    text = text.replace("\u3000", " ")
-    text = re.sub(r"[ \t]+", " ", text)
-    text = re.sub(r"\n{3,}", "\n\n", text)
+    text = text.replace("\u00a0", " ").replace("\x00", " ")
+    text = re.sub(r"(?<=[A-Za-z])\s+(?=[A-Za-z])", " ", text)
+    text = re.sub(r"\s+", " ", text)
     return text.strip()
 
 
-def strip_leading_clause_number(text: str) -> str:
-    """Remove a leading clause/list marker without removing meaningful in-sentence numbers."""
-    clean = normalize_text(text)
-    clean = re.sub(
-        r"^\s*(?:"
-        r"\d+(?:\.\d+)+(?:[.)、：:]|\s+)?"
-        r"|[(（]?\d+[)）.、]\s*"
-        r")",
-        "",
-        clean,
-        count=1,
-    )
-    return clean.strip()
+def language_of(text: str) -> Language:
+    chinese = len(CHINESE_RE.findall(text))
+    latin = len(LATIN_RE.findall(text))
+    total = chinese + latin
+    if total == 0:
+        return Language.unknown
+    if chinese and latin:
+        # Compact bilingual labels in quality manuals are often written without a
+        # delimiter, e.g. "策划Planning" or "目录Table of Contents". Treat these as
+        # mixed even when the Latin character count dominates, otherwise they become
+        # bogus English-only blocks. Do not apply this to longer Chinese paragraphs
+        # that merely contain Roman/regulatory tokens such as "II a", "MC", or "ISO".
+        compact_label = (
+            len(text) <= 140
+            and chinese <= 24
+            and not re.search(r"[。；;!?！？]", text)
+        )
+        if compact_label:
+            return Language.mixed
+    zh_ratio = chinese / total
+    en_ratio = latin / total
+    if zh_ratio >= 0.45 and en_ratio >= 0.30:
+        return Language.mixed
+    if zh_ratio >= 0.35:
+        return Language.zh
+    if en_ratio >= 0.55:
+        return Language.en
+    return Language.mixed
 
 
-def contains_chinese(text: str) -> bool:
-    return bool(re.search(r"[\u3400-\u9fff]", text or ""))
+def extract_section(text: str) -> str | None:
+    match = SECTION_RE.match(text[:120])
+    if not match:
+        return None
+    section = match.group(1).strip()
+    remainder = text[match.end() : 120].strip()
+    # A bare "8.2" or "51" on a TOC/table page is a locator, not a section heading.
+    # Require some actual heading/prose text after numeric sections before promoting
+    # the value into document section state.
+    if re.fullmatch(r"\d+(?:\.\d+)+(?:\.[a-zA-Z]\)?)?", section) and not re.search(
+        r"[A-Za-z\u3400-\u9fff]", remainder
+    ):
+        return None
+    if re.fullmatch(r"\d+", section):
+        if text[match.end() : match.end() + 1] in {"-", "/", "."}:
+            return None
+        if not re.search(r"[A-Za-z\u3400-\u9fff]", remainder):
+            return None
+        if int(section) > 15:
+            return None
+    return section
 
 
-def contains_english(text: str) -> bool:
-    return bool(re.search(r"[A-Za-z]", text or ""))
+def extract_references(text: str) -> set[str]:
+    return {normalize_text(m.group(0)).upper() for m in REFERENCE_RE.finditer(text)}
 
 
-def chinese_char_count(text: str) -> int:
-    return len(re.findall(r"[\u3400-\u9fff]", text or ""))
+def stable_id(prefix: str, *parts: Any, length: int = 12) -> str:
+    material = "\x1f".join(str(part) for part in parts)
+    digest = hashlib.sha256(material.encode("utf-8")).hexdigest()[:length]
+    return f"{prefix}_{digest}"
 
 
-def english_word_count(text: str) -> int:
-    return len(re.findall(r"[A-Za-z][A-Za-z\-]*", text or ""))
+def chunks(items: list[T], size: int) -> Iterable[list[T]]:
+    for start in range(0, len(items), size):
+        yield items[start : start + size]
 
 
-def classify_language(text: str) -> str:
-    """Classify by meaningful character ratios, with codes/numbers kept neutral."""
-    text = text or ""
-    zh_count = chinese_char_count(text)
-    latin_count = len(re.findall(r"[A-Za-z]", text))
-    word_count = english_word_count(text)
-    meaningful = zh_count + latin_count
-    if meaningful == 0:
-        return "Neutral"
-
-    zh_ratio = zh_count / meaningful
-    en_ratio = latin_count / meaningful
-    if zh_count >= 2 and word_count >= 1 and zh_ratio >= 0.18 and en_ratio >= 0.18:
-        return "Mixed Chinese-English"
-    if zh_count >= 2 and (zh_ratio >= 0.65 or word_count <= 1):
-        return "Chinese"
-    if word_count >= 1 and (en_ratio >= 0.65 or zh_count <= 1):
-        return "English"
-    if zh_count and latin_count:
-        return "Mixed Chinese-English"
-    return "Neutral"
+def read_prompt(path: str | Path) -> str:
+    return Path(path).read_text(encoding="utf-8")
 
 
-def confidence_from_score(score: float) -> str:
-    if score >= 0.75:
-        return "High"
-    if score >= 0.45:
-        return "Medium"
-    return "Low"
+def json_hash(payload: Any) -> str:
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, default=str)
+    return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
-def text_preview(text: str, limit: int = 180) -> str:
-    clean = normalize_text(text)
-    return clean if len(clean) <= limit else clean[: limit - 1] + "…"
+def validate_json_response(text: str, schema: type[T]) -> T:
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
+        cleaned = re.sub(r"\s*```$", "", cleaned)
+    return schema.model_validate_json(cleaned)
 
 
-def dataclasses_to_records(items: Iterable[Any]) -> list[dict[str, Any]]:
-    return [asdict(item) if hasattr(item, "__dataclass_fields__") else dict(item) for item in items]
+def severity_rank(value: str) -> int:
+    return {"Observation": 0, "Minor": 1, "Major": 2, "Critical": 3}.get(value, 0)
 
 
-def safe_sheet_name(name: str) -> str:
-    cleaned = re.sub(r"[\[\]\*:/\\?]", "_", name)[:31]
-    return cleaned or "Sheet"
+def compact_context(text: str, limit: int = 260) -> str:
+    text = normalize_text(text)
+    return text if len(text) <= limit else f"{text[: limit - 1]}…"
