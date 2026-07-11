@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import html
 import sys
 from pathlib import Path
@@ -148,24 +149,43 @@ if not uploaded:
         "so the app can use the Word document's real paragraph, table, section, and page structure."
     )
 
-if process_clicked and uploaded:
-    settings = ProcessingSettings(
-        include_headers_footers=include_furniture,
-        ocr_fallback=False,
-        review_regulations=review_regulations,
-        review_terminology=review_terminology,
-        severity_threshold=Severity(severity_threshold),
-        batch_size=batch_size,
-        confirmed_pair_threshold=confirmed_threshold,
-        uncertain_pair_threshold=uncertain_threshold,
-        dry_run=dry_run,
-        ai_provider=provider,
-        ai_model=model,
-        ai_base_url=base_url or None,
-        page_start=int(page_start) if page_start else None,
-        page_end=int(page_end) if page_end else None,
-        max_pages=None,
-    )
+review_settings = ProcessingSettings(
+    include_headers_footers=include_furniture,
+    ocr_fallback=False,
+    review_regulations=review_regulations,
+    review_terminology=review_terminology,
+    severity_threshold=Severity(severity_threshold),
+    batch_size=batch_size,
+    confirmed_pair_threshold=confirmed_threshold,
+    uncertain_pair_threshold=uncertain_threshold,
+    dry_run=dry_run,
+    ai_provider=provider,
+    ai_model=model,
+    ai_base_url=base_url or None,
+    page_start=int(page_start) if page_start else None,
+    page_end=int(page_end) if page_end else None,
+    max_pages=None,
+)
+
+
+def current_input_fingerprint() -> str | None:
+    if uploaded is None:
+        return None
+    digest = hashlib.sha256()
+    digest.update(uploaded.name.encode("utf-8"))
+    digest.update(b"\0")
+    digest.update(uploaded.getvalue())
+    digest.update(b"\0")
+    digest.update(review_settings.model_dump_json().encode("utf-8"))
+    return digest.hexdigest()
+
+
+input_fingerprint = current_input_fingerprint()
+
+
+def run_uploaded_review(selected_regulation_name: str | None = None) -> bool:
+    if uploaded is None:
+        return False
     status = st.status("Preparing review…", expanded=True)
     progress_bar = status.progress(0)
 
@@ -185,9 +205,10 @@ if process_clicked and uploaded:
             )
         result = process_document(
             temporary_path,
-            settings,
+            review_settings,
             ai_config=ai_config,
             progress=progress,
+            selected_regulation_name=selected_regulation_name,
         )
         output_dir = ROOT / "outputs"
         report_path = generate_report(
@@ -197,12 +218,26 @@ if process_clicked and uploaded:
         )
         st.session_state["review_result"] = result
         st.session_state["report_path"] = str(report_path)
+        st.session_state["review_input_fingerprint"] = input_fingerprint
         status.update(label="Review complete", state="complete", expanded=False)
+        return True
     except Exception as exc:
         status.update(label="Processing failed", state="error", expanded=True)
         st.exception(exc)
+        return False
 
-result = st.session_state.get("review_result")
+
+if process_clicked:
+    run_uploaded_review()
+
+stored_fingerprint = st.session_state.get("review_input_fingerprint")
+result = (
+    st.session_state.get("review_result")
+    if stored_fingerprint == input_fingerprint
+    else None
+)
+if stored_fingerprint and stored_fingerprint != input_fingerprint:
+    st.info("The document or review settings changed. Process the current input to refresh results.")
 if result:
     counts = {
         "Pages": result.metadata.page_count,
@@ -213,7 +248,7 @@ if result:
         "Manual review": sum(
             pair.pair_status != PairStatus.confirmed for pair in result.pairs
         ),
-        "Findings": len(result.translation_findings)
+        "AI-assisted observations": len(result.translation_findings)
         + len(result.regulatory_findings)
         + len(result.terminology_issues),
     }
@@ -227,7 +262,7 @@ if result:
             "Detected regulations",
             "Bilingual pairs",
             "Regulation consistency",
-            "Findings",
+            "AI-assisted observations",
             "Unpaired / manual review",
             "Downloads",
         ]
@@ -267,19 +302,59 @@ if result:
         st.dataframe(structure, width="stretch", hide_index=True)
 
     with tabs[1]:
-        if result.regulations:
+        if result.detected_regulations:
             st.markdown(
                 "".join(
                     f'<span class="reg-chip">{html.escape(reg.name)}</span>'
-                    for reg in result.regulations
+                    for reg in result.detected_regulations
                 ),
                 unsafe_allow_html=True,
             )
+            evidence_rows = [
+                {
+                    "Detected reference": regulation.name,
+                    "Exact citation": evidence.exact_citation,
+                    "Type": evidence.reference_type,
+                    "Version": evidence.version,
+                    "Cited regulation clause/provision": "; ".join(
+                        evidence.cited_provisions
+                    )
+                    or "—",
+                    "Page": evidence.page,
+                    "Company document section": evidence.company_document_section or "—",
+                    "Source evidence ID": evidence.source_block_id,
+                    "Evidence text": evidence.evidence_text,
+                }
+                for regulation in result.detected_regulations
+                for evidence in regulation.evidence
+            ]
             st.dataframe(
-                pd.DataFrame([reg.model_dump() for reg in result.regulations]),
+                pd.DataFrame(evidence_rows),
                 width="stretch",
                 hide_index=True,
             )
+            target_names = [regulation.name for regulation in result.detected_regulations]
+            selected_index = (
+                target_names.index(result.selected_regulation.name)
+                if result.selected_regulation is not None
+                else None
+            )
+            target_name = st.selectbox(
+                "Reviewer-selected review target",
+                target_names,
+                index=selected_index,
+                placeholder="Select one detected reference",
+            )
+            st.caption(
+                "Detection preserves every reference. Regulatory coverage and AI regulatory "
+                "observations run only after a reviewer confirms one target."
+            )
+            if st.button(
+                "Confirm target and run regulatory review",
+                disabled=target_name is None or uploaded is None,
+                type="primary",
+            ) and run_uploaded_review(target_name):
+                st.rerun()
         else:
             st.info("No regulation references were detected.")
 
@@ -296,7 +371,8 @@ if result:
         ]
         alignment_rows = [
             {
-                "ID": index,
+                "Pair evidence ID": pair.pair_id,
+                "Source evidence IDs": "; ".join(pair.source_block_ids),
                 "Page": pair.page,
                 "Section": pair.section,
                 "Status": pair.pair_status,
@@ -306,7 +382,7 @@ if result:
                 "Existing English": pair.english_text,
                 "Pairing reason": pair.pairing_reason,
             }
-            for index, pair in enumerate(alignment_pairs, start=1)
+            for pair in alignment_pairs
         ]
         st.subheader("Chinese-first alignment units")
         st.caption(
@@ -327,15 +403,13 @@ if result:
             and finding.pair_id
         }
         if show_cards:
-            for pair in alignment_pairs[:300]:
+            for pair in alignment_pairs:
                 st.markdown(pair_card(pair, mismatch_ids), unsafe_allow_html=True)
-            if len(alignment_pairs) > 300:
-                st.caption(f"Showing the first 300 of {len(alignment_pairs)} pairs.")
 
     with tabs[3]:
         st.subheader("Selected-regulation coverage matrix")
-        if result.regulations:
-            selected = result.regulations[0]
+        if result.selected_regulation:
+            selected = result.selected_regulation
             st.caption(
                 "This view maps the selected international regulation/standard to the "
                 "company document chapter/subsection evidence. It highlights missing or "
@@ -348,8 +422,13 @@ if result:
             )
             coverage_rows = build_regulatory_coverage_matrix(
                 result.pairs,
-                result.regulations,
+                selected,
                 result.regulatory_findings,
+                complete_document=(
+                    result.settings.page_start is None
+                    and result.settings.page_end is None
+                    and result.settings.max_pages is None
+                ),
             )
             severity_filter = st.multiselect(
                 "Coverage severity",
@@ -376,7 +455,8 @@ if result:
                 row
                 for row in coverage_rows
                 if row["Severity"] in {"Critical", "Major"}
-                or row["Coverage decision"] in {"Missing Evidence", "Confirmed Conflict"}
+                or row["Coverage decision"]
+                in {"evidence_not_found", "conflict_found"}
             ]
             if missing_or_major:
                 st.subheader("Missing / high-severity regulatory topics")
@@ -386,7 +466,10 @@ if result:
                     hide_index=True,
                 )
         else:
-            st.info("No selected regulation is available. Enable regulation review and reprocess the document.")
+            st.info(
+                "Select and confirm one detected reference in the Detected regulations tab "
+                "before regulatory coverage is generated."
+            )
 
     with tabs[4]:
         threshold = severity_rank(severity_threshold)
@@ -405,11 +488,14 @@ if result:
             for issue in result.terminology_issues
             if severity_rank(issue.severity.value) >= threshold
         ]
-        st.subheader("Translation equivalence")
+        st.caption(
+            "These are AI-assisted observations tied to source evidence, not confirmed findings."
+        )
+        st.subheader("Translation equivalence observations")
         st.dataframe(pd.DataFrame(translation_rows), width="stretch", hide_index=True)
-        st.subheader("Regulatory consistency")
+        st.subheader("Regulatory consistency observations")
         st.dataframe(pd.DataFrame(regulatory_rows), width="stretch", hide_index=True)
-        st.subheader("Terminology consistency")
+        st.subheader("Terminology consistency observations")
         st.dataframe(pd.DataFrame(terminology_rows), width="stretch", hide_index=True)
 
     with tabs[5]:

@@ -407,8 +407,8 @@ def segment_blocks(
             b.reading_order,
         ),
     )
-    toc_pages = _detect_toc_pages(ordered)
     non_docx_ordered = [block for block in ordered if block.source != SourceType.docx]
+    toc_pages = _detect_toc_pages(non_docx_ordered)
     change_history_pages = _detect_change_history_pages(non_docx_ordered)
     reference_pages = _detect_reference_pages(non_docx_ordered)
     for block in ordered:

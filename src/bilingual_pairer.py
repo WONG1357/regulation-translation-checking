@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 import re
 
 from src.ai_client import AIClient
@@ -28,6 +29,8 @@ from src.utils import (
 ENGLISH_RE = re.compile(r"[A-Za-z]")
 HTML_TABLE_TAG_RE = re.compile(r"</?(?:td|tr|th)(?:\s+[^>]*)?>", re.I)
 TABLE_DELIMITER_RE = re.compile(r"\s*\|\s*|\t+")
+DATE_CELL_RE = re.compile(r"\b\d{4}[-/]\d{1,2}[-/]\d{1,2}\b")
+REVISION_CELL_RE = re.compile(r"[A-Z]")
 ALLOWED_CHINESE_SIDE_LATIN_RE = re.compile(
     r"\b(?:[A-Z]{2,8}\d*|QSP\d{3,6}|WI\d{3,6}|ISO[-\s]?\d{3,6}|"
     r"YY/?T?\s*\d{3,6}|21\s*CFR(?:\s+Part)?\s*\d+|EU|MDR|MDD|"
@@ -46,6 +49,14 @@ EN_ONLY_ALLOWED_CLASSES = {
     "regulatory_matrix",
     "procedure_reference",
 }
+
+
+@dataclass(frozen=True)
+class AlignmentUnit:
+    chinese: str
+    english: str
+    unit_index: int
+    machine_translation: str = ""
 
 
 def _clean_alignment_text(text: str | None) -> str:
@@ -98,6 +109,26 @@ def _is_code_like_cell(text: str) -> bool:
     if extract_references(stripped) and len(stripped) <= 24:
         return True
     return bool(re.fullmatch(r"[\d\s./():;,_-]+", stripped))
+
+
+def _is_structural_table_cell(text: str) -> bool:
+    stripped = normalize_text(text)
+    if not stripped:
+        return True
+    if REVISION_CELL_RE.fullmatch(stripped):
+        return True
+    if DATE_CELL_RE.fullmatch(stripped):
+        return True
+    return _is_code_like_cell(stripped)
+
+
+def _is_change_history_structural_cell(text: str) -> bool:
+    compact = re.sub(r"[\s:：/|_-]+", "", normalize_text(text)).lower()
+    return (
+        _is_structural_table_cell(text)
+        or compact in {"版本revision", "revrevision", "revision"}
+        or compact in {"生效日期effectivedate", "effectivedate"}
+    )
 
 
 def _split_table_cells(text: str) -> list[str]:
@@ -184,6 +215,123 @@ def _split_compact_bilingual_piece(piece: str) -> tuple[str, str]:
     return "", ""
 
 
+def _translation_for_unit(
+    machine_translation: str,
+    unit_count: int,
+    unit_index: int,
+) -> str:
+    machine_translation = _clean_alignment_text(machine_translation)
+    if not machine_translation:
+        return ""
+    parts = [
+        _clean_english_side(part)
+        for part in re.split(r"\s*\|\s*|\n+", machine_translation)
+        if _clean_english_side(part)
+    ]
+    if len(parts) == unit_count:
+        return parts[unit_index]
+    return machine_translation if unit_count == 1 else ""
+
+
+def _unit_from_mixed_piece(piece: str, unit_index: int) -> AlignmentUnit | None:
+    chinese, english = _split_compact_bilingual_piece(piece)
+    if not chinese or not english:
+        return None
+    return AlignmentUnit(chinese, english, unit_index)
+
+
+def _alignment_units_from_pieces(
+    pieces: list[str],
+    *,
+    content_class: str,
+) -> list[AlignmentUnit]:
+    units: list[AlignmentUnit] = []
+    pending_chinese: str | None = None
+    pending_english: str | None = None
+    for piece in pieces:
+        piece = _clean_alignment_text(piece)
+        if not piece:
+            continue
+        if content_class == "change_history" and _is_change_history_structural_cell(piece):
+            continue
+        if content_class != "change_history" and _is_structural_table_cell(piece):
+            continue
+
+        mixed_unit = _unit_from_mixed_piece(piece, len(units))
+        if mixed_unit:
+            units.append(mixed_unit)
+            pending_chinese = None
+            pending_english = None
+            continue
+
+        chinese_count, english_count = _language_counts(piece)
+        if chinese_count and not english_count:
+            if pending_english:
+                units.append(
+                    AlignmentUnit(
+                        _clean_chinese_side(piece),
+                        _clean_english_side(pending_english),
+                        len(units),
+                    )
+                )
+                pending_english = None
+            else:
+                pending_chinese = piece
+            continue
+        if english_count and not chinese_count:
+            if pending_chinese:
+                units.append(
+                    AlignmentUnit(
+                        _clean_chinese_side(pending_chinese),
+                        _clean_english_side(piece),
+                        len(units),
+                    )
+                )
+                pending_chinese = None
+            else:
+                pending_english = piece
+    return units
+
+
+def alignment_units_from_text(
+    text: str,
+    *,
+    content_class: str = "bilingual_prose",
+    machine_translation: str = "",
+) -> list[AlignmentUnit]:
+    text = _clean_alignment_text(text)
+    if not text:
+        return []
+    if "|" in text or "\t" in text:
+        pieces = _split_table_cells(text)
+    elif "\n" in text:
+        pieces = [piece for piece in re.split(r"\n+", text) if _clean_alignment_text(piece)]
+    else:
+        unit = _unit_from_mixed_piece(text, 0)
+        pieces = [] if unit else [text]
+        units = [unit] if unit else _alignment_units_from_pieces(pieces, content_class=content_class)
+        return [
+            AlignmentUnit(
+                item.chinese,
+                item.english,
+                item.unit_index,
+                _translation_for_unit(machine_translation, len(units), item.unit_index),
+            )
+            for item in units
+        ]
+
+    units = _alignment_units_from_pieces(pieces, content_class=content_class)
+    return [
+        AlignmentUnit(
+            item.chinese,
+            item.english,
+            item.unit_index,
+            _translation_for_unit(machine_translation, len(units), item.unit_index),
+        )
+        for item in units
+    ]
+
+
 def _split_delimited_table_pair(text: str) -> tuple[str, str]:
     """Extract likely Chinese/English cells from delimiter-style table rows.
 
@@ -224,6 +372,10 @@ def _split_delimited_table_pair(text: str) -> tuple[str, str]:
 
 def split_mixed_text(text: str) -> tuple[str, str]:
     """Split a bilingual heading/table row while preserving clause codes and labels."""
+    units = alignment_units_from_text(text)
+    if units:
+        return units[0].chinese, units[0].english
+
     text = _clean_alignment_text(text)
     table_chinese, table_english = _split_delimited_table_pair(text)
     if table_chinese and table_english:
@@ -539,26 +691,20 @@ def _pair_from_consecutive_runs(
     )
 
 
-def _pair_from_same_block(
+def _pair_from_alignment_unit(
     block: ExtractedBlock,
-    machine_translation: str,
+    unit: AlignmentUnit,
     *,
     confirmed_threshold: float,
 ) -> BilingualPair | None:
-    if block.ignored:
-        return None
-    if block.content_class in NO_NORMAL_PAIRING_CLASSES:
-        return None
-    chinese, english = split_mixed_text(block.text)
-    if not chinese or not english:
-        return None
-    if block.content_class == "change_history":
-        english = re.sub(r"^\s*[A-Z]\s+", "", english)
+    chinese, english = unit.chinese, unit.english
     for date_value in filter(None, (block.effective_date,)):
         chinese = chinese.replace(date_value, " ")
         english = english.replace(date_value, " ")
     chinese = _clean_chinese_side(chinese)
     english = _clean_english_side(english)
+    if not chinese or not english:
+        return None
     heading_translation = heading_reference_translation(chinese)
     if block.content_class in {"reference_table", "regulatory_references"}:
         method = "table_row"
@@ -574,7 +720,7 @@ def _pair_from_same_block(
         reason = "Known bilingual heading matched by the heading glossary."
     else:
         method = "table_row" if block.table_id else "translated_chinese_similarity"
-        reference = machine_translation or heading_translation or ""
+        reference = unit.machine_translation or heading_translation or ""
         semantic = semantic_similarity(reference, english)
         # Same layout block is strong structural evidence, but a prose pair is not sent
         # downstream unless it also has a usable translation comparison.
@@ -590,7 +736,7 @@ def _pair_from_same_block(
         PairStatus.confirmed if score >= confirmed_threshold else PairStatus.uncertain
     )
     return BilingualPair(
-        pair_id=stable_id("pair", block.block_id),
+        pair_id=f"{stable_id('pair', block.block_id)}_{unit.unit_index:03d}",
         page=block.page,
         section=block.section,
         block_type=block.block_type,
@@ -598,7 +744,7 @@ def _pair_from_same_block(
         english_block_id=block.block_id,
         chinese_text=chinese,
         machine_translated_english=_clean_english_side(
-            machine_translation or heading_translation or ""
+            unit.machine_translation or heading_translation or ""
         ),
         english_text=english,
         semantic_similarity=semantic,
@@ -613,6 +759,33 @@ def _pair_from_same_block(
         revision_id=block.revision_id,
         effective_date=block.effective_date,
     )
+
+
+def _pairs_from_same_block(
+    block: ExtractedBlock,
+    machine_translation: str,
+    *,
+    confirmed_threshold: float,
+) -> list[BilingualPair]:
+    if block.ignored:
+        return []
+    if block.content_class in NO_NORMAL_PAIRING_CLASSES:
+        return []
+    units = alignment_units_from_text(
+        block.text,
+        content_class=block.content_class,
+        machine_translation=machine_translation,
+    )
+    pairs: list[BilingualPair] = []
+    for unit in units:
+        pair = _pair_from_alignment_unit(
+            block,
+            unit,
+            confirmed_threshold=confirmed_threshold,
+        )
+        if pair:
+            pairs.append(pair)
+    return pairs
 
 
 def pair_blocks(
@@ -633,13 +806,13 @@ def pair_blocks(
             continue
         if not CHINESE_RE.search(block.text) or not re.search(r"[A-Za-z]", block.text):
             continue
-        pair = _pair_from_same_block(
+        same_block_pairs = _pairs_from_same_block(
             block,
             translations.get(block.block_id, ""),
             confirmed_threshold=confirmed_threshold,
         )
-        if pair:
-            pairs.append(pair)
+        if same_block_pairs:
+            pairs.extend(same_block_pairs)
             consumed.add(block.block_id)
 
     # Consecutive Chinese rows followed by consecutive English rows often represent one

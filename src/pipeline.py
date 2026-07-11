@@ -8,7 +8,7 @@ from src.bilingual_pairer import pair_blocks, validate_pairs_with_ai
 from src.chinese_to_english_pairing import translate_chinese_blocks
 from src.document_loader import load_document
 from src.layout_segmenter import segment_blocks
-from src.regulation_detector import detect_regulations, select_primary_regulation
+from src.regulation_detector import detect_regulations
 from src.regulatory_checker import deterministic_regulatory_observations
 from src.schemas import AIConfig, ProcessingResult, ProcessingSettings
 from src.terminology_checker import check_terminology
@@ -18,12 +18,29 @@ from src.utils import read_prompt
 ProgressCallback = Callable[[str, float], None]
 
 
+def select_detected_target(
+    result: ProcessingResult, target_name: str
+) -> ProcessingResult:
+    selected = next(
+        (
+            regulation
+            for regulation in result.detected_regulations
+            if regulation.name == target_name
+        ),
+        None,
+    )
+    if selected is None:
+        raise ValueError("Selected regulation is not a detected canonical target.")
+    return result.model_copy(update={"selected_regulation": selected})
+
+
 def process_document(
     path: str | Path,
     settings: ProcessingSettings,
     *,
     ai_config: AIConfig | None = None,
     progress: ProgressCallback | None = None,
+    selected_regulation_name: str | None = None,
 ) -> ProcessingResult:
     def update(message: str, amount: float):
         if progress:
@@ -83,16 +100,22 @@ def process_document(
             "same-row/heading matches can be confirmed."
         )
 
-    update("Detecting regulations and selecting one target standard", 0.30)
-    all_regulations = detect_regulations(blocks) if settings.review_regulations else []
-    regulation_selection_reason: str | None = None
-    regulations: list = []
-    if settings.review_regulations:
-        regulations, regulation_selection_reason = select_primary_regulation(
-            all_regulations, blocks, client
+    update("Detecting regulatory references", 0.30)
+    detected_regulations = (
+        detect_regulations(blocks) if settings.review_regulations else []
+    )
+    selected_regulation = None
+    if selected_regulation_name is not None:
+        selected_regulation = next(
+            (
+                regulation
+                for regulation in detected_regulations
+                if regulation.name == selected_regulation_name
+            ),
+            None,
         )
-        if regulation_selection_reason:
-            warnings.append(regulation_selection_reason)
+        if selected_regulation is None:
+            raise ValueError("Selected regulation is not a detected canonical target.")
 
     chinese_blocks = [
         block
@@ -123,7 +146,7 @@ def process_document(
     update("Running conservative deterministic checks", 0.72)
     translation_findings = deterministic_translation_checks(pairs)
     regulatory_findings = (
-        deterministic_regulatory_observations(pairs, regulations)
+        deterministic_regulatory_observations(pairs, detected_regulations)
         if settings.review_regulations
         else []
     )
@@ -131,17 +154,22 @@ def process_document(
         check_terminology(pairs) if settings.review_terminology else ([], [])
     )
 
-    if client:
+    if client and selected_regulation is not None:
         update("AI stage 2: reviewing confirmed bilingual prose", 0.80)
         response = ai_review_pairs(
             pairs,
-            [reg.model_dump(mode="json") for reg in regulations],
+            [selected_regulation.model_dump(mode="json")],
             client,
             batch_size=settings.batch_size,
         )
         translation_findings.extend(response.translation_findings)
         regulatory_findings.extend(response.regulatory_findings)
         terminology_issues.extend(response.terminology_issues)
+    elif client:
+        warnings.append(
+            "AI-assisted findings were deferred until a reviewer selects one detected "
+            "regulatory target."
+        )
 
     update("Assembling result", 0.92)
     prompts = {
@@ -155,7 +183,8 @@ def process_document(
         settings=settings,
         blocks=blocks,
         pairs=pairs,
-        regulations=regulations,
+        detected_regulations=detected_regulations,
+        selected_regulation=selected_regulation,
         translation_findings=translation_findings,
         regulatory_findings=regulatory_findings,
         terminology_issues=terminology_issues,

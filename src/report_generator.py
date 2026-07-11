@@ -235,7 +235,11 @@ def _landscape_section(doc: Document):
 
 
 def _summary_counts(result: ProcessingResult) -> dict[str, int]:
-    all_findings = result.translation_findings + result.regulatory_findings
+    all_observations = (
+        result.translation_findings
+        + result.regulatory_findings
+        + result.terminology_issues
+    )
     pair_statuses = Counter(pair.pair_status for pair in result.pairs)
     return {
         "Blocks": len(result.blocks),
@@ -243,12 +247,13 @@ def _summary_counts(result: ProcessingResult) -> dict[str, int]:
         "Uncertain / unpaired": sum(
             count for status, count in pair_statuses.items() if status != "confirmed"
         ),
-        "Confirmed findings": len(all_findings) + len(result.terminology_issues),
-        "Critical": sum(f.severity == Severity.critical for f in all_findings),
-        "Major": sum(f.severity == Severity.major for f in all_findings),
-        "Minor": sum(f.severity == Severity.minor for f in all_findings)
-        + sum(i.severity == Severity.minor for i in result.terminology_issues),
-        "Observation": sum(f.severity == Severity.observation for f in all_findings),
+        "AI-assisted observations": len(all_observations),
+        "Critical": sum(item.severity == Severity.critical for item in all_observations),
+        "Major": sum(item.severity == Severity.major for item in all_observations),
+        "Minor": sum(item.severity == Severity.minor for item in all_observations),
+        "Observation": sum(
+            item.severity == Severity.observation for item in all_observations
+        ),
     }
 
 
@@ -320,27 +325,72 @@ def generate_report(
     _set_paragraph_text(
         p,
         "Detected regulations: "
-        + (", ".join(reg.name for reg in result.regulations) or "None detected"),
+        + (
+            ", ".join(reg.name for reg in result.detected_regulations)
+            or "None detected"
+        ),
+        size=9.5,
+    )
+    p = doc.add_paragraph()
+    _set_paragraph_text(
+        p,
+        "Reviewer-selected target: "
+        + (
+            result.selected_regulation.name
+            if result.selected_regulation is not None
+            else "None; regulatory coverage was not produced."
+        ),
         size=9.5,
     )
 
     doc.add_heading("2. Detected regulations and standards", level=1)
+    evidence_rows: list[list[str]] = []
+    for regulation in result.detected_regulations:
+        if regulation.evidence:
+            evidence_rows.extend(
+                [
+                    regulation.name,
+                    item.exact_citation,
+                    item.reference_type,
+                    item.version,
+                    "; ".join(item.cited_provisions) or "—",
+                    str(item.page),
+                    item.company_document_section or "—",
+                    item.source_block_id,
+                    compact_context(item.evidence_text, 300),
+                ]
+                for item in regulation.evidence
+            )
+        else:
+            evidence_rows.append(
+                [
+                    regulation.name,
+                    regulation.evidence_text,
+                    "—",
+                    regulation.version,
+                    "—",
+                    str(regulation.page),
+                    regulation.section or "—",
+                    "—",
+                    compact_context(regulation.evidence_text, 300),
+                ]
+            )
     _add_table(
         doc,
-        ["Name", "Version", "Evidence", "Page", "Section", "Confidence"],
         [
-            [
-                reg.name,
-                reg.version,
-                compact_context(reg.evidence_text, 300),
-                str(reg.page),
-                reg.section or "",
-                f"{reg.confidence:.0%}",
-            ]
-            for reg in result.regulations
+            "Detected reference",
+            "Exact citation",
+            "Type",
+            "Version",
+            "Cited regulation clause/provision",
+            "Page",
+            "Company document section",
+            "Source evidence ID",
+            "Evidence text",
         ],
-        [1.4, 0.7, 2.9, 0.45, 0.55, 0.6],
-        font_size=7.5,
+        evidence_rows,
+        [0.9, 1.0, 0.5, 0.55, 0.9, 0.3, 0.55, 0.7, 1.2],
+        font_size=6.5,
     )
 
     doc.add_heading("3. Pairing quality summary", level=1)
@@ -376,11 +426,13 @@ def generate_report(
     )
 
     _landscape_section(doc)
-    doc.add_heading("4. Translation equivalence findings", level=1)
+    doc.add_heading("4. AI-assisted translation observations", level=1)
     _add_table(
         doc,
         [
             "ID",
+            "Pair evidence ID",
+            "Evidence quote",
             "Pg",
             "Section",
             "Chinese text",
@@ -394,6 +446,8 @@ def generate_report(
         [
             [
                 f.finding_id,
+                f.pair_id,
+                f.evidence_quote,
                 str(f.page),
                 f.section or "",
                 compact_context(f.chinese_text, 420),
@@ -409,48 +463,64 @@ def generate_report(
             ]
             for f in result.translation_findings
         ],
-        [0.65, 0.3, 0.45, 1.45, 1.45, 0.75, 0.55, 1.75, 1.45, 0.5],
+        [0.5, 0.55, 0.8, 0.25, 0.35, 1.15, 1.15, 0.65, 0.45, 1.35, 1.1, 0.4],
         font_size=6.7,
-        severity_column=6,
+        severity_column=8,
     )
 
     doc.add_heading("5. Regulation consistency coverage matrix", level=1)
     coverage_rows = build_regulatory_coverage_matrix(
-        result.pairs, result.regulations, result.regulatory_findings
+        result.pairs,
+        result.selected_regulation,
+        result.regulatory_findings,
+        complete_document=(
+            result.settings.page_start is None
+            and result.settings.page_end is None
+            and result.settings.max_pages is None
+        ),
     )
-    _add_table(
-        doc,
-        [
-            "Regulation clause",
-            "Regulation topic",
-            "Company section(s)",
-            "Pages",
-            "Coverage decision",
-            "Severity",
-            "Gap / missing content",
-            "Mapped evidence",
-            "Recommended action",
-        ],
-        [
+    if result.selected_regulation is None:
+        p = doc.add_paragraph()
+        _set_paragraph_text(
+            p,
+            "Coverage was not generated because a reviewer did not select a regulatory target.",
+            size=9,
+            bold=True,
+        )
+    else:
+        _add_table(
+            doc,
             [
-                row["Regulation clause/subsection"],
-                row["Regulation topic"],
-                row["Company file chapter/subsection"],
-                row["Page references"],
-                row["Coverage decision"],
-                row["Severity"],
-                row["Gap / missing content"],
-                compact_context(row["Mapped evidence"], 430),
-                row["Recommended action"],
-            ]
-            for row in coverage_rows
-        ],
-        [0.65, 1.15, 0.8, 0.45, 0.8, 0.5, 1.45, 1.65, 1.35],
-        font_size=6.5,
-        severity_column=5,
-    )
+                "Regulation clause",
+                "Regulation topic",
+                "Company section(s)",
+                "Pages",
+                "Coverage decision",
+                "Severity",
+                "Gap / missing content",
+                "Mapped evidence",
+                "Recommended action",
+            ],
+            [
+                [
+                    row["Regulation clause/subsection"],
+                    row["Regulation topic"],
+                    row["Company file chapter/subsection"],
+                    row["Page references"],
+                    row["Coverage decision"],
+                    row["Severity"],
+                    row["Gap / missing content"],
+                    compact_context(row["Mapped evidence"], 430),
+                    row["Recommended action"],
+                ]
+                for row in coverage_rows
+            ],
+            [0.65, 1.15, 0.8, 0.45, 0.8, 0.5, 1.45, 1.65, 1.35],
+            font_size=6.5,
+            severity_column=5,
+        )
 
-    doc.add_heading("6. Regulatory consistency findings", level=1)
+    doc.add_heading("6. AI-assisted regulatory observations", level=1)
     _add_table(
         doc,
         [
@@ -458,6 +528,7 @@ def generate_report(
             "Regulation",
             "Clause/topic",
             "Decision",
+            "Evidence quote",
             "Pg",
             "Section",
             "Chinese text",
@@ -467,6 +538,8 @@ def generate_report(
             "Gap/concern",
             "Recommendation",
             "Manual review",
+            "Pair evidence IDs",
+            "Source evidence IDs",
         ],
         [
             [
@@ -474,6 +547,7 @@ def generate_report(
                 f.regulation,
                 f.clause_or_topic,
                 f.decision,
+                f.evidence_quote,
                 str(f.page),
                 f.section or "",
                 compact_context(f.chinese_text, 260),
@@ -488,27 +562,33 @@ def generate_report(
                     if f.manual_review_required
                     else "No"
                 ),
+                "; ".join(f.evidence_pair_ids),
+                "; ".join(f.source_block_ids),
             ]
             for f in result.regulatory_findings
         ],
-        [0.5, 0.85, 0.75, 0.7, 0.3, 0.4, 1.05, 1.05, 1.15, 0.5, 1.0, 1.2, 0.75],
+        [0.4, 0.65, 0.55, 0.5, 0.7, 0.25, 0.3, 0.75, 0.75, 0.85, 0.4, 0.7, 0.85, 0.55, 0.55, 0.65],
         font_size=6.7,
-        severity_column=9,
+        severity_column=10,
     )
 
-    doc.add_heading("7. Terminology consistency findings", level=1)
+    doc.add_heading("7. AI-assisted terminology observations", level=1)
     _add_table(
         doc,
         [
+            "ID",
             "Chinese term",
             "English variants found",
             "Preferred English",
             "Locations",
             "Severity",
             "Recommendation",
+            "Pair evidence IDs",
+            "Source evidence IDs",
         ],
         [
             [
+                issue.term_id,
                 issue.chinese_term,
                 "; ".join(issue.english_variants),
                 issue.preferred_english,
@@ -518,12 +598,14 @@ def generate_report(
                 ),
                 issue.severity.value,
                 issue.recommendation,
+                "; ".join(issue.evidence_pair_ids),
+                "; ".join(issue.source_block_ids),
             ]
             for issue in result.terminology_issues
         ],
-        [1.2, 2.1, 1.8, 1.2, 0.7, 3.0],
+        [0.55, 0.9, 1.45, 1.25, 0.85, 0.55, 2.1, 0.7, 0.8],
         font_size=7.5,
-        severity_column=4,
+        severity_column=5,
     )
 
     doc.add_heading("8. Unpaired / uncertain blocks for manual review", level=1)

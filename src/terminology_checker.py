@@ -6,10 +6,10 @@ from collections import Counter, defaultdict
 from src.schemas import (
     BilingualPair,
     GlossaryEntry,
+    PairStatus,
     Severity,
     TermLocation,
     TerminologyIssue,
-    PairStatus,
 )
 from src.utils import stable_id
 
@@ -50,6 +50,8 @@ def check_terminology(
 ) -> tuple[list[TerminologyIssue], list[GlossaryEntry]]:
     variants: dict[str, Counter[str]] = defaultdict(Counter)
     locations: dict[str, list[TermLocation]] = defaultdict(list)
+    evidence_pair_ids: dict[str, list[str]] = defaultdict(list)
+    source_block_ids: dict[str, set[str]] = defaultdict(set)
     for pair in pairs:
         if (
             pair.pair_status != PairStatus.confirmed
@@ -70,6 +72,8 @@ def check_terminology(
                     text=f"{pair.chinese_text} / {pair.english_text}",
                 )
             )
+            evidence_pair_ids[chinese].append(pair.pair_id)
+            source_block_ids[chinese].update(pair.source_block_ids)
 
     issues: list[TerminologyIssue] = []
     glossary: list[GlossaryEntry] = []
@@ -99,6 +103,8 @@ def check_terminology(
                     issue="Inconsistent English translation",
                     severity=Severity.minor,
                     recommendation=f'Use "{preferred}" consistently unless context requires otherwise.',
+                    evidence_pair_ids=list(dict.fromkeys(evidence_pair_ids[chinese])),
+                    source_block_ids=sorted(source_block_ids[chinese]),
                 )
             )
     return issues, glossary

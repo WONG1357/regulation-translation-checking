@@ -6,7 +6,9 @@ import re
 
 from src.schemas import (
     BilingualPair,
+    CoverageDecision,
     DetectedRegulation,
+    ProcessingSettings,
     RegulatoryFinding,
     Severity,
 )
@@ -235,13 +237,40 @@ def _evidence_summary(matches: list[BilingualPair]) -> str:
 
 def build_regulatory_coverage_matrix(
     pairs: list[BilingualPair],
-    regulations: list[DetectedRegulation],
+    selected_regulation: DetectedRegulation | None,
     findings: list[RegulatoryFinding] | None = None,
+    *,
+    complete_document: bool = False,
 ) -> list[dict[str, str]]:
-    """Build a practical selected-regulation-to-document-section coverage matrix."""
-    if not regulations:
+    """Map evidence conservatively without making a compliance determination."""
+    if isinstance(selected_regulation, list):
+        raise TypeError("Coverage requires one explicit reviewer-selected target.")
+    target = selected_regulation
+    if target is None:
         return []
-    target = regulations[0]
+    if not re.search(r"\bISO\s*13485\b", target.name, re.IGNORECASE):
+        return [
+            {
+                "Selected regulation": target.name,
+                "Regulation clause/subsection": "—",
+                "Regulation topic": "Reviewer-supplied requirements needed",
+                "Expected evidence": (
+                    "The selected target's authoritative requirement catalog was not supplied."
+                ),
+                "Company file chapter/subsection": "—",
+                "Page references": "—",
+                "Mapped evidence": "No target-specific coverage mapping was performed.",
+                "Coverage decision": CoverageDecision.needs_human_confirmation.value,
+                "Severity": Severity.observation.value,
+                "Gap / missing content": (
+                    "No supported coverage catalog is available for this selected target."
+                ),
+                "Recommended action": (
+                    "Have a qualified reviewer assess the document against licensed or "
+                    "authoritative target requirements."
+                ),
+            }
+        ]
     findings = findings or []
     finding_by_topic: dict[str, list[RegulatoryFinding]] = defaultdict(list)
     for finding in findings:
@@ -272,25 +301,49 @@ def build_regulatory_coverage_matrix(
                 related_findings,
                 key=lambda item: SEVERITY_RANK.get(item.severity.value, 0),
             )
-            decision = worst.decision or "Manual Review Required"
+            conflict_text = " ".join(
+                (worst.decision, worst.issue, worst.gap_or_concern)
+            ).lower()
+            decision = (
+                CoverageDecision.conflict_found.value
+                if "conflict" in conflict_text
+                else CoverageDecision.needs_human_confirmation.value
+            )
             severity = worst.severity.value
             gap = worst.gap_or_concern or worst.issue
             recommendation = worst.recommendation
         elif not matches:
-            decision = "Missing Evidence"
-            severity = topic.severity_if_missing
-            gap = "No mapped company-document evidence found for this selected-regulation topic."
-            recommendation = "Confirm whether the Quality Manual or a referenced procedure covers this topic; add or reference evidence if missing."
+            decision = (
+                CoverageDecision.evidence_not_found.value
+                if complete_document
+                else CoverageDecision.needs_human_confirmation.value
+            )
+            severity = Severity.observation.value
+            gap = (
+                "No evidence candidate was found in the complete processed document."
+                if complete_document
+                else "The processed page range is incomplete, so absence cannot be assessed."
+            )
+            recommendation = (
+                "A qualified reviewer should confirm coverage using the applicable licensed "
+                "standard text and any referenced procedures."
+            )
         elif any("qsp" in _normalise(pair.chinese_text + " " + pair.english_text) for pair in matches):
-            decision = "Partially Compliant"
-            severity = "Observation"
-            gap = "Mapped evidence includes supporting procedure references; underlying procedures were not reviewed in this upload."
-            recommendation = "Review referenced procedures to confirm detailed implementation."
+            decision = CoverageDecision.evidence_candidate_found.value
+            severity = Severity.observation.value
+            gap = (
+                "Evidence candidates include supporting procedure references; the underlying "
+                "procedures were not reviewed in this upload."
+            )
+            recommendation = "Review referenced procedures before reaching a conclusion."
         else:
-            decision = "Mapped / Evidence Found"
-            severity = "None"
-            gap = "No gap identified from mapped Quality Manual evidence."
-            recommendation = "No immediate action from mapping view; confirm detail in supporting procedures where applicable."
+            decision = CoverageDecision.evidence_candidate_found.value
+            severity = Severity.observation.value
+            gap = "Candidate evidence was located; adequacy was not determined."
+            recommendation = (
+                "Compare the candidate with the applicable licensed requirement before "
+                "confirming coverage."
+            )
 
         rows.append(
             {
@@ -316,6 +369,24 @@ def build_regulatory_coverage_matrix(
     return rows
 
 
+def is_complete_document_review(
+    settings: ProcessingSettings,
+    page_count: int,
+) -> bool:
+    """Return whether coverage may safely reason about document-wide absence."""
+    page_start = settings.page_start or 1
+    page_end = settings.page_end or page_count
+    if page_start > 1 or page_end < page_count:
+        return False
+    return settings.max_pages is None or settings.max_pages >= page_count
+
+
+def _regulation_source_ids(regulation: DetectedRegulation) -> list[str]:
+    return list(
+        dict.fromkeys(item.source_block_id for item in regulation.evidence)
+    )
+
+
 def deterministic_regulatory_observations(
     pairs: list[BilingualPair], regulations: list[DetectedRegulation]
 ) -> list[RegulatoryFinding]:
@@ -323,32 +394,40 @@ def deterministic_regulatory_observations(
     names = {reg.name for reg in regulations}
     if "EU MDD 93/42/EEC" in names and "EU MDR Regulation (EU) 2017/745" in names:
         evidence = next(reg for reg in regulations if reg.name == "EU MDD 93/42/EEC")
-        findings.append(
-            RegulatoryFinding(
-                finding_id=stable_id("RF", "mdd-mdr"),
-                regulation="EU MDD 93/42/EEC / EU MDR 2017/745",
-                clause_or_topic="Regulatory applicability and transition status",
-                page=evidence.page,
-                section=evidence.section,
-                issue="Both legacy MDD and EU MDR are listed without an explicit applicability/status explanation.",
-                severity=Severity.observation,
-                explanation=(
-                    "The document should make clear whether a legacy reference is retained for "
-                    "historical, transitional, market-specific, or active QMS purposes."
-                ),
-                recommendation=(
-                    "Have a qualified regulatory professional verify the current applicability "
-                    "and label legacy references clearly; do not treat this observation as a legal conclusion."
-                ),
-                confidence=0.76,
-                manual_review_required=True,
-            )
-        )
-    for reg in regulations:
-        if "CMDCAS" in reg.evidence_text.upper():
+        source_block_ids = _regulation_source_ids(evidence)
+        if source_block_ids:
             findings.append(
                 RegulatoryFinding(
-                    finding_id=stable_id("RF", "cmdcas", reg.page),
+                    finding_id=stable_id("RF", "mdd-mdr", *source_block_ids),
+                    regulation="EU MDD 93/42/EEC / EU MDR 2017/745",
+                    clause_or_topic="Regulatory applicability and transition status",
+                    page=evidence.page,
+                    section=evidence.section,
+                    issue="Both legacy MDD and EU MDR are listed without an explicit applicability/status explanation.",
+                    severity=Severity.observation,
+                    explanation=(
+                        "The document should make clear whether a legacy reference is retained for "
+                        "historical, transitional, market-specific, or active QMS purposes."
+                    ),
+                    recommendation=(
+                        "Have a qualified regulatory professional verify the current applicability "
+                        "and label legacy references clearly; do not treat this observation as a legal conclusion."
+                    ),
+                    confidence=0.76,
+                    manual_review_required=True,
+                    source_block_ids=source_block_ids,
+                )
+            )
+    for reg in regulations:
+        if "CMDCAS" in reg.evidence_text.upper():
+            source_block_ids = _regulation_source_ids(reg)
+            if not source_block_ids:
+                continue
+            findings.append(
+                RegulatoryFinding(
+                    finding_id=stable_id(
+                        "RF", "cmdcas", *source_block_ids
+                    ),
                     regulation=reg.name,
                     clause_or_topic="Regulatory program naming",
                     page=reg.page,
@@ -362,6 +441,7 @@ def deterministic_regulatory_observations(
                     ),
                     confidence=0.72,
                     manual_review_required=True,
+                    source_block_ids=source_block_ids,
                 )
             )
     return findings

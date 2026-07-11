@@ -17,6 +17,15 @@ from src.schemas import (
 from src.utils import extract_section, language_of, normalize_text, stable_id
 
 
+def _paragraph_style_chain(paragraph) -> Iterable[object]:
+    style = paragraph.style
+    seen: set[str] = set()
+    while style is not None and style.style_id not in seen:
+        seen.add(style.style_id)
+        yield style
+        style = style.base_style
+
+
 @dataclass
 class NumberingLevel:
     start: int
@@ -87,13 +96,21 @@ class NumberingResolver:
         return label.rstrip(".")
 
     def numbering_for(self, paragraph) -> tuple[str | None, int | None]:
-        ppr = paragraph._p.pPr
-        num_pr = ppr.numPr if ppr is not None and ppr.numPr is not None else None
-        if num_pr is None or num_pr.numId is None or num_pr.ilvl is None:
+        num_id: str | None = None
+        ilvl: int | None = None
+        properties = [paragraph._p.pPr]
+        properties.extend(style.element.pPr for style in _paragraph_style_chain(paragraph))
+        for ppr in properties:
+            num_pr = ppr.numPr if ppr is not None and ppr.numPr is not None else None
+            if num_pr is None:
+                continue
+            if num_id is None and num_pr.numId is not None:
+                num_id = str(num_pr.numId.val)
+            if ilvl is None and num_pr.ilvl is not None:
+                ilvl = int(num_pr.ilvl.val)
+        if num_id in {None, "0"}:
             return None, None
-        num_id = str(num_pr.numId.val)
-        ilvl = int(num_pr.ilvl.val)
-        return num_id, ilvl
+        return num_id, ilvl if ilvl is not None else 0
 
 
 def _element_xml(element) -> str:
@@ -211,6 +228,75 @@ def _section_level(section: str | None, numbering_level: int | None = None) -> i
     return len(parts) if parts else None
 
 
+def _is_section_numbering(
+    numbering: NumberingResolver,
+    paragraph,
+    section: str | None,
+) -> bool:
+    if _section_parts(section) is None:
+        return False
+    num_id, ilvl = numbering.numbering_for(paragraph)
+    abstract_id = numbering.num_to_abstract.get(num_id or "")
+    level = numbering.levels.get((abstract_id, ilvl)) if abstract_id is not None else None
+    if level is None or ")" in level.text:
+        return False
+    placeholders = re.findall(r"%[1-9]", level.text)
+    if len(placeholders) > 1:
+        return True
+    # Some manuals use ordinary paragraph styles for real sections. Their Word
+    # templates still distinguish them from list markers: top-level sections are
+    # rendered as ``1.0`` and child sections can have a fixed numeric parent such
+    # as ``6.%2``. A plain ``%1.`` remains a numbered list, not a section.
+    section_template = bool(
+        re.search(r"%[1-9]\s*\.\s*0\b", level.text)
+        or re.search(r"\b\d+\s*\.\s*%[1-9]", level.text)
+    )
+    return _has_docx_heading_style(paragraph) or section_template
+
+
+def _sync_numbering_parent(
+    numbering: NumberingResolver,
+    num_id: str | None,
+    level: int | None,
+    current_section: str | None,
+) -> None:
+    parts = _section_parts(current_section)
+    if num_id is None or level is None or level == 0 or not parts:
+        return
+    counters = numbering.counters.setdefault(num_id, [0] * 9)
+    parent = list(parts[:level])
+    prior_parent = counters[: len(parent)]
+    if prior_parent != parent:
+        counters[len(parent) :] = [0] * (len(counters) - len(parent))
+    counters[: len(parent)] = parent
+
+
+def _row_numbered_section(
+    numbering: NumberingResolver,
+    row,
+    current_section: str | None,
+) -> str | None:
+    """Resolve the first real section label stored in a table-cell paragraph."""
+    seen_tc_ids: set[int] = set()
+    section: str | None = None
+    for cell in row.cells:
+        tc_id = id(cell._tc)
+        if tc_id in seen_tc_ids:
+            continue
+        seen_tc_ids.add(tc_id)
+        for paragraph in cell.paragraphs:
+            if not normalize_text(paragraph.text):
+                continue
+            num_id, level = numbering.numbering_for(paragraph)
+            _sync_numbering_parent(numbering, num_id, level, current_section)
+            candidate = numbering.label_for(paragraph)
+            if section is None and _is_section_numbering(
+                numbering, paragraph, candidate
+            ):
+                section = candidate
+    return section
+
+
 def _manual_page_for_docx_block(
     section: str | None,
     raw_page: int,
@@ -244,6 +330,47 @@ def _manual_page_for_docx_block(
     )
 
 
+def _is_toc_entry_paragraph(paragraph) -> bool:
+    return any(
+        re.fullmatch(r"toc\s*\d+", (style.name or "").strip(), re.IGNORECASE)
+        for style in _paragraph_style_chain(paragraph)
+    )
+
+
+def _is_toc_heading_paragraph(paragraph) -> bool:
+    return any(
+        (style.name or "").strip().lower() == "toc heading"
+        for style in _paragraph_style_chain(paragraph)
+    )
+
+
+def _is_toc_title_paragraph(paragraph) -> bool:
+    if _is_toc_heading_paragraph(paragraph):
+        return True
+    compact = re.sub(r"\s+", "", normalize_text(paragraph.text)).lower()
+    return _has_docx_heading_style(paragraph) and compact in {
+        "tableofcontents",
+        "目录tableofcontents",
+        "0.1目录tableofcontents",
+    }
+
+
+def _toc_paragraph_entry(paragraph) -> tuple[str, str, int] | None:
+    if not _is_toc_entry_paragraph(paragraph):
+        return None
+    match = re.fullmatch(
+        r"\s*(\d+(?:\.\d+)*)\.?\s+(.+?)\s+(\d+)\s*",
+        normalize_text(paragraph.text),
+    )
+    if not match:
+        return None
+    section, title, page = match.groups()
+    title = re.sub(r"[.\u2024\u2026·\s]{2,}$", "", title).strip()
+    if not title or _section_parts(section) is None:
+        return None
+    return section, title, int(page)
+
+
 def _toc_section_pages(document) -> tuple[dict[str, int], dict[str, tuple[str, int]]]:
     section_pages: dict[str, int] = {}
     heading_lookup: dict[str, tuple[str, int]] = {}
@@ -271,6 +398,16 @@ def _toc_section_pages(document) -> tuple[dict[str, int], dict[str, tuple[str, i
             section_pages[section] = page
             heading_lookup[_normalise_heading_key(title)] = (section, page)
             heading_lookup[_normalise_heading_key(f"{section}{title}")] = (section, page)
+    for paragraph in document.paragraphs:
+        entry = _toc_paragraph_entry(paragraph)
+        if entry is None:
+            continue
+        section, title, page = entry
+        section_pages.setdefault(section, page)
+        heading_lookup.setdefault(_normalise_heading_key(title), (section, page))
+        heading_lookup.setdefault(
+            _normalise_heading_key(f"{section}{title}"), (section, page)
+        )
     return section_pages, heading_lookup
 
 
@@ -305,11 +442,51 @@ def _is_change_history_table(table) -> bool:
         return False
     header = " ".join(normalize_text(cell.text) for cell in table.rows[0].cells)
     compact_header = _normalise_heading_key(header)
+    if _is_change_history_continuation_table(table):
+        return True
     return (
         "版本rev" in compact_header
         and "更改描述changedescription" in compact_header
         and "生效日期effectivedate" in compact_header
     )
+
+
+def _is_revision_label(value: str) -> bool:
+    return bool(re.fullmatch(r"[A-Z]", normalize_text(value)))
+
+
+def _is_effective_date(value: str) -> bool:
+    return bool(re.search(r"\b\d{4}[-/]\d{1,2}[-/]\d{1,2}\b", normalize_text(value)))
+
+
+def _is_change_history_continuation_table(table) -> bool:
+    if len(table.columns) != 3:
+        return False
+    rows = [
+        [normalize_text(cell.text) for cell in row.cells]
+        for row in table.rows
+        if any(normalize_text(cell.text) for cell in row.cells)
+    ]
+    if not rows:
+        return False
+    revision_rows = [row for row in rows if row and _is_revision_label(row[0])]
+    if len(revision_rows) != len(rows):
+        return False
+    return any(len(row) >= 3 and _is_effective_date(row[2]) for row in revision_rows)
+
+
+def _revision_id_from_cells(cells: list[str]) -> str | None:
+    if cells and _is_revision_label(cells[0]):
+        return cells[0]
+    return None
+
+
+def _effective_date_from_cells(cells: list[str]) -> str | None:
+    for cell in cells:
+        match = re.search(r"\b\d{4}[-/]\d{1,2}[-/]\d{1,2}\b", normalize_text(cell))
+        if match:
+            return match.group(0)
+    return None
 
 
 def _is_regulatory_matrix_table(table) -> bool:
@@ -377,8 +554,7 @@ def _table_content_class(table) -> str:
 
 def _is_docx_heading(paragraph, heading_lookup: dict[str, tuple[str, int]]) -> bool:
     text = normalize_text(paragraph.text)
-    style_name = (paragraph.style.name or "").lower()
-    if "heading" in style_name or "title" in style_name:
+    if _has_docx_heading_style(paragraph):
         return True
     if text.startswith("更改历史记录") or text.lower().startswith("history of change"):
         return True
@@ -389,8 +565,15 @@ def _is_docx_heading(paragraph, heading_lookup: dict[str, tuple[str, int]]) -> b
 
 
 def _has_docx_heading_style(paragraph) -> bool:
-    style_name = (paragraph.style.name or "").lower()
-    return "heading" in style_name or "title" in style_name
+    for style in _paragraph_style_chain(paragraph):
+        style_name = (style.name or "").lower()
+        if "heading" in style_name or "title" in style_name:
+            return True
+        ppr = style.element.pPr
+        outline_level = ppr.find(qn("w:outlineLvl")) if ppr is not None else None
+        if outline_level is not None and int(outline_level.get(qn("w:val"), "9")) < 9:
+            return True
+    return False
 
 
 def _paragraph_content_class(text: str, section: str | None) -> str:
@@ -442,6 +625,7 @@ def _load_docx(path: Path, max_pages: int | None = None):
     document = Document(path)
     section_pages, heading_lookup = _toc_section_pages(document)
     numbering = NumberingResolver(document)
+    table_numbering = NumberingResolver(document)
     blocks: list[ExtractedBlock] = []
     order = 0
     page = 1
@@ -461,19 +645,31 @@ def _load_docx(path: Path, max_pages: int | None = None):
                 row_page += _breaks_before_visible_text(row)
                 if max_pages and row_page > max_pages:
                     break
+                numbered_section = _row_numbered_section(
+                    table_numbering, row, current_section
+                )
                 cells = _unique_cell_texts(row)
                 text = " | ".join(cells)
                 row_page = row_page or item_page
-                section = extract_section(text) or current_section
-                if section and table_class not in {
+                candidate_section = numbered_section or extract_section(text)
+                section = current_section
+                if candidate_section and table_class not in {
                     "table_of_contents",
                     "approval_table",
                     "regulatory_matrix",
                     "regulatory_references",
                     "change_history",
                 }:
-                    current_section = section
+                    if _section_transition_allowed(current_section, candidate_section):
+                        current_section = candidate_section
+                    section = current_section
+                elif candidate_section:
+                    section = candidate_section
                 if text:
+                    revision_id = _revision_id_from_cells(cells) if is_change_history else None
+                    effective_date = (
+                        _effective_date_from_cells(cells) if is_change_history else None
+                    )
                     if table_class == "regulatory_matrix":
                         block_page = section_pages.get("0.7", row_page)
                     elif table_class == "regulatory_references":
@@ -513,6 +709,8 @@ def _load_docx(path: Path, max_pages: int | None = None):
                             content_class=table_class,
                             ignored=table_class
                             in {"table_of_contents", "approval_table"},
+                            revision_id=revision_id,
+                            effective_date=effective_date,
                             raw_page=row_page,
                             section_level=_section_level(section),
                         )
@@ -527,19 +725,81 @@ def _load_docx(path: Path, max_pages: int | None = None):
             page += _page_break_count(item)
             continue
         raw_page = item_page + _page_break_count(item)
+        toc_entry = _toc_paragraph_entry(item)
+        if _is_toc_entry_paragraph(item) or _is_toc_title_paragraph(item):
+            toc_section = toc_entry[0] if toc_entry is not None else None
+            toc_page = toc_entry[2] if toc_entry is not None else raw_page
+            blocks.append(
+                ExtractedBlock(
+                    block_id=stable_id("docx_toc", order, text),
+                    page=toc_page,
+                    section=toc_section,
+                    block_type=(
+                        BlockType.heading
+                        if _is_toc_title_paragraph(item)
+                        else BlockType.paragraph
+                    ),
+                    language=language_of(text),
+                    text=text,
+                    source=SourceType.docx,
+                    confidence=1.0,
+                    reading_order=order,
+                    content_class="table_of_contents",
+                    ignored=True,
+                    raw_page=raw_page,
+                    section_level=_section_level(toc_section),
+                )
+            )
+            order += 1
+            page += _page_break_count(item)
+            continue
         heading_key = _normalise_heading_key(text)
         heading_section = heading_lookup.get(heading_key)
-        _, numbering_level = numbering.numbering_for(item)
+        num_id, numbering_level = numbering.numbering_for(item)
         numbered_section = numbering.label_for(item)
+        if not _is_section_numbering(numbering, item, numbered_section):
+            numbered_section = None
+            numbering_level = None
         # For styled section headings, the TOC entry is the most reliable source of
         # the manual-visible section/page. Word numbering counters can drift when
         # tables and continuation structures are present, while the TOC explicitly
         # records the intended section label and visible page number.
-        if heading_section and _has_docx_heading_style(item):
+        toc_mapped_numbered_heading = bool(heading_section and num_id is not None)
+        toc_mapping_allowed = True
+        current_parts = _section_parts(current_section)
+        toc_parts = _section_parts(heading_section[0]) if heading_section else None
+        if (
+            current_parts
+            and toc_parts
+            and len(current_parts) >= 3
+            and toc_parts[0] > current_parts[0] + 1
+        ):
+            # A nested role/title can have the same wording and Heading style as a
+            # much later chapter (for example "Purchasing"). Keep its local Word
+            # numbering instead of jumping from section 3.2.x to chapter 7.
+            toc_mapping_allowed = False
+            toc_mapped_numbered_heading = False
+        if heading_section and toc_mapping_allowed and (
+            _has_docx_heading_style(item) or toc_mapped_numbered_heading
+        ):
             section = heading_section[0]
             numbered_section = None
         else:
             section = numbered_section or extract_section(text)
+        if numbered_section and current_section:
+            previous_parts = _section_parts(current_section)
+            candidate_parts = _section_parts(numbered_section)
+            if (
+                previous_parts
+                and candidate_parts
+                and candidate_parts[0] > previous_parts[0] + 1
+                and not _has_docx_heading_style(item)
+            ):
+                # Detached/floating Word runs can carry numbering from a much later
+                # section. Ordinary unstyled content cannot legitimately jump several
+                # top-level sections and must not replace the active section.
+                section = None
+                numbered_section = None
         transition_allowed = _section_transition_allowed(current_section, section)
         if section and transition_allowed:
             current_section = section
@@ -552,7 +812,7 @@ def _load_docx(path: Path, max_pages: int | None = None):
         if section and transition_allowed:
             current_for_block = current_section
 
-        is_heading = _is_docx_heading(item, heading_lookup)
+        is_heading = _is_docx_heading(item, heading_lookup) or toc_mapped_numbered_heading
         block_page = _manual_page_for_docx_block(
             current_for_block,
             raw_page,

@@ -5,7 +5,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 class Severity(str, Enum):
@@ -13,6 +13,13 @@ class Severity(str, Enum):
     major = "Major"
     minor = "Minor"
     observation = "Observation"
+
+
+class CoverageDecision(str, Enum):
+    evidence_candidate_found = "evidence_candidate_found"
+    evidence_not_found = "evidence_not_found"
+    conflict_found = "conflict_found"
+    needs_human_confirmation = "needs_human_confirmation"
 
 
 class BlockType(str, Enum):
@@ -120,6 +127,18 @@ class BilingualPair(BaseModel):
         return self.pair_status
 
 
+class RegulationEvidence(BaseModel):
+    exact_citation: str
+    reference_type: Literal["standard", "regulation", "guidance", "program"]
+    version: str = "unknown"
+    cited_provisions: list[str] = Field(default_factory=list)
+    source_block_id: str
+    page: int = Field(ge=1)
+    company_document_section: str | None = None
+    evidence_text: str
+    evidence_context: str
+
+
 class DetectedRegulation(BaseModel):
     name: str
     version: str = "unknown"
@@ -128,10 +147,12 @@ class DetectedRegulation(BaseModel):
     section: str | None = None
     confidence: float = Field(ge=0.0, le=1.0)
     aliases: list[str] = Field(default_factory=list)
+    evidence: list[RegulationEvidence] = Field(default_factory=list)
 
 
 class TranslationFinding(BaseModel):
     finding_id: str
+    pair_id: str
     page: int
     section: str | None = None
     chinese_text: str
@@ -139,11 +160,11 @@ class TranslationFinding(BaseModel):
     issue_type: str
     severity: Severity
     explanation: str
+    evidence_quote: str = ""
     suggested_english: str = ""
     suggested_chinese: str = ""
     confidence: float = Field(ge=0.0, le=1.0)
     needs_manual_review: bool = False
-    pair_id: str | None = None
 
 
 class RegulatoryFinding(BaseModel):
@@ -157,6 +178,7 @@ class RegulatoryFinding(BaseModel):
     issue: str
     severity: Severity
     explanation: str = ""
+    evidence_quote: str = ""
     recommendation: str
     confidence: float = Field(default=0.7, ge=0.0, le=1.0)
     manual_review_required: bool = True
@@ -164,6 +186,14 @@ class RegulatoryFinding(BaseModel):
     requirement_summary: str = ""
     gap_or_concern: str = ""
     manual_review_reason: str = ""
+    evidence_pair_ids: list[str] = Field(default_factory=list)
+    source_block_ids: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def evidence_ids_are_required(self) -> RegulatoryFinding:
+        if not self.evidence_pair_ids and not self.source_block_ids:
+            raise ValueError("Regulatory findings require traceable evidence IDs.")
+        return self
 
 
 class TermLocation(BaseModel):
@@ -181,6 +211,14 @@ class TerminologyIssue(BaseModel):
     issue: str
     severity: Severity
     recommendation: str
+    evidence_pair_ids: list[str] = Field(default_factory=list)
+    source_block_ids: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def evidence_ids_are_required(self) -> TerminologyIssue:
+        if not self.evidence_pair_ids and not self.source_block_ids:
+            raise ValueError("Terminology findings require traceable evidence IDs.")
+        return self
 
 
 class GlossaryEntry(BaseModel):
@@ -218,13 +256,6 @@ class ChineseTranslationItem(BaseModel):
 
 class ChineseTranslationResponse(BaseModel):
     items: list[ChineseTranslationItem]
-
-
-class RegulationSelectionResponse(BaseModel):
-    selected_name: str
-    reason: str
-    confidence: float = Field(ge=0.0, le=1.0)
-    alternative_names_considered: list[str] = Field(default_factory=list)
 
 
 class ReviewBatchResponse(BaseModel):
@@ -266,7 +297,8 @@ class ProcessingResult(BaseModel):
     settings: ProcessingSettings
     blocks: list[ExtractedBlock]
     pairs: list[BilingualPair]
-    regulations: list[DetectedRegulation]
+    detected_regulations: list[DetectedRegulation] = Field(default_factory=list)
+    selected_regulation: DetectedRegulation | None = None
     translation_findings: list[TranslationFinding] = Field(default_factory=list)
     regulatory_findings: list[RegulatoryFinding] = Field(default_factory=list)
     terminology_issues: list[TerminologyIssue] = Field(default_factory=list)
@@ -274,6 +306,15 @@ class ProcessingResult(BaseModel):
     prompts_used: dict[str, str] = Field(default_factory=dict)
     token_usage: dict[str, int] = Field(default_factory=dict)
     processing_warnings: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def selected_target_must_be_detected(self) -> ProcessingResult:
+        if self.selected_regulation is None:
+            return self
+        detected_names = {item.name for item in self.detected_regulations}
+        if self.selected_regulation.name not in detected_names:
+            raise ValueError("Selected regulation is not a detected canonical target.")
+        return self
 
     @property
     def unpaired_blocks(self) -> list[ExtractedBlock]:
