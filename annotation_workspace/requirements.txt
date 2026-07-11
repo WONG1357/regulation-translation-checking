@@ -1,1 +1,0 @@
-# No Python packages are required. Python 3.10+ is sufficient.
